@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Diary</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="header">
+        <h1 style="color:#5fcf80">Calorie Diary</h1>
+        
+    </div>    
+    <div class="menu">
+        <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
+        <ul>
+            <li><a href="index.html" class="item"><div>홈</div></a></li>
+            <li><a href="profile.html" class="item"><div>프로필</div></a></li>
+            <li><a href="camera.html" class="item"><div>칼로리 카메라</div></a></li>
+            <li><a href="caresult.html" class="item"><div>식단 추천</div></a></li>
+            <li><a href="board.html" class="item"><div>게시판</div></a></li>
+            <li><a href="fooddb.html" class="item"><div>음식 데이터</div></a></li>
+            <li><a href="login.html" class="item"><div>로그아웃</div></a></li>
+        </ul>
+    </div>
+    <div class="dashboard">
+        <h2 style="color:#5fcf80">대시보드</h2>
+        <div class="dataCard">
+            <p style="color:#000"><br>오늘의 칼로리<p style="font-size:200%"><b>??  /  2300 kcal</b></p></p>
+        </div>
+    <div class="dataCard">
+        <p style="color:#000"><br>오늘의 영양소 밸런스<p style="font-size:100%"><b>지방 : ??%</b><br><b>단백질 : ??%</b><br><b>탄수화물 : ??%</b></p></p>
+    </div>
+    <div class="dataCard">
+        
+    </div>
+
+    <div class="container">
+        <div class="item" id="today">
+            <div id="week"></div>
+            <div id="date"></div>
+        </div>
+    <div class="item">
+        <button type="button" onclick="prev()"><&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</button>
+        <div id="year" class="top-bar"></div>
+        <div id="month" class="top-bar"></div>
+        <button type="button" onclick="next()">&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;></button><br>
+        <table>
+            <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
