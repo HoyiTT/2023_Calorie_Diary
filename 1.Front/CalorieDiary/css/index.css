@@ -1,178 +1,262 @@
-h1{
-  font-family: 'Noto Sans KR';
-  text-align: center;
-  margin-left: 10px;
+/* GOOGLE FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+/* VARIABLES CSS */
+:root {
+    --nav--width: 92px;
+
+    /* Colores */
+    --first-color: #94CCBD;
+    --bg-color: #5fcf80;
+    --sub-color: #b6cefc;
+    --white-color: #fff;
+
+    /* Fuente y tipografia */
+    --body-font: 'Poppins', sans-serif;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+
+    /* z index */
+    --z-fixed: 100;
 }
-.menu {
-  font-family: 'Noto Sans KR';
-  margin-right: 30px;
-  display: block;
-  overflow: hidden;
-  width: 200px;
-  background-color: #5fcf80;
-  color: #fff;
-  transition: all 0.5s ease;
-  border-radius: 20px;
-  padding: 10px;
-  box-sizing: border-box;
-  float:left;
+
+/* BASE */
+*, ::before, ::after {
+    box-sizing: border-box;
 }
-.menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 2rem 0 0 6.75rem;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    transition: .5s;
 }
-.dashboard{
-  font-family: 'Noto Sans KR';
-  float:left;
-  width:1600px;
-  height:800px;
-  background-color: #fff;
-  float: left;
-  margin:10px;
-  margin-top:0px;
-  box-sizing: border-box;
-  border:5px solid #5fcf80;
-  border-color: #5fcf80;
+
+h1 {
+    margin: 0;
+    text-align:center;
+    margin-bottom: 20px;
 }
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* l NAV */
+.l-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav--width);
+    height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--white-color);
+    padding: 1.5rem 1.5rem 2rem;
+    transition: .5s;
+    z-index: var(--z-fixed);
+}
+
+/* NAV */
+.nav {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.nav__brand {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.nav__toggle {
+    font-size: 1.25rem;
+    padding: .75rem;
+    cursor: pointer;
+}
+
+.nav__logo {
+    color: var(--white-color);
+    font-weight: 600;
+}
+
+.nav__link {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    align-items: center;
+    column-gap: .75rem;
+    padding: .75rem;
+    color: var(--white-color);
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.nav__link:hover {
+    background-color: var(--first-color);
+}
+
+.nav__icon {
+    font-size: 20px;
+}
+
+.nav_name {
+    font-size: var(--small-font-size);
+}
+
+/* Expander menu */
+.expander {
+    width: calc(var(--nav--width) + 9.25rem);
+}
+
+/* Add padding body*/
+.body-pd {
+    padding: 2rem 0 0 16rem;
+}
+
+/* Active links menu */
+.active {
+    background-color: var(--first-color);
+}
+
+/* COLLAPSE */
+.collapse {
+    grid-template-columns: 20px max-content 1fr;
+}
+
+.collapse__link {
+    justify-self: flex-end;
+    transition: .5;
+}
+
+.collapse__menu {
+    display: none;
+    padding: .75rem 2.25rem;
+}
+
+.collapse__sublink {
+    color: var(--sub-color);
+    font-size: var(--small-font-size);
+}
+
+.collapse__sublink:hover {
+    color: var(--white-color);
+}
+
+/* Show collapse */
+.showCollapse {
+    display: block;
+}
+
+/* Rotate icon */
+.rotate {
+    transform: rotate(180deg);
+    transition: .5s;
+}
+
+
+
+/*반응형 웹*/
+
+div {
+    font-size: 30px;
+    text-align: center;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;    
+}
+
+.miniProfile {
+    min-height: 500px; 
+    box-sizing: border-box;
+    border:1px solid #ddd;
+    border-color: #ddd;
+    background-color: #fff;
+}
+
+.user-image{
+    width: 50%;
+    height: auto;
+    max-width: 1000px;
+}
+
+.li{
+    font-family: 'Noto Sans KR';
+    font-size: xx-small;
+}
+
+.contents {
+    min-height: 500px; 
+    background-color:#fff;
+    box-sizing: border-box;
+    border:1px solid #ddd;
+    border-color: #ddd;
+    margin-right: 10px;
+}
+
 .dataCard{
-  float:left;
-  margin: 50px;
-  margin-top: 10px;
-  width:300px;
-  height:200px;
-  border:3px solid #5fcf80;
-  background-color: #fff;
-  box-sizing: border-box;
-  box-shadow: 5px 5px 5px 5px gray;
-  text-align: center;
-}
-h2{
-  text-align: left;
-  margin:20px;
-}
-.menu a, .menu > label {
-  display: block;
-  height: 25px;
-  padding: 8px;
-  cursor: pointer;
-  color: #fff;
-  text-decoration: none;
+    float:left;
+    text-align: center;
+    margin-left: 70px;
+    margin-top: 50px;
+    width:300px;
+    height:100px;
+    border:3px solid #5fcf80;
+    background-color: #fff;
+    box-sizing: border-box;
+    box-shadow: 5px 5px 5px 5px gray;
 }
 
-.menu a:hover {
-  color: #5fcf80;
-}
-.menu ul li:hover, .menu > label:hover {
-  background-color: #fff;
-  color: #5fcf80;
-  border-radius: 10px;
-}
-.menu div {
-  position: absolute;
-  left: 50px;
-  line-height: 1.5;
-  font-size: 1em;
-  font-family: 'Noto Sans KR';
-  padding: 0 0 0 20px;
+.youtube{
+    float: left;
+    margin-top: 80px;
+    margin-left: 70px;
 }
 
-#expand-menu {
-  display: none;
-}
-#expand-menu:checked ~ ul {
-  display: block;
-  height: auto;
-}
-
-.menu ::before {
-  font-family: 'Material Icons';
-  font-size: 1.5em;
-  float: left;
-  clear: left;
-}
-.menu label::before{ content: '\e5d2'; }
-.menu li:nth-child(1) a::before{ content: '\e88a'; }
-.menu li:nth-child(2) a::before{ content: '\f02e'; }
-.menu li:nth-child(3) a::before{ content: '\e412'; }
-.menu li:nth-child(4) a::before{ content: '\e561'; }
-.menu li:nth-child(5) a::before{ content: '\e85d'; }
-.menu li:nth-child(6) a::before{ content: '\e1db'; }
-.menu li:nth-child(7) a::before{ content: '\e9ba'; }
-
-@media screen and (max-width:1023px) {
-  .menu {
-      width: 60px;
-  }
-}
-.menu #expand-menu:not(:checked) ~ ul {
-  display: none;
+.footer {
+    margin-top: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    border:1px solid #ddd;
+    border-color: #ddd;
+    background-color: #fff;
 }
 
-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 0;
-  outline: 0;
-  background-color: white;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-th{
-  font-size: 17px;
-}
-td{
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-}
-.container{
-  display: flex;
-  margin: 50px;
-  margin-bottom: auto;
-  float:left;
-  box-sizing: border-box;
-  border:1px solid #ddd;
-  border-color: #ddd;
-  
-}
-.item{
-  text-align: center;
-  font-size: 18px;
-}
-#today{
-  
-  width: 160px;
-  margin-right: 60px;
-  margin-bottom: 60px;
-  font-weight: bold;
-}
-#week{
-  font-size: 30px;
-}
-#date{
-  font-size: 70px;
-}
-.top-bar{
-  text-align: center; 
-  display: inline;
-  font-weight: bold;
-}
-.today-circle{
-  width: 43px;
-  height: 43px;
-  border-radius: 50%;
-  border-width: 3px;
-  background-color: #5fcf80;
-  color: white;
-}
-.click-circle{
-  
-  width: 43px;
-  height: 43px;
-  border-radius: 50%;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #5fcf80;
+
+@media (max-width:600px){ /*가로 너비가 600px 이하일 때 아래 스타일 적용*/
+    .main {
+        display: block;    
+    }
+
+    .miniProfile {  
+        margin-bottom: 10px; 
+        margin-right: 10px;
+    }
+    .responsive-image {
+        max-width: 500px; 
+    }
+    .dataCard{
+        width: 70%;
+        height: 75%;
+    }
+    .youtube{
+        width: 270px;
+        height: 315px;
+    }
+
 }

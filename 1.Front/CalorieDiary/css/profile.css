@@ -1,7 +1,9 @@
-h1{
-    font-family: 'Noto Sans KR';
-    text-align: center;
-  }
+h1 {
+  font-family: 'Noto Sans KR';
+  margin: 0;
+  text-align:center;
+  margin-bottom: 20px;
+}
   .menu {
     font-family: 'Noto Sans KR';
     margin-right: 30px;
@@ -21,35 +23,6 @@ h1{
     margin: 0;
     padding: 0;
   }
-  .dashboard{
-    font-family: 'Noto Sans KR';
-    float:left;
-    width:1600px;
-    height:800px;
-    background-color: #fff;
-    float: left;
-    margin:10px;
-    margin-top:0px;
-    box-sizing: border-box;
-    border:5px solid #5fcf80;
-    border-color: #5fcf80;
-  }
-  .dataCard{
-    float:left;
-    margin: 50px;
-    margin-top: 10px;
-    width:300px;
-    height:200px;
-    border:3px solid #5fcf80;
-    background-color: #fff;
-    box-sizing: border-box;
-    box-shadow: 5px 5px 5px 5px gray;
-    text-align: center;
-  }
-  h2{
-    text-align: left;
-    margin:20px;
-  }
   .menu a, .menu > label {
     display: block;
     height: 25px;
@@ -68,13 +41,13 @@ h1{
     border-radius: 10px;
   }
   .menu div {
-    position: absolute;
+    position: absolute; /* 절대 위치로 텍스트 고정 */
     left: 50px;
     line-height: 1.5;
     font-size: 1em;
     font-family: 'Noto Sans KR';
-    padding: 0 0 0 20px;
-  }
+    padding: 0 0 0 20px; /* 패딩 20p로 축소 */
+}
   
   #expand-menu {
     display: none;
@@ -100,10 +73,17 @@ h1{
   .menu li:nth-child(7) a::before{ content: '\e9ba'; }
   
   @media screen and (max-width:1023px) {
-    .menu {
-        width: 60px;
-    }
+}
+@media screen and (max-width:560px) {   
+  .menu { /* 1단계 */
+    width: 60px;
   }
-  .menu #expand-menu:not(:checked) ~ ul {
-    display: none;
-  }
+  .menutext{
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+      }
+}
