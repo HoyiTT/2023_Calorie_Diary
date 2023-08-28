@@ -28,3 +28,5 @@ if (savedUsername === null) {
 } else {
   paintGreetings(savedUsername);
 }
+
+/*여기서부터 백*/

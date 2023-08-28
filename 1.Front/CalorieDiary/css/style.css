@@ -18,7 +18,8 @@ a {
 
 .board_wrap {
     width: 1000px;
-    margin: 100px auto;
+    margin: 0px auto;
+    
 }
 
 .board_title {
@@ -199,9 +200,9 @@ a {
     font-size: 1.4rem;
 }
 
-.board_view .info dl dt {
+/*.board_view .info dl dt {
 
-}
+}*/
 
 .board_view .info dl dd {
     margin-left: 10px;
