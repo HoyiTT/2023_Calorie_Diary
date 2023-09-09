@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -15,6 +18,28 @@ public class BoardService {
     private BoardRepository boardRepository;
     public void Write(BoardDTO boardDTO){
         BoardEntity boardEntity = BoardEntity.toBoardEntity(boardDTO);
+        boardEntity.setView(0);
         boardRepository.save(boardEntity);
     }
+    public List<BoardEntity> boardList() {
+        return boardRepository.findAll();
+    }
+
+    public BoardEntity boardView(Integer id)
+    {
+        Optional<BoardEntity> boardEntity = this.boardRepository.findById(id);
+        if(boardEntity.isPresent()) {
+            BoardEntity boardEntity1 = boardEntity.get();
+            boardEntity1.setView(boardEntity1.getView()+1);
+            this.boardRepository.save(boardEntity1);
+        }
+        return boardRepository.findById(id).get();
+    }
+    //특정 게시물 불러오기
+
+    public void boardDelete(Integer id){
+        boardRepository.deleteById(id);
+    }
+
+
 }

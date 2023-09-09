@@ -2,6 +2,8 @@ package com.example.cal_dia_mem.board.dto;
 
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,4 +15,6 @@ public class BoardDTO {
     private String content;
     private String memberEmail;
     private String memberNickname;
+    private Integer view;
+    private Timestamp create_date;
 }
