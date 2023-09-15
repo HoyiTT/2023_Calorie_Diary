@@ -5,7 +5,11 @@ import com.example.cal_dia_mem.member.entity.SiteUserEntity;
 import com.example.cal_dia_mem.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -18,6 +22,16 @@ public class MemberService {
         // repository의 save메서드 호출
         SiteUserEntity siteUserEntity = SiteUserEntity.toSiteUserEntity(memberDTO);
         memberRepository.save(siteUserEntity);
+    }
+
+    public static Map<String, String> validateHandling(Errors errors) {
+        Map<String, String> validatorResult = new HashMap<>();
+
+        for (FieldError error : errors.getFieldErrors()) {
+            String validKeyName = String.format("valid_%s", error.getField());
+            validatorResult.put(validKeyName, error.getDefaultMessage());
+        }
+        return validatorResult;
     }
 
     public MemberDTO login(MemberDTO memberDTO) {

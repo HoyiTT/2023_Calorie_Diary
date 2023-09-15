@@ -6,10 +6,14 @@ import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,8 +28,19 @@ public class MemberController {
 
     //memberService에 memberDTO넘겨줌
     @PostMapping("/member/save")
-    public String save(@ModelAttribute MemberDTO memberDTO) {
+    public String save(@Valid MemberDTO memberDTO, Errors errors, org.springframework.ui.Model model) {
         System.out.println("memberDTO= " + memberDTO);
+        if(errors.hasErrors()){
+            //회원가입 실패 시 입력값 유지
+            model.addAttribute("memberDTO",memberDTO);
+
+            //유효성 통과 못한 필드와 메시지 핸들링
+            Map<String, String> validatorResult = MemberService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+            return "/member/createaccount";
+        }
         memberService.save(memberDTO);
         return "/member/login";
     }
@@ -40,7 +55,7 @@ public class MemberController {
         //로그인 성공
         if(loginResult != null){
             HttpSession session =request.getSession();
-            session.setAttribute("sessionName",loginResult.getMemberName());
+            session.setAttribute("sessionNickname",loginResult.getMemberNickname());
             session.setAttribute("sessionEmail",loginResult.getMemberEmail());
             return "main";
         }

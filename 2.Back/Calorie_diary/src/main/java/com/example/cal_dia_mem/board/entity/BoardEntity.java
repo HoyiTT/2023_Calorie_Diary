@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.SimpleNaturalIdLoadAccess;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;

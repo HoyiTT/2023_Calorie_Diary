@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시물 작성</title>
-    <link rel="stylesheet" href="/css/css/board.css?after">
+    <link rel="stylesheet" href="/css/board.css?after">
 </head>
 <body>
     <div class="board_wrap">
@@ -34,6 +34,8 @@
                     <div class="cont">
                         <textarea name="content" placeholder="내용 입력"></textarea>
                     </div>
+                    <input type="hidden" name="memberEmail" th:value=${session.sessionEmail}>
+                    <input type="hidden" name="memberNickname" th:value=${session.sessionNickname}>
                     <div class="bt_wrap">
                         <button type="submit">등록</button>
                         <a href="/board/list">취소</a>
