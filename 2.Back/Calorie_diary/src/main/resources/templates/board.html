@@ -21,7 +21,7 @@
             <li><a href="profile.html" class="item"><div class="menutext">프로필</div></a></li>
             <li><a href="camera.html" class="item"><div class="menutext">칼로리 카메라</div></a></li>
             <li><a href="caresult.html" class="item"><div class="menutext">식단 추천</div></a></li>
-            <li><a href="board.html" class="item"><div class="menutext">게시판</div></a></li>
+            <li><a href="/board/list" class="item"><div class="menutext">게시판</div></a></li>
             <li><a href="fooddb.html" class="item"><div class="menutext">음식 데이터</div></a></li>
             <li><a href="login.html" class="item"><div class="menutext">로그아웃</div></a></li>
         </ul>
@@ -52,17 +52,10 @@
                     </div>
                 </th:block>
             </div>
-            <div class="board_page">
-                <a href="#" class="bt first"><<</a>
-                <a href="#" class="bt prev"><</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="num">4</a>
-                <a href="#" class="num">5</a>
-                <a href="#" class="bt next">></a>
-                <a href="#" class="bt last">>></a>
-            </div>
+            <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page-1})}" th:text="${page}"></a>
+                <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+            </th:block>
             <div class="bt_wrap">
                 <a href="/board/write" class="on">게시물 작성</a>
                 <!--<a href="#">수정</a>-->

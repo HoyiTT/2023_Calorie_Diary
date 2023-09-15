@@ -5,6 +5,8 @@ import com.example.cal_dia_mem.board.entity.BoardEntity;
 import com.example.cal_dia_mem.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,11 @@ public class BoardService {
         boardEntity.setView(0);
         boardRepository.save(boardEntity);
     }
-    public List<BoardEntity> boardList() {
-        return boardRepository.findAll();
+    public void Modify(BoardEntity boardEntity){
+        boardRepository.save(boardEntity);
+    }
+    public Page<BoardEntity> boardList(Pageable pageable) {
+        return boardRepository.findAll(pageable);
     }
 
     public BoardEntity boardView(Integer id)
