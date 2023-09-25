@@ -1,9 +1,12 @@
-@media (max-width: 1000px) {
+@media screen and (max-width: 768px) {
+     
+    
     .board_wrap {
         width: 100%;
         min-width: 320px;
-        padding: 0 30px;
-        box-sizing: border-box;
+        padding: 0 34px;
+        box-sizing: flex;
+        justify-content: center;
     }
     
     .board_list .num,
@@ -77,5 +80,8 @@
     .board_write .info input[type="text"],
     .board_write .info input[type="password"] {
         width: 100%;
+    }
+    .board_list_wrap{
+        width: 700px;
     }
 }

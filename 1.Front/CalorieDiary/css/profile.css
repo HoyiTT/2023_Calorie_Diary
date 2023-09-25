@@ -1,89 +1,91 @@
-h1 {
-  font-family: 'Noto Sans KR';
+body{
   margin: 0;
-  text-align:center;
-  margin-bottom: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  width:100vw;
+  height:100vh;
+  background-color: #328f8a;
+  background-image: linear-gradient(20deg,#328f8a,#5fcf80);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-  .menu {
-    font-family: 'Noto Sans KR';
-    margin-right: 30px;
-    display: block;
-    overflow: hidden;
-    width: 200px;
-    background-color: #5fcf80;
-    color: #fff;
-    transition: all 0.5s ease;
-    border-radius: 20px;
-    padding: 10px;
-    box-sizing: border-box;
-    float:left;
-  }
-  .menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .menu a, .menu > label {
-    display: block;
-    height: 25px;
-    padding: 8px;
-    cursor: pointer;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .menu a:hover {
-    color: #5fcf80;
-  }
-  .menu ul li:hover, .menu > label:hover {
-    background-color: #fff;
-    color: #5fcf80;
-    border-radius: 10px;
-  }
-  .menu div {
-    position: absolute; /* 절대 위치로 텍스트 고정 */
-    left: 50px;
-    line-height: 1.5;
-    font-size: 1em;
-    font-family: 'Noto Sans KR';
-    padding: 0 0 0 20px; /* 패딩 20p로 축소 */
+a{
+  text-decoration: none;
+  color: white;
 }
-  
-  #expand-menu {
-    display: none;
-  }
-  #expand-menu:checked ~ ul {
-    display: block;
-    height: auto;
-  }
-  
-  .menu ::before {
-    font-family: 'Material Icons';
-    font-size: 1.5em;
-    float: left;
-    clear: left;
-  }
-  .menu label::before{ content: '\e5d2'; }
-  .menu li:nth-child(1) a::before{ content: '\e88a'; }
-  .menu li:nth-child(2) a::before{ content: '\f02e'; }
-  .menu li:nth-child(3) a::before{ content: '\e412'; }
-  .menu li:nth-child(4) a::before{ content: '\e561'; }
-  .menu li:nth-child(5) a::before{ content: '\e85d'; }
-  .menu li:nth-child(6) a::before{ content: '\e1db'; }
-  .menu li:nth-child(7) a::before{ content: '\e9ba'; }
-  
-  @media screen and (max-width:1023px) {
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  padding: 8px 12px;
 }
-@media screen and (max-width:560px) {   
-  .menu { /* 1단계 */
-    width: 60px;
+.navbar__logo{
+  padding: 8px 12ox;
+  font-size: 24px;
+  color: white;
+}
+.navbar__logo i{
+  color:white;
+}
+.navbar__menu{
+  display:flex;
+  list-style:none;
+  padding-left:0;
+}
+.navbar__menu li{
+  padding: 8px 12px;
+}
+.navbar__menu li:hover{
+  background-color: #fc8e12;
+  border-radius: 4px;
+}
+
+.navbar__icons{
+  list-style: none;
+  color:white;
+  display:flex;
+  padding-left:0;
+}
+.navbar__icons li{
+  padding: 8px 12px;
+}
+.navbar__toggleBtn{
+  position: absolute;
+  right: 32px;
+  font-size:24px;
+  display:none;
+}
+
+
+
+
+@media screen and (max-width:768px){
+  
+  .navbar{
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 8px 12px;
   }
-  .menutext{
-    position: absolute;
-    clip: rect(0 0 0 0);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-      }
+  .navbar__menu{
+      display:none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+  }
+  .navbar__menu li{
+      width: 100%;
+      text-align:center;
+  }
+  .navbar__icons{
+      display:none;
+      justify-content:center;
+      width:100%;
+  }
+  .navbar__toggleBtn{
+      display: block;
+  }
+
+  .navbar__menu.active,
+  .navbar__icons.active{
+      display: flex;
+  }
 }

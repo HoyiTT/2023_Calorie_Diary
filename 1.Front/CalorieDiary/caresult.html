@@ -1,87 +1,39 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>Calorie Diary</title>
-  <link rel="stylesheet" href="css/caresult.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/caresult.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/07f7c184df.js" crossorigin="anonymous"></script>
+    <title>CalorieDiary</title>
 </head>
 <body>
-  <div id="container">    
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">Calorie Diary</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">홈</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="profile.html">프로필 등록</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  칼로리 계산
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="camera.html">카메라</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="caresult.html">결과</a></li>
-                </ul>
-              </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">식단 추천</a>
-              </li>
-            
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
+    <nav class="navbar">
+        
+        <div class="navbar__logo">
+            <i class="fa-solid fa-c"></i><i class="fa-solid fa-d"></i>
+            <a href="index.html">CalorieDiary</a>
         </div>
-      </nav>
-      </header>
-    <main class="contents">
-      <section id="headling">
-        <h2>추천 음식 1</h2>                  
-        <div class="detail"> 
-          <img src="images/ddeokbokggi.jfif" width="300" height="200">                            
-          <b><p>떡볶이</p></b>          
-          <p>매운게 땡기는게 떡볶이 먹으러가자 지금 당장 레쓰고 </p>        
-        </div>        
-        <div class="info1">
-          <h3>정보</h3>
-          <ul>
-            <li>칼로리(100g당) : 135 kcal</li>
-            <li>영양소 : 탄수화물 102g 단백질 9g 지방 2g</li>
-          </ul> 
+        
+        <div class="navbar__menu">
+            <li><a href="index.html">홈</a></li>
+            <li><a href="profile.html">프로필</a></li>
+            <li><a href="camera.html">칼로리 카메라</a></li>
+            <li><a href="caresult.html">식단 추천</a></li>
+            <li><a href="board.html">게시판</a></li>
+            <li><a href="fooddb.html">음식 데이터</a></li>
+            <li><a href="login.html">로그아웃</a></li>
         </div>
-      </section>
-      <section id="activity">
-        <h2>추천 음식 2</h2>
-        <div class="detail">          
-          <img src="images/soondae.jfif" width="300" height="200">
-          <b><p>순대</p></b>          
-          <p>떡볶이 먹으면 순대는 못참지 </p>
-          <div class="info2">
-            <h3>정보</h3>
-            <ul>
-                <li>칼로리(100g당) : 180 kcal</li>
-                <li>영양소(탄,단,지) : 나트륨 463g 단백질 6.5g 지방 8.5g</li>
+        
+        <ul class="navbar__icons"></ul>
 
-            </ul> 
-          </div>
-        </div>
-      </section>
-    </main>
-    <footer>      
-    </footer>  
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <a href="#" class="navbar__toggleBtn">
+            <i class="fa-solid fa-bars"></i>
+        </a> 
+    </nav>
+
+
+    <script src="js/main.js" defer></script>
 </body>
-</html>
+</html> 
