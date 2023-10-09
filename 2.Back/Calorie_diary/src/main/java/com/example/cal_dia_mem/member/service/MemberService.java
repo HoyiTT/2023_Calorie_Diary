@@ -1,8 +1,10 @@
 package com.example.cal_dia_mem.member.service;
 
 import com.example.cal_dia_mem.member.dto.MemberDTO;
+import com.example.cal_dia_mem.profile.entity.ProfileEntity;
 import com.example.cal_dia_mem.member.entity.SiteUserEntity;
 import com.example.cal_dia_mem.member.repository.MemberRepository;
+import com.example.cal_dia_mem.profile.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;

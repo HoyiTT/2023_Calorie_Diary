@@ -4,6 +4,8 @@ import ch.qos.logback.core.model.Model;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.member.service.MemberService;
+import com.example.cal_dia_mem.profile.dto.ProfileDTO;
+import com.example.cal_dia_mem.profile.service.ProfileService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberService memberService;
+    private final ProfileService profileService;
     //회원가입 페이지 출력
     @GetMapping("/member/save")
     public String saveForm(){
@@ -30,6 +33,7 @@ public class MemberController {
     @PostMapping("/member/save")
     public String save(@Valid MemberDTO memberDTO, Errors errors, org.springframework.ui.Model model) {
         System.out.println("memberDTO= " + memberDTO);
+
         if(errors.hasErrors()){
             //회원가입 실패 시 입력값 유지
             model.addAttribute("memberDTO",memberDTO);
@@ -41,13 +45,20 @@ public class MemberController {
             }
             return "/member/createaccount";
         }
+        ProfileDTO profileDTO = new ProfileDTO();
+        profileDTO.setMemberEmail(memberDTO.getMemberEmail());
+        profileDTO.setMemberName(memberDTO.getMemberName());
+
+        System.out.println("profileDTO= "+ profileDTO);
         memberService.save(memberDTO);
+        profileService.save(profileDTO);
+
         return "/member/login";
     }
 
     @GetMapping("/member/login")
     public String loginForm(){
-        return "/member/login";
+         return "/member/login";
     }
     @PostMapping("/member/login")
     public String login(@ModelAttribute MemberDTO memberDTO , HttpServletRequest request, Model model){
@@ -57,7 +68,7 @@ public class MemberController {
             HttpSession session =request.getSession();
             session.setAttribute("sessionNickname",loginResult.getMemberNickname());
             session.setAttribute("sessionEmail",loginResult.getMemberEmail());
-            return "main";
+            return "index";
         }
         //로그인 실패
         else{

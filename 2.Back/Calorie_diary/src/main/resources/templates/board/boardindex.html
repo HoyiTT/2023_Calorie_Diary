@@ -5,27 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calorie Diary</title>
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/css/board.css?after">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/07f7c184df.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/board.css">
 </head>
 <body>
-    <div class="header">
-        <h1 style="color:#5fcf80">Calorie Diary</h1>
-        
-    </div>    
-    <div class="menu">
-        <label for="expand-menu"><div class="menutext">메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
-        <ul>
-            <li><a href="index.html" class="item"><div class="menutext">홈</div></a></li>
-            <li><a href="profile.html" class="item"><div class="menutext">프로필</div></a></li>
-            <li><a href="camera.html" class="item"><div class="menutext">칼로리 카메라</div></a></li>
-            <li><a href="caresult.html" class="item"><div class="menutext">식단 추천</div></a></li>
-            <li><a href="/board/list" class="item"><div class="menutext">게시판</div></a></li>
-            <li><a href="fooddb.html" class="item"><div class="menutext">음식 데이터</div></a></li>
-            <li><a href="login.html" class="item"><div class="menutext">로그아웃</div></a></li>
-        </ul>
-    </div>
+    <nav class="navbar">
+
+        <div class="navbar__logo">
+            <i class="fa-solid fa-c"></i><i class="fa-solid fa-d"></i>
+            <a href="index.html">CalorieDiary</a>
+        </div>
+
+        <div class="navbar__menu">
+            <li><a href="index.html">홈</a></li>
+            <li><a href="profile.html">프로필</a></li>
+            <li><a href="camera.html">칼로리 카메라</a></li>
+            <li><a href="caresult.html">식단 추천</a></li>
+            <li><a href="board.html">게시판</a></li>
+            <li><a href="fooddb.html">음식 데이터</a></li>
+            <li><a href="login.html">로그아웃</a></li>
+        </div>
+
+        <ul class="navbar__icons"></ul>
+
+        <a href="#" class="navbar__toggleBtn">
+            <i class="fa-solid fa-bars"></i>
+        </a>
+    </nav>
     
     <div class="board_wrap">
         <div class="board_title">
