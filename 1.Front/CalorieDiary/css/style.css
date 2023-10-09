@@ -18,7 +18,7 @@ a {
 
 .board_wrap {
     width: 1000px;
-    margin: 0px auto;
+    margin: 50px auto;
     
 }
 
@@ -135,11 +135,13 @@ a {
     padding-top: 3px;
     font-size: 1.2rem;
     letter-spacing: -1px;
+    color:#000;
 }
 
 .board_page a.num {
     padding-top: 3px;
     font-size: 1.4rem;
+    color:#000;
 }
 
 .board_page a.num.on {
@@ -283,3 +285,7 @@ a {
     border: 0;
     resize: vertical;
 }
+@media screen {
+    
+}
+
