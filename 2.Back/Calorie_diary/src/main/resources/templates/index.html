@@ -1,102 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calorie Diary</title>
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/07f7c184df.js" crossorigin="anonymous"></script>
+    <title>CalorieDiary</title>
 </head>
-<body id="body-pd">
-    
-    <h1 style="color: #5fcf80;">Calorie Diary</h1>
-    
-    <div class="l-navbar" id="navbar">
-        <nav class="nav">
-            <div>
-                <div class="nav__brand">
-                    <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="index.html" class="nav__logo">Menu</a>
-                </div>
-                <div class="nav__list">
-                    
-                    <a href="index.html" class="nav__link active">
-                        <ion-icon name="home-outline" class="nav__icon"></ion-icon>
-                        <span class="nav_name">홈</span>
-                    </a>
-                    <a href="/profile/modify" class="nav__link">
-                        <ion-icon name="person-outline" class="nav__icon"></ion-icon>
-                        <span class="nav_name">프로필</span>
-                    </a>
-
-                    <a href="camera.html" class="nav__link">
-                        <ion-icon name="camera-outline" class="nav__icon"></ion-icon>
-                        <span class="nav_name">칼로리 카메라</span>
-                    </a>
-                    
-                    <a href="caresult.html" class="nav__link">
-                        <ion-icon name="restaurant-outline" class="nav__icon"></ion-icon>
-                        <span class="nav_name">식단 추천</span>
-                    </a>
-
-                    <a href="/board/list" class="nav__link">
-                        <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                        <span class="nav_name">게시판</span>
-                    </a>
-
-                    <a href="fooddb.html" class="nav__link">
-                        <ion-icon name="file-tray-stacked-outline" class="nav__icon"></ion-icon>
-                        <span class="nav_name">음식 데이터</span>
-                    </a>
-
-                </div>
-                <a href="/member/logout" class="nav__link">
-                    <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
-                    <span class="nav_name">로그아웃</span>
-                </a>
-            </div>
-        </nav>
-    </div>
-
-    <div class="main">
-        <div class="miniProfile"><p>My Profile</p>
-            <div id="profilePicture">
-                <img src="images/user.png" alt="image" class="user-image">
-            </div>
-            <div class="userInfo">
-                <ul class="infoList">
-                    <li>이름 : ???</li>
-                    <li>성별 : ?</li>
-                    <li>목표 체중 : ?? kg</li>
-                    <li>목표 bmi : ?? kg/㎡</li>
-                    <!-- 아래 두개는 인바디 등록 한 사람만 -->
-                    <li>목표 골격근량 : ?? kg</li>
-                    <li>목표 체지방량 : ?? kg</li>
-                </ul>
-            </div>
+<body>
+    <nav class="navbar">
+        
+        <div class="navbar__logo">
+            <i class="fa-solid fa-c"></i><i class="fa-solid fa-d"></i>
+            <a href="index.html">CalorieDiary</a>
         </div>
-        <div class="contents">
+        
+        <div class="navbar__menu">
+            <li><a href="index.html">홈</a></li>
+            <li><a href="/profile/modify">프로필</a></li>
+            <li><a href="camera.html">칼로리 카메라</a></li>
+            <li><a href="caresult.html">식단 추천</a></li>
+            <li><a href="/board/list">게시판</a></li>
+            <li><a href="fooddb.html">음식 데이터</a></li>
+            <li><a href="/member/logout">로그아웃</a></li>
+        </div>
+        
+        <ul class="navbar__icons"></ul>
+
+        <a href="#" class="navbar__toggleBtn">
+            <i class="fa-solid fa-bars"></i>
+        </a> 
+    </nav>
+
+    <div class="container">
+        
+        <div class="item myProfile">
             
-            <div class="dataCard">
-                <a style="font-size: medium;">오늘의 칼로리</a><br> <a style="font-size: small;">1375 / 2300 kcal</a>
+            <div class="ProfileImage">
+                <img src="/images/user.png" alt="image" class="userImage">
+            </div>
+
+            <ul class="infoList" style="list-style-type:none;">
+                <li>이름 : ???</li>
+                <li>성별 : ?</li>
+                <li>목표 체중 : ?? kg</li>
+                <li>목표 bmi : ?? kg/㎡</li>
+                <!-- 아래 두개는 인바디 등록 한 사람만 -->
+                <li>목표 골격근량 : ?? kg</li>
+                <li>목표 체지방량 : ?? kg</li>
+            </ul>
+        </div>
+        
+        <div class="item color2">
+            <div class="recommendfood">
+                <p>오늘의 추천 음식</p>
+                <img class="recommendfood" src="/images/tteokbokki.jpg" alt="My Image" width="300" height="300">
             </div>
             
-            <div class="dataCard">
-                <a style="font-size: medium;">부족한 영양소</a><br> <a style="font-size: small;">탄수화물 단백질 지방 중 가장 적은 영양소</a>
-            </div>
-
-            <div class="dataCard">
-                <a style="font-size: medium;">초과된 영양소</a><br> <a style="font-size: small;">탄수화물 단백질 지방 중 초과된 영양소</a>
-            </div>
-
-            <iframe class="youtube" width="560" height="315" src="https://www.youtube.com/embed/Os_heh8vPfs?si=XB510sxC8XgxbD92" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>오늘의 추천 운동 유튜브</iframe>
+            <p>오늘의 영상</p><iframe class="youtube" width="500" height="255" src="https://www.youtube.com/embed/Os_heh8vPfs?si=Eg8YcpMxhEckDYV_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            
         </div>
+        <div class="item color3">오늘의 식단</div>
+        <div class="item color4">오늘의 칼로리</div>
+        <div class="item color5">출석 체크</div>
+        <div class="item color6">미니 게시판 가져오기</div>
+        <div class="item color7">오늘 초과한 영양성분</div>
+        <div class="item color8">오늘 부족한 영양성분</div>
+
+        
     </div>
 
-    <div class="footer">footer</div>
-
-    <!-- IONICONS -->
-    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
-    <!-- JS -->
-    <script src="js/index.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
-</html>
+</html> 

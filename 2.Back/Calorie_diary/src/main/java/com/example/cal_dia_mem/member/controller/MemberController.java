@@ -83,7 +83,7 @@ public class MemberController {
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if (session != null) session.invalidate();
-        return "index";
+        return "/member/login";
     }
 
     @PostMapping("/member/email-check")

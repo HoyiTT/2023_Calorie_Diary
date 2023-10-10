@@ -24,9 +24,9 @@
             <li><a href="profile.html">프로필</a></li>
             <li><a href="camera.html">칼로리 카메라</a></li>
             <li><a href="caresult.html">식단 추천</a></li>
-            <li><a href="board.html">게시판</a></li>
+            <li><a href="/board/list">게시판</a></li>
             <li><a href="fooddb.html">음식 데이터</a></li>
-            <li><a href="login.html">로그아웃</a></li>
+            <li><a href="/member/logout">로그아웃</a></li>
         </div>
 
         <ul class="navbar__icons"></ul>
@@ -53,7 +53,7 @@
                     <div>
                         <div th:text="${board.id}" class="num">1</div>
                         <div class="title" >
-                            <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
+                            <a style="color:#000" th:text="${board.title}" th:href="@{/board/view(id=${board.id})}">제목</a>
                         </div>
                         <div th:text="${board.memberNickname}" class="writer">박준서</div>
                         <div th:text="${board.createDate}" class="date">2023.8.22</div>

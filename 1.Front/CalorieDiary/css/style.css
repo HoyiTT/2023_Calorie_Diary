@@ -16,10 +16,11 @@ a {
     color: inherit;
 }
 
+
 .board_wrap {
     width: 1000px;
     margin: 50px auto;
-    
+
 }
 
 .board_title {
@@ -49,15 +50,23 @@ a {
     border: 1px solid #5fcf80;
     border-radius: 2px;
     font-size: 1.4rem;
+    background-color: #5fcf80;
 }
 
 .bt_wrap a:first-child {
     margin-left: 0;
 }
 
-.bt_wrap a.on {
-    background: #5fcf80;
-    color: #fff;
+.bt_wrap button.on {
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #5fcf80;
+    border-radius: 2px;
+    font-size: 1.4rem;
+    background-color: #5fcf80;
+    color:#fff;
 }
 
 .board_list {
@@ -286,6 +295,5 @@ a {
     resize: vertical;
 }
 @media screen {
-    
-}
 
+}

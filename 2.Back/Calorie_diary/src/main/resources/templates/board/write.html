@@ -10,7 +10,7 @@
     <div class="board_wrap">
         <div class="board_title">
             <strong style="color:#5fcf80">게시판</strong>
-            
+
         </div>
         <div class="board_write_wrap">
             <div class="board_write">
@@ -37,7 +37,7 @@
                     <input type="hidden" name="memberEmail" th:value=${session.sessionEmail}>
                     <input type="hidden" name="memberNickname" th:value=${session.sessionNickname}>
                     <div class="bt_wrap">
-                        <a href="view.html" class="on">등록</a>
+                        <button type="submit" href="view.html" class="on">등록</button>
                         <a href="board.html">취소</a>
                     </div>
                 </form>
