@@ -46,3 +46,5 @@ if __name__ == "__main__":
         models[m] = torch.hub.load("ultralytics/yolov5", 'custom', 'best.pt', force_reload=True, skip_validation=True)
 
     app.run(host="0.0.0.0", port=opt.port)  # debug=True causes Restarting with stat
+
+    #  python3 app.py --port 5001 --model food_uolov5s   
