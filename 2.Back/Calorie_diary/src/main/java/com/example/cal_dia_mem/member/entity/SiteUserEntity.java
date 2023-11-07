@@ -18,6 +18,7 @@ public class SiteUserEntity {
     @Column
     private String memberName;
 
+    @Column
     private String memberPassword;
 
     @Column(unique = true)
