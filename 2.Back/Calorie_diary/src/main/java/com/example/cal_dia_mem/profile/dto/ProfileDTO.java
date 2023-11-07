@@ -9,6 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class ProfileDTO {
+
+    private Long id;
     private String memberEmail;
     private String memberName;
     private String gender;
@@ -19,8 +21,10 @@ public class ProfileDTO {
     private String muscle;
     private String bodyFat;
 
+
     public static ProfileDTO toProfileDTO(ProfileEntity profileEntity){
         ProfileDTO profileDTO = new ProfileDTO();
+        profileDTO.setId(profileEntity.getId());
         profileDTO.setMemberEmail(profileEntity.getMemberEmail());
         profileDTO.setMemberName(profileEntity.getMemberName());
         profileDTO.setGender(profileEntity.getGender());
@@ -30,6 +34,7 @@ public class ProfileDTO {
         profileDTO.setPurposeBMI(profileEntity.getPurposeBMI());
         profileDTO.setMuscle(profileEntity.getMuscle());
         profileDTO.setBodyFat(profileEntity.getBodyFat());
+
 
         return profileDTO;
 

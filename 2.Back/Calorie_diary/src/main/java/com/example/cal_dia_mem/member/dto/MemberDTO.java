@@ -20,6 +20,7 @@ public class MemberDTO {
 
     private String memberNickname;
 
+    //Entity 를 DTO 로 변환 후 DTO 리턴
     public static MemberDTO tomemberDTO(SiteUserEntity siteUserEntity){
          MemberDTO memberDTO =new MemberDTO();
          memberDTO.setId(siteUserEntity.getId());

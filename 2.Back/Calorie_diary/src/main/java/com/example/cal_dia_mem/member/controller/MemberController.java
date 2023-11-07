@@ -23,6 +23,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final ProfileService profileService;
+
     //회원가입 페이지 출력
     @GetMapping("/member/save")
     public String saveForm(){
@@ -45,6 +46,8 @@ public class MemberController {
             }
             return "/member/createaccount";
         }
+
+        // site_user테이블에서 profile 테이블에 저장 할 값 복사
         ProfileDTO profileDTO = new ProfileDTO();
         profileDTO.setMemberEmail(memberDTO.getMemberEmail());
         profileDTO.setMemberName(memberDTO.getMemberName());
@@ -65,6 +68,7 @@ public class MemberController {
         MemberDTO loginResult = memberService.login(memberDTO);
         //로그인 성공
         if(loginResult != null){
+            // 세션 사용 - 회원별 데이터 식별 시 사용됨
             HttpSession session =request.getSession();
             session.setAttribute("sessionNickname",loginResult.getMemberNickname());
             session.setAttribute("sessionEmail",loginResult.getMemberEmail());
@@ -80,6 +84,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/logout")
+    // 세션 반환 후 로그아웃
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if (session != null) session.invalidate();
@@ -87,13 +92,16 @@ public class MemberController {
     }
 
     @PostMapping("/member/email-check")
+    //이메일 중복체크
     public @ResponseBody String emailCheck(@RequestParam("memberEmail") String memberEmail){
         System.out.println("memberEmail ="+ memberEmail);
         String checkResult =memberService.emailCheck(memberEmail);
         return checkResult;
     }
 
+
     @PostMapping("/member/nickname-check")
+    //닉네임 중복 체크
     public @ResponseBody String nickNameCheck(@RequestParam("memberNickname") String memberNickname){
         System.out.println("memberNickname ="+ memberNickname);
         String checkResult =memberService.NicknameCheck(memberNickname);
