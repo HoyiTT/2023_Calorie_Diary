@@ -13,10 +13,11 @@ a {
     color: inherit;
 }
 
+
 .board_wrap {
     width: 1000px;
     margin: 50px auto;
-    
+
 }
 
 .board_title {
@@ -292,6 +293,5 @@ a {
     resize: vertical;
 }
 @media screen {
-    
-}
 
+}

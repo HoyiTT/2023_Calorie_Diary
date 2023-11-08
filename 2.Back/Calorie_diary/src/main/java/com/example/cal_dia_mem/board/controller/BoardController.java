@@ -2,11 +2,7 @@ package com.example.cal_dia_mem.board.controller;
 
 import com.example.cal_dia_mem.board.dto.BoardDTO;
 import com.example.cal_dia_mem.board.entity.BoardEntity;
-import com.example.cal_dia_mem.board.repository.BoardRepository;
 import com.example.cal_dia_mem.board.service.BoardService;
-import com.example.cal_dia_mem.member.dto.MemberDTO;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +10,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BoardController {
@@ -35,7 +33,7 @@ public class BoardController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        return "board";
+        return "/board/boardindex";
     }
 
     @GetMapping("/board/write")
@@ -57,7 +55,7 @@ public class BoardController {
     public String boardView(Model model, Integer id){
 
         model.addAttribute("board",boardService.boardView(id));
-        return "view";
+        return "/board/boardview";
     }
 
     @GetMapping("/board/delete")

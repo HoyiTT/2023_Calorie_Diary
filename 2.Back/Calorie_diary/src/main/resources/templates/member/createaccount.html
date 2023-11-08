@@ -57,7 +57,7 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">회원가입</h4>
-        <form class="validation-form" novalidate action="/member/save" method="post">
+        <form class="validation-form" novalidate action="/member/save" method="post" modelAttribute="memberDTO">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
@@ -87,18 +87,20 @@
 
           <div class="mb-3">
             <label for="email">비밀번호</label>
-            <input type="password" class="form-control" id="password" name="memberPassword" placeholder="8자리 이상" required>
+            <input type="password" class="form-control" id="password" name="memberPassword" placeholder="8자리 이상" required onkeyup="passwordNum()">
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
             </div>
+            <span id="password_num_result"></span>
           </div>
 
           <div class="mb-3">
             <label for="email">비밀번호 확인</label>
-            <input type="password" class="form-control" id="checkPassword" placeholder="8자리 이상" required>
+            <input type="password" class="form-control" id="checkPassword" placeholder="8자리 이상" required onkeyup="passwordCheck()">
             <div class="invalid-feedback">
               올바른 비밀번호를 입력해주세요.
             </div>
+            <span id="password_check_result"></span>
           </div>
 
           
@@ -113,7 +115,7 @@
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit" style="background-color: #5fcf80;">가입 완료</button>
+          <button class="btn btn-primary btn-lg btn-block" onclick="test()" type="submit" id="success" style="background-color: #5fcf80;">가입 완료</button>
         </form>
       </div>
     </div>
@@ -140,6 +142,8 @@
       const email = document.getElementById("email").value;
       const checkResult = document.getElementById("check-result");
       console.log("입력값: ", email);
+      const success = document.getElementById("success");
+      var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
       $.ajax({
         type: "post",
         url: "/member/email-check",
@@ -148,13 +152,21 @@
         },
         success: function(res) {
           console.log("요청성공",res);
-          if(res == "no"){
+          if(!reg_email.test(email)) {
+            success.disabled=true;
+            checkResult.style.color="red";
+            checkResult.innerHTML =" 이메일 형식이 올바르지 않습니다.";
+          }
+          else if(res == "no") {
+              success.disabled=true;
               console.log("이미 사용중인 이메일")
               checkResult.style.color="red";
               checkResult.innerHTML ="이미 사용중인 이메일입니다.";
           }else{
+            success.disabled=false;
             checkResult.innerHTML =" ";
           }
+
         },
         error: function(err) {
           console.log("에러발생", err);
@@ -164,9 +176,10 @@
   </script>
 
   <script th:inline="javascript">
-    const nicknameCheck = () => {
+      const nicknameCheck = () => {
       const nickname = document.getElementById("nickname").value;
       const checkResult = document.getElementById("nick-check-result");
+      const success = document.getElementById("success");
       console.log("입력값: ", nickname);
       $.ajax({
         type: "post",
@@ -177,10 +190,12 @@
         success: function(res) {
           console.log("요청성공",res);
           if(res == "no"){
+              success.disabled=true;
               console.log("이미 사용중인 별명입니다.")
               checkResult.style.color="red";
               checkResult.innerHTML ="이미 사용중인 별명입니다.";
           }else{
+            success.disabled=false;
             checkResult.innerHTML =" ";
           }
         },
@@ -191,6 +206,40 @@
    }
 </script>
 
+  <script th:inline="javascript">
+      const passwordNum = () =>{
+      const password = document.getElementById('password').value;
+      const password_result=document.getElementById('password_num_result');
+      if(password.length < 8) {
+              success.disabled=true;
+              password_result.innerHTML="8자리 이상의 비밀번호를 사용해주세요.";
+              password_result.style.color="red"
+      }
+      else{
+              success.disabled=false;
+              password_result.innerHTML=" "
+      }
+
+    }
+  </script>
+
+  <script th:inline="javascript">
+      const passwordCheck = () =>{
+      const passwordCheck = document.getElementById('checkPassword').value;
+      const password =document.getElementById('password').value;
+      const password_result=document.getElementById('password_check_result');
+      if(password != passwordCheck) {
+              success.disabled=true;
+              password_result.innerHTML="비밀번호가 일치하지 않습니다.";
+              password_result.style.color="red"
+      }
+      else{
+              success.disabled=false;
+              password_result.innerHTML=" "
+      }
+
+    }
+  </script>
 
 
 </body>

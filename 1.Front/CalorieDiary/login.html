@@ -2,7 +2,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/login.css">
-
 <title> Calorie Diary </title>
 </head>
 <body>
@@ -15,11 +14,11 @@
             <p>Calorie Diary를 시작하기 위해<br>로그인을 해주세요.</p>
           </div>
         </div>
-        <form class="login-page">
-          <input type="text" placeholder="username"/>
-          <input type="password" placeholder="password"/>
-          <button class="loginBtn" onclick="location.href='index.html'">login</button >
-          <p class="message">계정이 없으신가요? <a href="createaccount.html">새 계정 만들기</a></p>
+        <form action="/member/login" method="post" class="login-page">
+          <input type="text" name="memberEmail" placeholder="ID(Email)" />
+          <input type="password" name="memberPassword" placeholder="password"/>
+          <button class="loginBtn" input type="submit">login</button >
+          <p class="message">계정이 없으신가요? <a href="/member/save">새 계정 만들기</a></p>
         </form>
       </div>
     </div>

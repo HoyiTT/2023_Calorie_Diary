@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=http://www.thymeleaf.org>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/profile/modify" method="post">
+    <input hidden="hidden" name="memberEmail" th:valur="${session.sessionEmail}">
+    <input type="text" name="currentWeight" placeholder="현재체중" th:text="${profile.currentWeight}">
+    <input type="text" name="height" placeholder="키" th:text="${profile.height}">
+    <input type="text" name="purposeWeight" placeholder="목표체중" th:text="${profile.purposeWeight}">
+    <input type="text" name="gender" placeholder="성별" th:text="${profile.gender}">
+    <input type="text" name="purposeBmi" placeholder="목표bmi" th:text="${profile.purposeBMI}">
+    <button type="submit"> 저장</button>
+</form>
+</body>
+</html>

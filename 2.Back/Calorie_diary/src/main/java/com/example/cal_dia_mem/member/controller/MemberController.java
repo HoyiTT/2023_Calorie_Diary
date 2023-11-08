@@ -4,18 +4,25 @@ import ch.qos.logback.core.model.Model;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.member.service.MemberService;
+import com.example.cal_dia_mem.profile.dto.ProfileDTO;
+import com.example.cal_dia_mem.profile.service.ProfileService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
+    private final ProfileService profileService;
     //회원가입 페이지 출력
     @GetMapping("/member/save")
     public String saveForm(){
@@ -24,15 +31,34 @@ public class MemberController {
 
     //memberService에 memberDTO넘겨줌
     @PostMapping("/member/save")
-    public String save(@ModelAttribute MemberDTO memberDTO) {
+    public String save(@Valid MemberDTO memberDTO, Errors errors, org.springframework.ui.Model model) {
         System.out.println("memberDTO= " + memberDTO);
+
+        if(errors.hasErrors()){
+            //회원가입 실패 시 입력값 유지
+            model.addAttribute("memberDTO",memberDTO);
+
+            //유효성 통과 못한 필드와 메시지 핸들링
+            Map<String, String> validatorResult = MemberService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+            return "/member/createaccount";
+        }
+        ProfileDTO profileDTO = new ProfileDTO();
+        profileDTO.setMemberEmail(memberDTO.getMemberEmail());
+        profileDTO.setMemberName(memberDTO.getMemberName());
+
+        System.out.println("profileDTO= "+ profileDTO);
         memberService.save(memberDTO);
+        profileService.save(profileDTO);
+
         return "/member/login";
     }
 
     @GetMapping("/member/login")
     public String loginForm(){
-        return "/member/login";
+         return "/member/login";
     }
     @PostMapping("/member/login")
     public String login(@ModelAttribute MemberDTO memberDTO , HttpServletRequest request, Model model){
@@ -40,9 +66,9 @@ public class MemberController {
         //로그인 성공
         if(loginResult != null){
             HttpSession session =request.getSession();
-            session.setAttribute("sessionName",loginResult.getMemberName());
+            session.setAttribute("sessionNickname",loginResult.getMemberNickname());
             session.setAttribute("sessionEmail",loginResult.getMemberEmail());
-            return "main";
+            return "index";
         }
         //로그인 실패
         else{
@@ -57,7 +83,7 @@ public class MemberController {
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if (session != null) session.invalidate();
-        return "index";
+        return "/member/login";
     }
 
     @PostMapping("/member/email-check")
