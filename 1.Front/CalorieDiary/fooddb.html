@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,18 +37,20 @@
     </nav>
 
     <div class="col-md-4 offset-md-4 mt-4 border border-success pt-3">
+        <form action="/api/foodData" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="음식 검색" aria-label="Recipient's username">
-          <div class="input-group-append">
-            <span class="input-group-text"><i class="fa fa-search"></i></span>
-          </div>
+              <input type="text" name="food_name" class="form-control" placeholder="음식 검색" aria-label="Recipient's username">
+              <div class="input-group-append">
+                 <button type="submit" class="input-group-text"><i class="fa fa-search"></i></button>
+              </div>
         </div>
+    </form>
     </div>
 
     <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">순서</th>
+            <th scope="col" >순서</th>
             <th scope="col">음식이름</th>
             <th scope="col">제조사</th>
             <th scope="col">제공량</th>
@@ -61,55 +63,46 @@
             <th scope="col">콜레스테롤</th>
             <th scope="col">포화지방</th>
             <th scope="col">트랜스지방</th> 
-
+            <th scope="col">다이어리 추가</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>라면</td>
-            <td>농심</td>
-            <td>30g</td>
-            <td>123kcal</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>라면</td>
-            <td>농심</td>
-            <td>30g</td>
-            <td>123kcal</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>라면</td>
-            <td>농심</td>
-            <td>30g</td>
-            <td>123kcal</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-          </tr>
+        <th:block th:each="item : ${datalist}">
+            <form action="/diary/save" method="post">
+                <tr>
+                    <th th:text="${item.num}" scope="row" >1</th>
+                    <td th:text="${item.food_name}">라면</td>
+                    <td th:text="${item.maker_name}">농심</td>
+                    <td th:text="${item.serving_size}">30g</td>
+                    <td th:text="${item.kcal}">123kcal</td>
+                    <td th:text="${item.carbohydrate}">123</td>
+                    <td th:text="${item.protein}">123</td>
+                    <td th:text="${item.fat}">123</td>
+                    <td th:text="${item.sugars}">123</td>
+                    <td th:text="${item.salt}">123</td>
+                    <td th:text="${item.cholesterol}">123</td>
+                    <td th:text="${item.saturated_fatty}">123</td>
+                    <td th:text="${item.transfat}">123</td>
+                    <form action="/diary/save" method="post">
+                        <input type="hidden" name="food_name" th:value=${item.food_name}>
+                        <input type="hidden" name="maker_name" th:value=${item.maker_name}>
+                        <input type="hidden" name="serving_size" th:value=${item.serving_size}>
+                        <input type="hidden" name="kcal" th:value=${item.kcal}>
+                        <input type="hidden" name="carbohydrate" th:value=${item.carbohydrate}>
+                        <input type="hidden" name="protein" th:value=${item.protein}>
+                        <input type="hidden" name="fat" th:value=${item.fat}>
+                        <input type="hidden" name="sugars" th:value=${item.sugars}>
+                        <input type="hidden" name="salt" th:value=${item.salt}>
+                        <input type="hidden" name="cholesterol" th:value=${item.cholesterol}>
+                        <input type="hidden" name="saturated_fatty" th:value=${item.saturated_fatty}>
+                        <input type="hidden" name="transfat" th:value=${item.transfat}>
+                        <input type="hidden" name="memberEmail" th:value=${memberEmail}>
+                        <td><button type="submit">추가하기</button></td>
+                    </form>
+
+                </tr>
+            </form>
+        </th:block>
         </tbody>
       </table>
 
