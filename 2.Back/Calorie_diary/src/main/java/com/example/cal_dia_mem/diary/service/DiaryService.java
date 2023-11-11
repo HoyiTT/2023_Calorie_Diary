@@ -7,10 +7,12 @@ import com.example.cal_dia_mem.profile.dto.ProfileDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +23,11 @@ public class DiaryService {
         diaryRepository.save(diaryEntity);
     }
 
-  /*  public List<DiaryDTO> callDiary(Timestamp create_date, String myEmail){
-        List<DiaryDTO> diaryList =diaryRepository.findByDateAndMemberEmail(create_date,myEmail);
-        return diaryList;
-    } */
+    public List<DiaryDTO> callDiary(Date createDate, String myEmail){
+        List<DiaryEntity> diaryEntityList =diaryRepository.findByCreateDateAndMemberEmail(createDate,myEmail);
+        List<DiaryDTO> diaryDtoList = diaryEntityList.stream()
+                .map(DiaryEntity::entityToDto)
+                    .collect(Collectors.toList());
+        return diaryDtoList;
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,8 +56,19 @@
             <p>오늘의 영상</p><iframe class="youtube" width="500" height="255" src="https://www.youtube.com/embed/Os_heh8vPfs?si=Eg8YcpMxhEckDYV_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             
         </div>
-        <div class="item color3">오늘의 식단</div>
-        <div class="item color4">오늘의 칼로리</div>
+        <div class="item color3">
+            오늘의 식단
+            <th:block th:each="todayItem : ${todayList}">
+                <p th:text="${todayItem.food_name}"> </p>
+            </th:block>
+        </div>
+
+        <div class="item color4">
+            오늘의 칼로리
+            <th:block th:each="todayItem : ${todayList}">
+                <p th:text="${todayItem.kcal}+kcal"> </p>
+            </th:block>
+        </div>
         <div class="item color5">출석 체크</div>
         <div class="item color6">미니 게시판 가져오기</div>
         <div class="item color7">초과한 영양성분</div>

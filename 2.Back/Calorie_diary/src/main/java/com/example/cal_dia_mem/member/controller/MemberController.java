@@ -1,7 +1,9 @@
 package com.example.cal_dia_mem.member.controller;
 
-import ch.qos.logback.core.model.Model;
 import ch.qos.logback.core.net.SyslogOutputStream;
+import com.example.cal_dia_mem.diary.dto.DiaryDTO;
+import com.example.cal_dia_mem.diary.repository.DiaryRepository;
+import com.example.cal_dia_mem.diary.service.DiaryService;
 import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.member.service.MemberService;
 import com.example.cal_dia_mem.profile.dto.ProfileDTO;
@@ -12,9 +14,12 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,6 +28,8 @@ public class MemberController {
 
     private final MemberService memberService;
     private final ProfileService profileService;
+
+    private final DiaryService diaryService;
 
     //회원가입 페이지 출력
     @GetMapping("/member/save")
@@ -72,6 +79,10 @@ public class MemberController {
             HttpSession session =request.getSession();
             session.setAttribute("sessionNickname",loginResult.getMemberNickname());
             session.setAttribute("sessionEmail",loginResult.getMemberEmail());
+            Date createDate = new Date(System.currentTimeMillis());
+            List<DiaryDTO> dto=diaryService.callDiary(createDate,loginResult.getMemberEmail());
+            model.addAttribute("todayList",dto);
+            System.out.println(dto);
             return "index";
         }
         //로그인 실패

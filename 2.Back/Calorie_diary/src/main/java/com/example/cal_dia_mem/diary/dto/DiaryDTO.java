@@ -4,6 +4,7 @@ package com.example.cal_dia_mem.diary.dto;
 import com.example.cal_dia_mem.diary.entity.DiaryEntity;
 import lombok.*;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Getter
@@ -15,7 +16,7 @@ public class DiaryDTO {
 
     private Integer id;
     private String memberEmail;
-    private Timestamp createDate;
+    private Date createDate;
     private String food_name;
     private String kcal;
     private String carbohydrate;

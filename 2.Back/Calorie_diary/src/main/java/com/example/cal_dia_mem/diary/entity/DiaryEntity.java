@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -21,7 +22,7 @@ public class DiaryEntity {
     private String memberEmail;
     @Column(columnDefinition = "DATE")
     @CreationTimestamp
-    private Timestamp createDate;
+    private Date createDate;
     @Column
     private String food_name;
     @Column
@@ -59,6 +60,24 @@ public class DiaryEntity {
         diaryEntity.setTransfat(diaryDTO.getTransfat());
 
         return diaryEntity;
+    }
+
+
+    public static DiaryDTO entityToDto(DiaryEntity entity){
+        DiaryDTO dto = new DiaryDTO();
+        dto.setMemberEmail(entity.getMemberEmail());
+        dto.setCreateDate(entity.getCreateDate());
+        dto.setFood_name(entity.getFood_name());
+        dto.setKcal(entity.getKcal());
+        dto.setCarbohydrate(entity.getCarbohydrate());
+        dto.setProtein(entity.getProtein());
+        dto.setFat(entity.getFat());
+        dto.setSugars(entity.getSugars());
+        dto.setSalt(entity.getSalt());
+        dto.setCholesterol(entity.getCholesterol());
+        dto.setSaturated_fatty(entity.getSaturated_fatty());
+        dto.setTransfat(entity.transfat);
+        return dto;
     }
 }
 
