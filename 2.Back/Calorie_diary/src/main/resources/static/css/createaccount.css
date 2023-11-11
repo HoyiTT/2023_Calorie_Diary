@@ -3,13 +3,13 @@
     font-family: "Noto Sans CJK KR";
     font-style: normal;
   }
-
+  
   body {
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
-
+  
   .container {
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);
     border-radius: 20px;
   }
-
+  
   .member-container {
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@
     margin-top: 72px;
     margin-bottom: 70px;
   }
-
+  
   .header {
     width: 466px;
     height: 94px;
@@ -42,7 +42,7 @@
     line-height: 47px;
     color: #0068ff;
   }
-
+  
   .user-info input {
     border: none;
     border-bottom: darkblue;
@@ -55,11 +55,11 @@
     height: 80px;
     margin-top: 21px;
   }
-
+  
   .email {
     border-bottom: 1px solid #0068ff;
   }
-
+  
   .gender {
     display: flex;
     align-items: center;
@@ -68,20 +68,20 @@
     height: 23.94px;
     margin-top: 50px;
   }
-
+  
   .gender input {
     width: 20px;
     height: 19.95px;
     background: #ebebeb;
     border: 1px solid #d2d2d2;
   }
-
+  
   .gender label {
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
   }
-
+  
   .agree-check {
     width: 454px;
     height: 21.06px;
@@ -91,7 +91,7 @@
     line-height: 21px;
     color: #000000;
   }
-
+  
   .btn {
     display: flex;
     flex-direction: column;
@@ -100,7 +100,7 @@
     height: 106px;
     border-top: 1px solid #e6e6e6;
   }
-
+  
   button {
     margin-top: 30px;
     width: 470px;

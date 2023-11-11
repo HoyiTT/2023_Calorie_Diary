@@ -21,7 +21,7 @@ public class  CameraEntity {
     private String filepath;
 
 
-    public static com.example.cal_dia_mem.camera.entity.CameraEntity toCameraEntity(CameraDTO cameraDTO){
+    public static CameraEntity toCameraEntity(CameraDTO cameraDTO){
         CameraEntity cameraEntity = new CameraEntity();
         cameraEntity.setMemberEmail(cameraDTO.getMemberEmail());
         cameraEntity.setMemberNickname(cameraDTO.getMemberNickname());

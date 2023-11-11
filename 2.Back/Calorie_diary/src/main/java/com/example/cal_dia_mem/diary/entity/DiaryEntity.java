@@ -2,6 +2,7 @@ package com.example.cal_dia_mem.diary.entity;
 
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,11 +15,11 @@ import java.sql.Timestamp;
 @Table(name="food_diary")
 public class DiaryEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String memberEmail;
-    @Column
+    @Column(columnDefinition = "DATE")
     @CreationTimestamp
     private Timestamp createDate;
     @Column
@@ -60,3 +61,4 @@ public class DiaryEntity {
         return diaryEntity;
     }
 }
+

@@ -3,8 +3,6 @@ package com.example.cal_dia_mem.camera.dto;
 
 import lombok.*;
 
-import java.sql.Timestamp;
-
 @Getter
 @Setter
 @NoArgsConstructor

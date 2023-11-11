@@ -21,7 +21,7 @@ public class ApiService {
     public String callApi(String foodname) {
         StringBuilder result = new StringBuilder();
         try {
-            String apiUrl = "http://openapi.foodsafetykorea.go.kr/api/db8f865acfd64a048404/I2790/json/1/5/" +
+            String apiUrl = "http://openapi.foodsafetykorea.go.kr/api/db8f865acfd64a048404/I2790/json/1/1000/" +
                     "DESC_KOR=" + foodname;
 
             URL url = new URL(apiUrl);
