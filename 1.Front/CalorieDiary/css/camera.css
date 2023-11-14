@@ -3,14 +3,32 @@
 
 
 
-h2 {
+
+
+.header{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.headerName{
   font-family: "Roboto", sans-serif;
   font-size: 26px;
-  line-height: 1;
   color: #5fcf80;
-  margin-top: 50px;
+  margin-top: 25px;
   text-align: center;
+  margin-right: 280px;
 }
+
+.form-check{
+    margin-top:25px;
+}
+
+.change input{
+  accent-color:#5fcf80;
+}
+
+
 
 p {
   font-family: "Roboto", sans-serif;
@@ -149,6 +167,7 @@ p {
   cursor: pointer;
 }
 
+
 body{
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
@@ -209,9 +228,6 @@ a{
 
 
 
-/*여기서부터 드래그앤드롭*/
-
-
 
 @media screen and (max-width:768px){
   
@@ -245,6 +261,6 @@ a{
   }
   .form{
     display: flex;
-    justify-content: centerl;;
+    justify-content: center;
   }
 }
