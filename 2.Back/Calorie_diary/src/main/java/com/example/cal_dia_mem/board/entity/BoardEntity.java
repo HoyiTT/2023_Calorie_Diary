@@ -1,14 +1,20 @@
 package com.example.cal_dia_mem.board.entity;
 
 import com.example.cal_dia_mem.board.dto.BoardDTO;
+import com.example.cal_dia_mem.board.service.BoardService;
+import com.example.cal_dia_mem.diary.dto.DiaryDTO;
+import com.example.cal_dia_mem.diary.entity.DiaryEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Setter
@@ -24,13 +30,17 @@ public class  BoardEntity {
     private String memberEmail;
     private String memberNickname;
     private Integer view;
-    @CreationTimestamp
-    private Timestamp create_date;
+    @Column(name="create_date")
+    private LocalDateTime createDate;
 
-    public String getCreateDate(){
-        return new SimpleDateFormat("yyyy.MM.dd").format(create_date);
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
 
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate.truncatedTo(ChronoUnit.MINUTES);
+    }
     public static BoardEntity toBoardEntity(BoardDTO boardDTO){
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setTitle(boardDTO.getTitle());
@@ -39,6 +49,19 @@ public class  BoardEntity {
         boardEntity.setMemberNickname(boardDTO.getMemberNickname());
         boardEntity.setView(boardDTO.getView());
         return boardEntity;
+    }
+
+    public static BoardDTO entityToDto(BoardEntity entity){
+        BoardDTO dto = new BoardDTO();
+        dto.setId(entity.getId());
+        dto.setTitle(entity.getTitle());
+        dto.setContent(entity.getContent());
+        dto.setMemberEmail(entity.getMemberEmail());
+        dto.setMemberNickname(entity.getMemberNickname());
+        dto.setView(entity.getView());
+        dto.setCreateDate(entity.getCreateDate());
+
+        return dto;
     }
 }
 

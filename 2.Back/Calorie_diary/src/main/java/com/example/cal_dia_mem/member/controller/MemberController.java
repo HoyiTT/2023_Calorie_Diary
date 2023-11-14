@@ -1,6 +1,8 @@
 package com.example.cal_dia_mem.member.controller;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import com.example.cal_dia_mem.board.dto.BoardDTO;
+import com.example.cal_dia_mem.board.service.BoardService;
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import com.example.cal_dia_mem.diary.repository.DiaryRepository;
 import com.example.cal_dia_mem.diary.service.DiaryService;
@@ -31,6 +33,7 @@ public class MemberController {
 
     private final DiaryService diaryService;
 
+    private final BoardService boardService;
     //회원가입 페이지 출력
     @GetMapping("/member/save")
     public String saveForm(){
@@ -79,10 +82,22 @@ public class MemberController {
             HttpSession session =request.getSession();
             session.setAttribute("sessionNickname",loginResult.getMemberNickname());
             session.setAttribute("sessionEmail",loginResult.getMemberEmail());
-            Date createDate = new Date(System.currentTimeMillis());
-            List<DiaryDTO> dto=diaryService.callDiary(createDate,loginResult.getMemberEmail());
+            Date todayDate = new Date(System.currentTimeMillis());
+            // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 섭취한 음식 및 영양성분 받아오기
+            List<DiaryDTO> dto=diaryService.callDiary(todayDate,loginResult.getMemberEmail());
             model.addAttribute("todayList",dto);
-            System.out.println(dto);
+
+            // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
+            List<String> overNutrient = diaryService.overNutrient(todayDate,loginResult.getMemberEmail());
+            model.addAttribute("overNutrient",overNutrient);
+
+            // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
+            List<String> scarceNutrient = diaryService.scarceNutrient(todayDate,loginResult.getMemberEmail());
+            model.addAttribute("scarceNutrient",scarceNutrient);
+
+            //최근 3일동안 가장 인기있는 게시글 5개 가져오기
+            List<BoardDTO> poplarBoard = boardService.popularBoard();
+            model.addAttribute("poplarBoard",poplarBoard);
             return "index";
         }
         //로그인 실패
@@ -92,6 +107,28 @@ public class MemberController {
             request.setAttribute("searchUrl","/member/login");
             return "/member/message";
         }
+    }
+
+    @GetMapping("/index/call")
+    public String index(@ModelAttribute MemberDTO memberDTO , HttpServletRequest request, Model model,HttpSession session){
+        String myEmail = (String) session.getAttribute("sessionEmail");
+        Date todayDate = new Date(System.currentTimeMillis());
+        // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 섭취한 음식 및 영양성분 받아오기
+        List<DiaryDTO> dto=diaryService.callDiary(todayDate,myEmail);
+        model.addAttribute("todayList",dto);
+
+        // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
+        List<String> overNutrient = diaryService.overNutrient(todayDate,myEmail);
+        model.addAttribute("overNutrient",overNutrient);
+
+        // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
+        List<String> scarceNutrient = diaryService.scarceNutrient(todayDate,myEmail);
+        model.addAttribute("scarceNutrient",scarceNutrient);
+
+        //최근 3일동안 가장 인기있는 게시글 5개 가져오기
+        List<BoardDTO> poplarBoard = boardService.popularBoard();
+        model.addAttribute("poplarBoard",poplarBoard);
+        return "index";
     }
 
     @GetMapping("/member/logout")

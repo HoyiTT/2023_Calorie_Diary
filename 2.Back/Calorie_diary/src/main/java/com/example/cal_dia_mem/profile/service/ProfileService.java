@@ -17,15 +17,14 @@ public class ProfileService {
     @Autowired
     private final ProfileRepository profileRepository;
 
+    // 회원 가입 시 회원 기본 정보 저장
     public void save(ProfileDTO profileDTO) {
 
         ProfileEntity profileEntity = ProfileEntity.toprofileEntiy(profileDTO);
-        System.out.println("weight"+profileEntity.getCurrentWeight());
-        System.out.println("weight"+profileEntity.getPurposeWeight());
-        System.out.println("bmi"+profileEntity.getPurposeBMI());
         profileRepository.save(profileEntity);
     }
 
+    // 프로필 수정을 위한 함수
     public ProfileDTO modifyProfile(String myEmail) {
         Optional<ProfileEntity> optionalProfileEntity = profileRepository.findByMemberEmail(myEmail);
         if (optionalProfileEntity.isPresent()) {
@@ -33,5 +32,28 @@ public class ProfileService {
         } else {
             return null;
         }
+    }
+
+    // 멤버 이메일별 회원의 성별을 리턴
+    public String returnGen(String myEmail){
+
+        Optional<ProfileEntity> optionalProfileEntity = profileRepository.findByMemberEmail(myEmail);
+        if(optionalProfileEntity.isPresent()){
+            ProfileEntity profileEntity = optionalProfileEntity.get();
+            return profileEntity.getGender();
+        }
+
+        else return "m";
+    }
+
+    // 멤버 이메일별 회원의 현제 체중 리턴
+    public String returnCurrentWeight(String myEmail){
+
+        Optional<ProfileEntity> optionalProfileEntity = profileRepository.findByMemberEmail(myEmail);
+        if(optionalProfileEntity.isPresent()){
+            ProfileEntity profileEntity = optionalProfileEntity.get();
+            return profileEntity.getCurrentWeight();
+        }
+        else return "1";
     }
 }
