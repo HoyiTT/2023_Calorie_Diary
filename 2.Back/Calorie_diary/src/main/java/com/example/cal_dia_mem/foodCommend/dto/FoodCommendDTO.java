@@ -26,8 +26,8 @@ public class FoodCommendDTO {
         foodCommendDTO.setCarbohydrate(foodCommendEntity.getCarbohydrate());
         foodCommendDTO.setProtein(foodCommendEntity.getProtein());
         foodCommendDTO.setFat(foodCommendEntity.getFat());
-        foodCommendDTO.setSugars(foodCommendDTO.getSugars());
-        foodCommendDTO.setSalt(foodCommendDTO.getSalt());
+        foodCommendDTO.setSugars(foodCommendEntity.getSugars());
+        foodCommendDTO.setSalt(foodCommendEntity.getSalt());
 
         return foodCommendDTO;
     }

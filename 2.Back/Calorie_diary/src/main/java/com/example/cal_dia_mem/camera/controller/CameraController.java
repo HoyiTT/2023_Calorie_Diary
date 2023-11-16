@@ -54,6 +54,10 @@ public class CameraController {
         if(junFoodDTO1!=null){
             junFoodDTO=junFoodDTO1;  // 빈 값을 가진 DTO에 사진으로 받아온DTO 입력
         }
+        //만약 음식사진이 아닌 영양성분 사진이라면 음식이름을 공백으로 채움
+        if(junFoodDTO.getFoodName()==null){
+            junFoodDTO.setFoodName("  ");
+        }
         model.addAttribute("memberEmail",myEmail);
         model.addAttribute("junFood",junFoodDTO); // model에 객체추가
         System.out.println(junFoodDTO);

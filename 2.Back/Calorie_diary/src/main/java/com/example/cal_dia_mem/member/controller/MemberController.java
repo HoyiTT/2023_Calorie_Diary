@@ -6,6 +6,7 @@ import com.example.cal_dia_mem.board.service.BoardService;
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import com.example.cal_dia_mem.diary.repository.DiaryRepository;
 import com.example.cal_dia_mem.diary.service.DiaryService;
+import com.example.cal_dia_mem.foodCommend.dto.FoodCommendDTO;
 import com.example.cal_dia_mem.foodCommend.service.FoodCommendService;
 import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.member.service.MemberService;
@@ -105,7 +106,12 @@ public class MemberController {
             List<BoardDTO> poplarBoard = boardService.popularBoard();
             model.addAttribute("poplarBoard",poplarBoard);
 
-           // foodCommendService.commendFood();
+            List<FoodCommendDTO> foodCommendDTOList=foodCommendService.commendFood();
+
+            model.addAttribute("commendNutrient",foodCommendDTOList);
+
+            String commendInfo=foodCommendService.foodCommendInfo(foodCommendDTOList);
+            model.addAttribute("commendInfo",commendInfo);
             return "index";
         }
         //로그인 실패

@@ -50,7 +50,27 @@
         <div class="item color2">
             <div class="recommendfood">
                 <p>오늘의 추천 음식</p>
-                <img class="recommendfood" src="/images/tteokbokki.jpg" alt="My Image" width="300" height="300">
+
+                <table border="1">
+                    <tr>
+                        <td>아침</td>
+                        <td>점심</td>
+                        <td>저녁</td>
+                    </tr>
+                    <th:block th:each="commend : ${commendNutrient}">
+                        <tr>
+                            <td th:text="${commend.foodName}"></td>
+                        </tr>
+                    </th:block>
+
+                    <tr>
+                        <td>저녁</td>
+                        <td>점심</td>
+                        <td>저녁</td>
+                    </tr>
+                </table>
+
+                <p th:text="${commendInfo}"></p>
             </div>
             
             <p>오늘의 영상</p><iframe class="youtube" width="500" height="255" src="https://www.youtube.com/embed/Os_heh8vPfs?si=Eg8YcpMxhEckDYV_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

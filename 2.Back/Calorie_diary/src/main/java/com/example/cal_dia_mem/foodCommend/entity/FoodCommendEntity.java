@@ -1,5 +1,7 @@
 package com.example.cal_dia_mem.foodCommend.entity;
 
+import com.example.cal_dia_mem.diary.dto.DiaryDTO;
+import com.example.cal_dia_mem.diary.entity.DiaryEntity;
 import com.example.cal_dia_mem.foodCommend.dto.FoodCommendDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -39,5 +41,18 @@ public class FoodCommendEntity {
         foodCommendEntity.setSalt(foodCommendDTO.getSalt());
 
         return foodCommendEntity;
+    }
+
+    public static FoodCommendDTO entityToDto(FoodCommendEntity entity){
+        FoodCommendDTO dto = new FoodCommendDTO();
+        dto.setId(entity.getId());
+        dto.setFoodName(entity.getFoodName());
+        dto.setKcal(entity.getKcal());
+        dto.setCarbohydrate(entity.getCarbohydrate());
+        dto.setProtein(entity.getProtein());
+        dto.setFat(entity.getFat());
+        dto.setSugars(entity.getSugars());
+        dto.setSalt(entity.getSalt());
+        return dto;
     }
 }
