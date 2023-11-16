@@ -102,7 +102,10 @@
     <tr>
         <form action="/diary/save" method="post"></form>
         <th scope="row">1</th>
-        <td><input th:text="${junFood.foodName}" type="text" name="foodName"></td>
+        <form action="/diary/save" method="post">
+        <td>
+            <input th:value="${junFood.foodName}" type="text" name="food_name">
+        </td>
         <td></td>
         <td ></td>
         <td th:text="${junFood.kcal}"></td>
@@ -114,8 +117,6 @@
         <td th:text="${junFood.cholesterol}"></td>
         <td th:text="${junFood.saturated_fatty}"></td>
         <td th:text="${junFood.transfat}"></td>
-        <form action="/diary/save" method="post">
-            <input type="hidden" name="food_name" th:value=${junFood.foodName}>
             <input type="hidden" name="maker_name" value=" ">
             <input type="hidden" name="serving_size" value=" ">
             <input type="hidden" name="kcal" th:value=${junFood.kcal}>
