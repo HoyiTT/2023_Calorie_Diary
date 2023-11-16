@@ -2,23 +2,24 @@ package com.example.cal_dia_mem.profile.entity;
 
 import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.profile.dto.ProfileDTO;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Setter
 @Getter
 @Table(name="memberProfile")
 public class ProfileEntity{
+
     @Id
-    private String memberEmail;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(unique = true)
-    @NotNull
+    private String memberEmail;
+    @Column
     private String memberName;
     @Column
     private String gender;
@@ -36,17 +37,18 @@ public class ProfileEntity{
     private String bodyFat;
 
     public static ProfileEntity toprofileEntiy(ProfileDTO profileDTO){
+
         ProfileEntity profileEntity = new ProfileEntity();
+        profileEntity.setId(profileDTO.getId());
         profileEntity.setMemberEmail(profileDTO.getMemberEmail());
         profileEntity.setMemberName(profileDTO.getMemberName());
         profileEntity.setGender(profileDTO.getGender());
         profileEntity.setHeight(profileDTO.getHeight());
-        profileEntity.setCurrentWeight(profileEntity.getCurrentWeight());
-        profileEntity.setPurposeWeight(profileEntity.getPurposeWeight());
-        profileEntity.setPurposeBMI(profileEntity.getPurposeBMI());
-        profileEntity.setMuscle(profileEntity.getMuscle());
-        profileEntity.setBodyFat(profileEntity.getBodyFat());
-
+        profileEntity.setCurrentWeight(profileDTO.getCurrentWeight());
+        profileEntity.setPurposeWeight(profileDTO.getPurposeWeight());
+        profileEntity.setPurposeBMI(profileDTO.getPurposeBMI());
+        profileEntity.setMuscle(profileDTO.getMuscle());
+        profileEntity.setBodyFat(profileDTO.getBodyFat());
 
         return profileEntity;
     }

@@ -1,7 +1,9 @@
 package com.example.cal_dia_mem.member.controller;
 
-import ch.qos.logback.core.model.Model;
 import ch.qos.logback.core.net.SyslogOutputStream;
+import com.example.cal_dia_mem.diary.dto.DiaryDTO;
+import com.example.cal_dia_mem.diary.repository.DiaryRepository;
+import com.example.cal_dia_mem.diary.service.DiaryService;
 import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.member.service.MemberService;
 import com.example.cal_dia_mem.profile.dto.ProfileDTO;
@@ -12,9 +14,12 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,6 +28,9 @@ public class MemberController {
 
     private final MemberService memberService;
     private final ProfileService profileService;
+
+    private final DiaryService diaryService;
+
     //회원가입 페이지 출력
     @GetMapping("/member/save")
     public String saveForm(){
@@ -45,6 +53,8 @@ public class MemberController {
             }
             return "/member/createaccount";
         }
+
+        // site_user테이블에서 profile 테이블에 저장 할 값 복사
         ProfileDTO profileDTO = new ProfileDTO();
         profileDTO.setMemberEmail(memberDTO.getMemberEmail());
         profileDTO.setMemberName(memberDTO.getMemberName());
@@ -65,9 +75,14 @@ public class MemberController {
         MemberDTO loginResult = memberService.login(memberDTO);
         //로그인 성공
         if(loginResult != null){
+            // 세션 사용 - 회원별 데이터 식별 시 사용됨
             HttpSession session =request.getSession();
             session.setAttribute("sessionNickname",loginResult.getMemberNickname());
             session.setAttribute("sessionEmail",loginResult.getMemberEmail());
+            Date createDate = new Date(System.currentTimeMillis());
+            List<DiaryDTO> dto=diaryService.callDiary(createDate,loginResult.getMemberEmail());
+            model.addAttribute("todayList",dto);
+            System.out.println(dto);
             return "index";
         }
         //로그인 실패
@@ -80,6 +95,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/logout")
+    // 세션 반환 후 로그아웃
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if (session != null) session.invalidate();
@@ -87,13 +103,16 @@ public class MemberController {
     }
 
     @PostMapping("/member/email-check")
+    //이메일 중복체크
     public @ResponseBody String emailCheck(@RequestParam("memberEmail") String memberEmail){
         System.out.println("memberEmail ="+ memberEmail);
         String checkResult =memberService.emailCheck(memberEmail);
         return checkResult;
     }
 
+
     @PostMapping("/member/nickname-check")
+    //닉네임 중복 체크
     public @ResponseBody String nickNameCheck(@RequestParam("memberNickname") String memberNickname){
         System.out.println("memberNickname ="+ memberNickname);
         String checkResult =memberService.NicknameCheck(memberNickname);

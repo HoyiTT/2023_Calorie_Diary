@@ -18,6 +18,7 @@ public class SiteUserEntity {
     @Column
     private String memberName;
 
+    @Column
     private String memberPassword;
 
     @Column(unique = true)
@@ -26,6 +27,8 @@ public class SiteUserEntity {
     @Column(unique = true)
     private String memberNickname;
 
+
+    // DTO --> Entity로 변환 후 Entity 리턴
     public static SiteUserEntity toSiteUserEntity(MemberDTO memberDTO){
         SiteUserEntity siteUserEntity = new SiteUserEntity();
         siteUserEntity.setMemberEmail(memberDTO.getMemberEmail());
