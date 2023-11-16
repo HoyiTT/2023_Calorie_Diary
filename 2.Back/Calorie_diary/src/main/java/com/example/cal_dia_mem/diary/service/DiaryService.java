@@ -98,35 +98,36 @@ public class DiaryService {
 
         if(gen.equals("m")) {
             double mScarceCarbo = 110-totalCarbohydrate(diaryDtoList);
+
             if (mScarceCarbo>=1){
-                scarceNutrient.add("탄수화물이 최소권장 섭취량보다"+mScarceCarbo+"g만큼 부족합니다.");
+                scarceNutrient.add("탄수화물이 최소권장 섭취량보다"+String.format("%.1f",mScarceCarbo)+"g만큼 부족합니다.");
             }
 
             double mScarcePro = Double.parseDouble(currentWeight) * 0.85-totalProtein(diaryDtoList);
             if (mScarcePro>=1) {
-                scarceNutrient.add("단백질이 체중별 권장 섭취량보다"+mScarcePro+"g만큼 부족합니다.");
+                scarceNutrient.add("단백질이 체중별 권장 섭취량보다"+String.format("%.1f",mScarcePro)+"g만큼 부족합니다.");
             }
 
             double mScarceFat=45-totalFat(diaryDtoList);
             if (mScarceFat>=1){
-                scarceNutrient.add("지방이 최소권장 섭취량보다"+mScarceFat+"g만큼 부족합니다.");
+                scarceNutrient.add("지방이 최소권장 섭취량보다"+String.format("%.1f",mScarceFat)+"g만큼 부족합니다.");
             }
         }
         else if(gen.equals("w")){
 
             double wScarceCarbo = 100-totalCarbohydrate(diaryDtoList);
             if (wScarceCarbo>=1){
-                scarceNutrient.add("탄수화물이 최소권장 섭취량보다"+wScarceCarbo+"g만큼 부족합니다.");
+                scarceNutrient.add("탄수화물이 최소권장 섭취량보다"+String.format("%.1f",wScarceCarbo)+"g만큼 부족합니다.");
             }
 
             double wScarcePro = Double.parseDouble(currentWeight) * 0.85-totalProtein(diaryDtoList);
             if (wScarcePro>=1) {
-                scarceNutrient.add("단백질이 체중별 권장 섭취량보다"+wScarcePro+"g만큼 부족합니다.");
+                scarceNutrient.add("단백질이 체중별 권장 섭취량보다"+String.format("%.1f",wScarcePro)+"g만큼 부족합니다.");
             }
 
             double wScarceFat=40-totalFat(diaryDtoList);
             if (wScarceFat>=1){
-                scarceNutrient.add("지방이 최소권장 섭취량보다"+wScarceFat+"g만큼 부족합니다.");
+                scarceNutrient.add("지방이 최소권장 섭취량보다"+String.format("%.1f",wScarceFat)+"g만큼 부족합니다.");
             }
         }
         return scarceNutrient;

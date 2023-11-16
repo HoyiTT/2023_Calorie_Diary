@@ -6,6 +6,7 @@ import com.example.cal_dia_mem.board.service.BoardService;
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import com.example.cal_dia_mem.diary.repository.DiaryRepository;
 import com.example.cal_dia_mem.diary.service.DiaryService;
+import com.example.cal_dia_mem.foodCommend.service.FoodCommendService;
 import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.member.service.MemberService;
 import com.example.cal_dia_mem.profile.dto.ProfileDTO;
@@ -21,8 +22,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -34,6 +38,8 @@ public class MemberController {
     private final DiaryService diaryService;
 
     private final BoardService boardService;
+
+    private final FoodCommendService foodCommendService;
     //회원가입 페이지 출력
     @GetMapping("/member/save")
     public String saveForm(){
@@ -98,19 +104,21 @@ public class MemberController {
             //최근 3일동안 가장 인기있는 게시글 5개 가져오기
             List<BoardDTO> poplarBoard = boardService.popularBoard();
             model.addAttribute("poplarBoard",poplarBoard);
+
+           // foodCommendService.commendFood();
             return "index";
         }
         //로그인 실패
         else{
             // 알림창 및 리다이렉션
-            request.setAttribute("message","아이디와 비밀번호가 일치하지 않습니다!");
-            request.setAttribute("searchUrl","/member/login");
+            model.addAttribute("message","아이디와 비밀번호가 일치하지 않습니다!");
+            model.addAttribute("searchUrl","/member/login");
             return "/member/message";
         }
     }
 
     @GetMapping("/index/call")
-    public String index(@ModelAttribute MemberDTO memberDTO , HttpServletRequest request, Model model,HttpSession session){
+    public String index(HttpServletRequest request, Model model,HttpSession session){
         String myEmail = (String) session.getAttribute("sessionEmail");
         Date todayDate = new Date(System.currentTimeMillis());
         // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 섭취한 음식 및 영양성분 받아오기
@@ -130,6 +138,40 @@ public class MemberController {
         model.addAttribute("poplarBoard",poplarBoard);
         return "index";
     }
+
+    @PostMapping("/index/call/past")
+    public String index(Model model,HttpSession session,@RequestParam("pastDate") String Date) {
+        String myEmail = (String) session.getAttribute("sessionEmail");
+        String dateString = Date;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date utilDate = null;
+        try {
+            utilDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (utilDate != null) {
+            Date pastDate = new Date(utilDate.getTime());
+
+
+            List<DiaryDTO> dto = diaryService.callDiary(pastDate, myEmail);
+            model.addAttribute("todayList", dto);
+
+            // 과거 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
+            List<String> overNutrient = diaryService.overNutrient(pastDate, myEmail);
+            model.addAttribute("overNutrient", overNutrient);
+
+            // 과거 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
+            List<String> scarceNutrient = diaryService.scarceNutrient(pastDate, myEmail);
+            model.addAttribute("scarceNutrient", scarceNutrient);
+
+            //오늘 3일동안 가장 인기있는 게시글 5개 가져오기
+            List<BoardDTO> poplarBoard = boardService.popularBoard();
+            model.addAttribute("poplarBoard", poplarBoard);
+        }
+        return "index";
+    }
+
 
     @GetMapping("/member/logout")
     // 세션 반환 후 로그아웃
