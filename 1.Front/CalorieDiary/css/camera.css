@@ -226,8 +226,16 @@ a{
   display:none;
 }
 
+.btn .btn-success{
+  justify-content: center;
+}
 
-
+.form{
+  margin-bottom: 20px;
+}
+.table{
+  margin-top:580px;
+}
 
 @media screen and (max-width:768px){
   

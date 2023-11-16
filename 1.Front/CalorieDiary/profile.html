@@ -21,8 +21,8 @@
         <div class="navbar__menu">
             <li><a href="index.html">홈</a></li>
             <li><a href="profile.html">프로필</a></li>
-            <li><a href="camera.html">칼로리 카메라</a></li>
-            <li><a href="caresult.html">식단 추천</a></li>
+            <li><a href="camera.html">식단 등록</a></li>
+            <li><a href="diary.html">칼로리 다이어리</a></li>
             <li><a href="board.html">게시판</a></li>
             <li><a href="fooddb.html">음식 데이터</a></li>
             <li><a href="login.html">로그아웃</a></li>
@@ -45,12 +45,20 @@
     </div>!-->
 
     <div class="container">
-        <div class="item">
+        <div class="item1">
             <div class="profile">
+                
+                <h3>내 프로필</h3>
+
                 <img src="images/profile.png" width="400px" height="300px">
                 
                 <p>이름 : 황호연</p>
                 <p>별명 : brianhhy</p>
+
+                <p>목표 kg</p>
+                <div class="graph1">
+                    <span>75%</span>
+                </div>
                 
                 <p>목표 bmi</p>
                 <div class="graph2">
@@ -69,7 +77,112 @@
             </div>
         </div>
 
-        <div class="item">B</div>
+        <div class="item2">
+            
+            <div class="input-form-backgroud row">
+                <div class="input-form col-md-12 mx-auto">
+                  <h4 class="mb-3">프로필 수정</h4>
+                  <form class="validation-form" novalidate>
+                    
+                    <div class="row">
+                        
+                        <div class="col-md-6 mb-3">
+                          <label for="height">키 (cm)</label>
+                          <input type="text" class="form-control" id="height" placeholder="(현재 키cm)" aria-label="Disabled input example" value="" required>
+                          <div class="invalid-feedback">
+                            이름을 입력해주세요.
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="gender">성별</label>
+                            <input type="text" class="form-control" id="gender" placeholder="(남자 or 여자)" aria-label="Disabled input example" value="" disabled>
+                            <div class="invalid-feedback">
+                              이름을 입력해주세요.
+                            </div>
+                        </div>
+
+                    </div>
+                    
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="weight">현재 몸무게(kg)</label>
+                        <input type="text" class="form-control" id="weight" placeholder="(현재 몸무게)" aria-label="Disabled input example" value="" disabled>
+                        <div class="invalid-feedback">
+                          이름을 입력해주세요.
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="goalweight">목표 몸무게(kg)</label>
+                        <input type="text" class="form-control" id="goalWeight" placeholder="목표 몸무게(kg)" value="" required>
+                        <div class="invalid-feedback">
+                          별명을 입력해주세요.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label for="bmi">현재 bmi</label>
+                          <input type="text" class="form-control" id="bmi" placeholder="(현재 bmi)" aria-label="Disabled input example" value="" disabled>
+                          <div class="invalid-feedback">
+                            이름을 입력해주세요.
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label for="goalbmi">목표 bmi</label>
+                          <input type="text" class="form-control" id="goalBmi" placeholder="목표 bmi" value="" required>
+                          <div class="invalid-feedback">
+                            별명을 입력해주세요.
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label for="sMuscle">현재 골격근량</label>
+                          <input type="text" class="form-control" id="sMuscle" placeholder="(현재 골격근량)" aria-label="Disabled input example" value="" disabled>
+                          <div class="invalid-feedback">
+                            이름을 입력해주세요.
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label for="goalsMuscle">목표 골격근량</label>
+                          <input type="text" class="form-control" id="goalsMuscle" placeholder="목표 골격근량" value="" required>
+                          <div class="invalid-feedback">
+                            별명을 입력해주세요.
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label for="fatMass">현재 체지방량</label>
+                          <input type="text" class="form-control" id="fatMass" placeholder="(현재 체지방량)" aria-label="Disabled input example" value="" disabled>
+                          <div class="invalid-feedback">
+                            이름을 입력해주세요.
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                          <label for="goalFatMass">목표 체지방량</label>
+                          <input type="text" class="form-control" id="goalFatMass" placeholder="목표 체지방량" value="" required>
+                          <div class="invalid-feedback">
+                            별명을 입력해주세요.
+                          </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4"></div>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" style="background-color: #5fcf80;">저장</button>
+
+                  </form>
+                </div>
+              </div>
+        </div>
     </div>
 
 
