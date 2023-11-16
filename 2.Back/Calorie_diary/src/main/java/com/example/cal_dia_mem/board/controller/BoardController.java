@@ -46,7 +46,7 @@ public class BoardController {
         System.out.println(boardDTO.getTitle()+boardDTO.getContent());
         boardService.Write(boardDTO);
         model.addAttribute("message", "글 작성이 완료되었습니다.");
-        model.addAttribute("searchUrl", "/board/list");
+        model.addAttribute("searchUrl", "/list");
         return "/member/message";
     }
 

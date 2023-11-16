@@ -3,13 +3,22 @@ package com.example.cal_dia_mem.board.service;
 import com.example.cal_dia_mem.board.dto.BoardDTO;
 import com.example.cal_dia_mem.board.entity.BoardEntity;
 import com.example.cal_dia_mem.board.repository.BoardRepository;
+import com.example.cal_dia_mem.diary.dto.DiaryDTO;
+import com.example.cal_dia_mem.diary.entity.DiaryEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +29,8 @@ public class BoardService {
     public void Write(BoardDTO boardDTO){
         BoardEntity boardEntity = BoardEntity.toBoardEntity(boardDTO);
         boardEntity.setView(0);
+        LocalDateTime now =LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+        boardEntity.setCreateDate(now);
         boardRepository.save(boardEntity);
     }
     public void Modify(BoardEntity boardEntity){
@@ -46,4 +57,19 @@ public class BoardService {
     }
 
 
+    public List<BoardDTO> popularBoard() {
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime threeDaysAgo = now.minusDays(3);
+        Pageable pageable = PageRequest.of(0, 5);
+        List<BoardEntity> popularBoardEntity=boardRepository.findTop5ByCreateDateAfterAndCreateDateBeforeOrderByViewDesc(threeDaysAgo,now);
+
+
+        List<BoardDTO> poplarBoardDto = popularBoardEntity.stream()
+                .map(BoardEntity::entityToDto)
+                .collect(Collectors.toList());
+
+        System.out.print(poplarBoardDto);
+        return poplarBoardDto;
+    }
 }
