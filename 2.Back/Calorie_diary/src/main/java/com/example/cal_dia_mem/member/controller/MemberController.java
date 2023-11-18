@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -96,22 +97,35 @@ public class MemberController {
 
             // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
             List<String> overNutrient = diaryService.overNutrient(todayDate,loginResult.getMemberEmail());
-            model.addAttribute("overNutrient",overNutrient);
-
+            if(overNutrient==null){
+                model.addAttribute("overNutrient","정확한 서비스를 제공 위해 프로필설정을 해주세요.");
+            }
+            else {
+                model.addAttribute("overNutrient", overNutrient);
+            }
             // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
             List<String> scarceNutrient = diaryService.scarceNutrient(todayDate,loginResult.getMemberEmail());
-            model.addAttribute("scarceNutrient",scarceNutrient);
-
+            if(scarceNutrient==null){
+                model.addAttribute("scarceNutrient","정확한 서비스를 제공 위해 프로필설정을 해주세요.");
+            }
+            else{
+                model.addAttribute("scarceNutrient", scarceNutrient);
+            }
             //최근 3일동안 가장 인기있는 게시글 5개 가져오기
             List<BoardDTO> poplarBoard = boardService.popularBoard();
             model.addAttribute("poplarBoard",poplarBoard);
 
+            // 음식추천
             List<FoodCommendDTO> foodCommendDTOList=foodCommendService.commendFood();
 
             model.addAttribute("commendNutrient",foodCommendDTOList);
 
             String commendInfo=foodCommendService.foodCommendInfo(foodCommendDTOList);
             model.addAttribute("commendInfo",commendInfo);
+
+            List<String> meal = new ArrayList<>();
+            meal.add("아침"); meal.add("점심"); meal.add("저녁");
+            model.addAttribute("meal",meal);
             return "index";
         }
         //로그인 실패
