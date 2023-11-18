@@ -69,7 +69,6 @@ public class FoodCommendService {
 
         for(FoodCommendDTO dto : foodCommendDTOList){
             try {
-                System.out.println("씨발새끼"+dto.getCarbohydrate());
                 carbohydrateValue = Double.parseDouble(dto.getCarbohydrate());
                 System.out.println("탄수화물 합 : "+carbohydrateValue);
                 carbohydrateSum+=carbohydrateValue;

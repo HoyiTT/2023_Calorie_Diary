@@ -47,7 +47,7 @@ public class DiaryService {
                 .map(DiaryEntity::entityToDto)
                 .collect(Collectors.toList());
 
-
+        if(gen==null)return null;
         if(gen.equals("m")) {
 
             if (400 < totalCarbohydrate(diaryDtoList)){
@@ -91,7 +91,7 @@ public class DiaryService {
                 .map(DiaryEntity::entityToDto)
                 .collect(Collectors.toList());
 
-
+        if(gen==null)return null;
         if(gen.equals("m")) {
             double mScarceCarbo = 110-totalCarbohydrate(diaryDtoList);
 

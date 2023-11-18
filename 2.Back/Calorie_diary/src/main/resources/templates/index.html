@@ -51,24 +51,18 @@
             <div class="recommendfood">
                 <p>오늘의 추천 음식</p>
 
-                <table border="1">
-                    <tr>
-                        <td>아침</td>
-                        <td>점심</td>
-                        <td>저녁</td>
-                    </tr>
-                    <th:block th:each="commend : ${commendNutrient}">
-                        <tr>
-                            <td th:text="${commend.foodName}"></td>
-                        </tr>
+
+
+                    <th:block th:each="commend : ${commendNutrient}" th:block="meal : ${meal}">
+                            <p th:text="${meal}"></p>
+                            <p th:text="${commend.foodName}"></p>
+
+                    </th:block>
+                    <th:block th:each="meal:${meal}">
+                        <p th:text="${meal}"></p>
                     </th:block>
 
-                    <tr>
-                        <td>저녁</td>
-                        <td>점심</td>
-                        <td>저녁</td>
-                    </tr>
-                </table>
+
 
                 <p th:text="${commendInfo}"></p>
             </div>
