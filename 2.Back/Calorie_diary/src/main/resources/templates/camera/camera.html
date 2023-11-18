@@ -104,30 +104,30 @@
         <th scope="row">1</th>
         <form action="/diary/save" method="post">
         <td>
-            <input th:value="${junFood.foodName}" type="text" name="food_name">
+            <input th:value="${food.foodName}" type="text" name="food_name">
         </td>
         <td></td>
         <td ></td>
-        <td th:text="${junFood.kcal}"></td>
-        <td th:text="${junFood.carbohydrate}"></td>
-        <td th:text="${junFood.protein}"></td>
-        <td th:text="${junFood.fat}"></td>
-        <td th:text="${junFood.sugars}"></td>
-        <td th:text="${junFood.salt}"></td>
-        <td th:text="${junFood.cholesterol}"></td>
-        <td th:text="${junFood.saturated_fatty}"></td>
-        <td th:text="${junFood.transfat}"></td>
+        <td th:text="${food.kcal}"></td>
+        <td th:text="${food.carbohydrate}"></td>
+        <td th:text="${food.protein}"></td>
+        <td th:text="${food.fat}"></td>
+        <td th:text="${food.sugars}"></td>
+        <td th:text="${food.salt}"></td>
+        <td th:text="${food.cholesterol}"></td>
+        <td th:text="${food.saturated_fatty}"></td>
+        <td th:text="${food.transfat}"></td>
             <input type="hidden" name="maker_name" value=" ">
             <input type="hidden" name="serving_size" value=" ">
-            <input type="hidden" name="kcal" th:value=${junFood.kcal}>
-            <input type="hidden" name="carbohydrate" th:value=${junFood.carbohydrate}>
-            <input type="hidden" name="protein" th:value=${junFood.protein}>
-            <input type="hidden" name="fat" th:value=${junFood.fat}>
-            <input type="hidden" name="sugars" th:value=${junFood.sugars}>
-            <input type="hidden" name="salt" th:value=${junFood.salt}>
-            <input type="hidden" name="cholesterol" th:value=${junFood.cholesterol}>
-            <input type="hidden" name="saturated_fatty" th:value=${junFood.saturated_fatty}>
-            <input type="hidden" name="transfat" th:value=${junFood.transfat}>
+            <input type="hidden" name="kcal" th:value=${food.kcal}>
+            <input type="hidden" name="carbohydrate" th:value=${food.carbohydrate}>
+            <input type="hidden" name="protein" th:value=${food.protein}>
+            <input type="hidden" name="fat" th:value=${food.fat}>
+            <input type="hidden" name="sugars" th:value=${food.sugars}>
+            <input type="hidden" name="salt" th:value=${food.salt}>
+            <input type="hidden" name="cholesterol" th:value=${food.cholesterol}>
+            <input type="hidden" name="saturated_fatty" th:value=${food.saturated_fatty}>
+            <input type="hidden" name="transfat" th:value=${food.transfat}>
             <input type="hidden" name="memberEmail" th:value=${memberEmail}>
             <td><button type="submit" class="btn btn-success">추가하기</button></td>
         </form>

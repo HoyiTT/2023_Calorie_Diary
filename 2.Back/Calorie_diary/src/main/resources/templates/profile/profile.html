@@ -7,14 +7,18 @@
 <body>
 <form action="/profile/modify" method="post">
 
-    <input type="hidden" name="id" th:value="${modifyProfile.id}">
-    <input type="hidden" name="memberEmail" th:value="${modifyProfile.memberEmail}">
-    <input type="hidden" name="memberName" th:value="${modifyProfile.memberName}">
-    <input type="text" name="currentWeight" placeholder="현재체중" th:value="${modifyProfile.currentWeight}">
-    <input type="text" name="height" placeholder="키" th:value="${modifyProfile.height}">
-    <input type="text" name="purposeWeight" placeholder="목표체중" th:value="${modifyProfile.purposeWeight}">
-    <input type="text" name="gender" placeholder="성별" th:value="${modifyProfile.gender}">
-    <input type="text" name="purposeBMI" placeholder="목표bmi" th:value="${modifyProfile.purposeBMI}">
+    <input type="hidden" name="id" th:value="${modifyProfile?.id}">
+    <input type="hidden" name="memberEmail" th:value="${modifyProfile?.memberEmail}">
+    <input type="hidden" name="memberName" th:value="${modifyProfile?.memberName}">
+    <input type="text" name="currentWeight" placeholder="현재체중" th:value="${modifyProfile?.currentWeight}">
+    <input type="text" name="height" placeholder="키" th:value="${modifyProfile?.height}">
+    <input type="text" name="purposeWeight" placeholder="목표체중" th:value="${modifyProfile?.purposeWeight}">
+    <input type="text" name="gender" placeholder="성별" th:value="${modifyProfile?.gender}">
+    <input type="text" name="purposeBMI" placeholder="목표bmi" th:value="${modifyProfile?.purposeBMI}">
+    <input type="text" name="purposeMuscle" placeholder="목표 골격근" th:value="${modifyProfile?.purposeMuscle}">
+    <input type="text" name="purposeBodyFat" placeholder="목표체지방" th:value="${modifyProfile?.purposeBodyFat}">
+    <input type="text" name="muscle" placeholder="현재 골격근" th:value="${modifyProfile?.muscle}">
+    <input type="text" name="bodyFat" placeholder="현재 체지방" th:value="${modifyProfile?.bodyFat}">
     <button type="submit"> 저장</button>
 </form>
 </body>

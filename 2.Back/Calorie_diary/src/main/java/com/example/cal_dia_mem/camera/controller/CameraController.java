@@ -35,8 +35,10 @@ public class CameraController {
         String myEmail=(String)session.getAttribute("sessionEmail");
         JunFoodDTO junFoodDTO =new JunFoodDTO();
         JunFoodDTO junFoodDTO1 = new JunFoodDTO();
+        OcrDTO ocrDTO = new OcrDTO();
+        OcrDTO ocrDTO1 =new OcrDTO();
 
-        //초기에 객체 빈 값으로 채워넣기
+        //초기에 음식 사진 객체 빈 값으로 채워넣기
         junFoodDTO.setFoodName(" ");
         junFoodDTO.setKcal(" ");
         junFoodDTO.setCarbohydrate(" ");
@@ -48,19 +50,42 @@ public class CameraController {
         junFoodDTO.setSaturated_fatty(" ");
         junFoodDTO.setTransfat(" ");
 
-        junFoodDTO1= (JunFoodDTO) session.getAttribute("junFood"); //세션으로 객체받아오기
+        //초기에 영양 사진 객체 빈 값으로 채워넣기
+        ocrDTO.setFoodName(" ");
+        ocrDTO.setKcal(" ");
+        ocrDTO.setCarbohydrate(" ");
+        ocrDTO.setProtein(" ");
+        ocrDTO.setFat(" ");
+        ocrDTO.setSugars(" ");
+        ocrDTO.setSalt(" ");
+        ocrDTO.setCholesterol(" ");
+        ocrDTO.setSaturated_fatty(" ");
+        ocrDTO.setTransfat(" ");
 
-        //만약 받아온 DTO가 NULL이 아니라면? --> 사진이 업로드 된 것임
-        if(junFoodDTO1!=null){
-            junFoodDTO=junFoodDTO1;  // 빈 값을 가진 DTO에 사진으로 받아온DTO 입력
+
+
+        junFoodDTO1= (JunFoodDTO) session.getAttribute("junFood"); //세션으로 객체받아오기
+        ocrDTO1= (OcrDTO) session.getAttribute("ocr");
+
+        //둘 다 널이라면? --> 첫 화면 진입상태
+        if(ocrDTO1==null && junFoodDTO1==null) {
+            model.addAttribute("food",junFoodDTO);
         }
-        //만약 음식사진이 아닌 영양성분 사진이라면 음식이름을 공백으로 채움
-        if(junFoodDTO.getFoodName()==null){
-            junFoodDTO.setFoodName("  ");
+        //만약 받아온 ocrDTO1이고 junFoodDTO1이 널이 아니라면? --> 사진이 업로드 된 것임
+        else if(ocrDTO1==null) {
+            if (junFoodDTO1 != null) {
+
+                junFoodDTO = junFoodDTO1;  // 빈 값을 가진 DTO에 사진으로 받아온DTO 입력
+                model.addAttribute("food",junFoodDTO); // model에 객체추가
+            }
         }
+        //그렇지 않다면 ? --> 영양성분이 업로드 된 것임
+        else{
+            ocrDTO=ocrDTO1;
+            model.addAttribute("food",ocrDTO);
+        }
+
         model.addAttribute("memberEmail",myEmail);
-        model.addAttribute("junFood",junFoodDTO); // model에 객체추가
-        System.out.println(junFoodDTO);
 
         return "/camera/camera";
     }
@@ -87,9 +112,9 @@ public class CameraController {
                 model.addAttribute("message", "File uploaded successfully: " + fileName);
                 model.addAttribute("searchUrl", "/camera");
 
-                List<OcrDTO> nutrientlist = cameraService.ocr(myEmail); //ocr을 통해 뽑아온 영양성분을 저장하는 곳
-                System.out.println(nutrientlist);
-
+                OcrDTO orcNutrient = cameraService.ocr(myEmail); //ocr을 통해 뽑아온 영양성분을 저장하는 곳
+                System.out.println("test:"+orcNutrient);
+                session.setAttribute("ocr",orcNutrient);
                 return "/member/message";
             } catch (IOException e) {
                 e.printStackTrace();

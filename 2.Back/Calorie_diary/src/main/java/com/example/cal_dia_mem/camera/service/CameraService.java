@@ -70,9 +70,10 @@ public class CameraService {
 
         return nameValue;
     }
-    public List<OcrDTO> ocr(String myEmail){
+    public OcrDTO ocr(String myEmail){
         String apiURL = "https://s8ajln5gaa.apigw.ntruss.com/custom/v1/25873/a17bbc25bf454fc8958a92d5e2a00befbf9f1e8f435e110f9098198080056a85/general"; //API URL
         String secretKey = "cWlmemNNTnNvSkp0TlFWVHpEc0VvWElTSWFBY1lDb2E="; //API secret key
+        String foodName= " ";
         String kcal = null;
         String SaltInfo= null;
         String CarbohydrateInfo= null;
@@ -82,7 +83,7 @@ public class CameraService {
         String SaturatedFatInfo= null;
         String CholesterolInfo= null;
         String ProteinInfo= null;
-        List<OcrDTO> nutrientlist = new ArrayList<>();
+        OcrDTO data = new OcrDTO();
 
         try {
             URL url = new URL(apiURL);
@@ -175,6 +176,7 @@ public class CameraService {
 
             // 영양성분 정보 추출
             SaltInfo = extractNutrientInfo(NutrientFacts, Salt);
+            SaltInfo = extractNutrientInfo(NutrientFacts, Salt);
             CarbohydrateInfo = extractNutrientInfo(NutrientFacts, Carbohydrate);
             SugarInfo = extractNutrientInfo(NutrientFacts, Sugar);
             FatInfo = extractNutrientInfo(NutrientFacts, Fat);
@@ -193,8 +195,61 @@ public class CameraService {
             ProteinInfo = extractStringAfterKorean(ProteinInfo);*/
 
 
+            //문자열 가공 --> 띄어쓰기 뒷부분만 추출 --> 영양성분만 추출하겠다는 뜻 ex) 탄수화물 36g 에서 36g만 추출
+            int spaceIndex = SaltInfo.indexOf(' ');
+            // 띄어쓰기가 있는 경우에만 추출
+            SaltInfo = (spaceIndex != -1) ? SaltInfo.substring(spaceIndex + 1) : SaltInfo;
 
-            OcrDTO data = new OcrDTO();
+            //위에 두 줄을 반복
+            spaceIndex = CarbohydrateInfo.indexOf(' ');
+            CarbohydrateInfo= (spaceIndex != -1) ? CarbohydrateInfo.substring(spaceIndex + 1) : CarbohydrateInfo;
+
+            spaceIndex = SugarInfo.indexOf(' ');
+            SugarInfo= (spaceIndex != -1) ? SugarInfo.substring(spaceIndex + 1) : SugarInfo;
+
+            spaceIndex = FatInfo.indexOf(' ');
+            FatInfo= (spaceIndex != -1) ? FatInfo.substring(spaceIndex + 1) : FatInfo;
+
+            spaceIndex = TransFatInfo.indexOf(' ');
+            TransFatInfo= (spaceIndex != -1) ? TransFatInfo.substring(spaceIndex + 1) : TransFatInfo;
+
+            spaceIndex = SaturatedFatInfo.indexOf(' ');
+            SaturatedFatInfo= (spaceIndex != -1) ? SaturatedFatInfo.substring(spaceIndex + 1) : SaturatedFatInfo;
+
+            spaceIndex = CholesterolInfo.indexOf(' ');
+            CholesterolInfo= (spaceIndex != -1) ? CholesterolInfo.substring(spaceIndex + 1) : CholesterolInfo;
+
+            spaceIndex = ProteinInfo.indexOf(' ');
+            ProteinInfo= (spaceIndex != -1) ? ProteinInfo.substring(spaceIndex + 1) : ProteinInfo;
+
+            //두번 째 문자열 가공 --> 숫자부분만 추출 --> ex) 26g 에서 26만 추출
+
+            Pattern pattern = Pattern.compile("[^0-9]");
+            Matcher matcher = pattern.matcher(SaltInfo);
+            SaltInfo = matcher.replaceAll("");
+
+            matcher = pattern.matcher(CarbohydrateInfo);
+            CarbohydrateInfo = matcher.replaceAll("");
+
+            matcher = pattern.matcher(SugarInfo);
+            SugarInfo = matcher.replaceAll("");
+
+            matcher = pattern.matcher(FatInfo);
+            FatInfo = matcher.replaceAll("");
+
+            matcher = pattern.matcher(TransFatInfo);
+            TransFatInfo = matcher.replaceAll("");
+
+            matcher = pattern.matcher(SaturatedFatInfo);
+            SaturatedFatInfo = matcher.replaceAll("");
+
+            matcher = pattern.matcher(CholesterolInfo);
+            CholesterolInfo = matcher.replaceAll("");
+
+            matcher = pattern.matcher(ProteinInfo);
+            ProteinInfo = matcher.replaceAll("");
+
+            data.setFoodName("  ");
             data.setKcal(kcal);
             data.setSalt(SaltInfo);
             data.setCarbohydrate(CarbohydrateInfo);
@@ -205,11 +260,10 @@ public class CameraService {
             data.setCholesterol(CholesterolInfo);
             data.setProtein(ProteinInfo);
 
-            nutrientlist.add(data);
 
 
             //전체 문자열 출력
-            System.out.println(NutrientFacts);
+            //System.out.println("테스트 :"+ data);
             // 결과 출력
             System.out.println(kcal+" : kcal");
             System.out.println("추출된 " + Salt + " 정보: " + SaltInfo);
@@ -228,7 +282,7 @@ public class CameraService {
             System.out.println(e);
         }
 
-        return nutrientlist;
+        return data;
     }
 
 
@@ -262,7 +316,7 @@ public class CameraService {
     public static String removeCommas(String input) {
         // 쉼표(,)를 제거한 문자열 반환
         String processedString = input.replaceAll(",", "");
-
+        //processedString=input.replaceAll("g"," ");
         return processedString;
     }
     public static String extractNumberBeforeKcal(String input) {

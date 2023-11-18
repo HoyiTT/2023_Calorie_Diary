@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class OcrDTO {
-
+    String foodName;
     String kcal;
     String carbohydrate;
     String protein;
