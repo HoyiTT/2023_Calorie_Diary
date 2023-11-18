@@ -1,5 +1,50 @@
 @media screen and (max-width: 768px) {
      
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 12px;
+    }
+    .navbar__menu{
+        display:none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .navbar__menu li{
+        width: 100%;
+        text-align:center;
+    }
+    .navbar__icons{
+        display:none;
+        justify-content:center;
+        width:100%;
+    }
+    .navbar__toggleBtn{
+        display: block;
+    }
+
+    .navbar__menu.active,
+    .navbar__icons.active{
+        display: flex;
+    }
+
+    .container{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    .userImage{
+        width: 350px;
+        height:350px;
+    }
+    .item{
+        text-align: center;
+        font-size: 1rem;
+    }
+    .youtube{
+        width: 300px;
+        height:250px;
+    }
     
     .board_wrap {
         width: 100%;
