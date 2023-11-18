@@ -4,3 +4,4 @@ board -->  boardindex
 view  -->  boardview
 edit  -->  modify
 write -->  write
+caresult --> diary
