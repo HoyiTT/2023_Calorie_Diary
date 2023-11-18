@@ -42,19 +42,7 @@
           
           <div class="headerName">칼로리 카메라</div>
           
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-              영양성분
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-              음식
-            </label>
-          </div>
+          
 
         </div>
         
@@ -62,6 +50,16 @@
   <!-- Upload  -->
   <form id="file-upload-form" class="uploader">
     <input id="file-upload" type="file" name="fileUpload" accept="image/*" capture="camera"/>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <p>음식</p>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <p>영양성분</p>
+    </div>
 
     <label for="file-upload" id="file-drag" style="height: 500px;">
       <img id="file-image" src="#" alt="Preview" class="hidden">
@@ -101,22 +99,22 @@
       </tr>
     </thead>
     <tbody>
-  <tr>
-    <th scope="row">1</th>
-    <td><input type="text" name="foodName"></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><button type="submit" class="btn btn-success">추가하기</button></td>
-  </tr>
+      <tr>
+        <th scope="row">1</th>
+          <td><input type="text" name="foodName"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><button type="submit" class="btn btn-success">추가하기</button></td>
+      </tr>
   </tbody>
 </table>
 
