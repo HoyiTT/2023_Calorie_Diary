@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
 </head>
 <body>
     <nav class="navbar">
-        
+
         <div class="navbar__logo">
             <i class="fa-solid fa-c"></i><i class="fa-solid fa-d"></i>
             <a href="index.html">CalorieDiary</a>
@@ -40,11 +40,26 @@
         <div class="item myProfile">
             
             <div class="ProfileImage">
-                <img src="/images/user.png" alt="image" class="userImage">
+                <img src="/images/profile.png" alt="image" class="userImage" width="200px" height="50px">
             </div>
 
-            <p>이름 : 황호연</p>
-            <p>별명 : brianhhy</p>
+            <p>이름 : <p  th:text="${session.sessionName}"></p></p>
+            <p>별명 : <p th:text="${session.sessionNickname}"></p></p>
+
+            <p>목표 bmi</p>
+            <div class="graph2">
+                <span th:text="${modifyProfile?.purposeBMI}+ '%'"></span>
+            </div>
+
+            <p>목표 골격근량</p>
+            <div class="graph3">
+                <span th:text="${modifyProfile?.purposeMuscle}+ '%'">50%</span>
+            </div>
+
+            <p>목표 체지방량</p>
+            <div class="graph4">
+                <span th:text="${modifyProfile?.purposeBodyFat}+ '%'"></span>
+            </div>
         </div>
         
         <div class="item color2">
@@ -112,5 +127,6 @@
     </div>
 
     <script src="js/main.js" defer></script>
+    <script src="js/index.js" defer></script>
 </body>
 </html> 
