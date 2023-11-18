@@ -19,7 +19,9 @@ public class ProfileDTO {
     private String purposeWeight;
     private String purposeBMI;
     private String muscle;
+    private String purposeMuscle;
     private String bodyFat;
+    private String purposeBodyFat;
 
 
     public static ProfileDTO toProfileDTO(ProfileEntity profileEntity){
@@ -34,7 +36,8 @@ public class ProfileDTO {
         profileDTO.setPurposeBMI(profileEntity.getPurposeBMI());
         profileDTO.setMuscle(profileEntity.getMuscle());
         profileDTO.setBodyFat(profileEntity.getBodyFat());
-
+        profileDTO.setPurposeMuscle(profileEntity.getPurposeMuscle());
+        profileDTO.setPurposeBodyFat(profileEntity.getPurposeBodyFat());
 
         return profileDTO;
 

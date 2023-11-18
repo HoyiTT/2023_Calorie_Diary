@@ -4,7 +4,9 @@ import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.profile.dto.ProfileDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -34,8 +36,11 @@ public class ProfileEntity{
     @Column
     private String muscle;
     @Column
+    private String purposeMuscle;
+    @Column
     private String bodyFat;
-
+    @Column
+    private String purposeBodyFat;
     public static ProfileEntity toprofileEntiy(ProfileDTO profileDTO){
 
         ProfileEntity profileEntity = new ProfileEntity();
@@ -49,6 +54,8 @@ public class ProfileEntity{
         profileEntity.setPurposeBMI(profileDTO.getPurposeBMI());
         profileEntity.setMuscle(profileDTO.getMuscle());
         profileEntity.setBodyFat(profileDTO.getBodyFat());
+        profileEntity.setPurposeMuscle(profileDTO.getPurposeMuscle());
+        profileEntity.setPurposeBodyFat(profileDTO.getPurposeBodyFat());
 
         return profileEntity;
     }

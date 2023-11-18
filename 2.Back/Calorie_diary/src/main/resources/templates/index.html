@@ -19,13 +19,13 @@
         </div>
         
         <div class="navbar__menu">
-            <li><a href="index.html">홈</a></li>
-            <li><a href="profile.html">프로필</a></li>
+            <li><a href="/index/call">홈</a></li>
+            <li><a href="/profile/modify">프로필</a></li>
             <li><a href="/camera">칼로리 카메라</a></li>
             <li><a href="caresult.html">식단 추천</a></li>
-            <li><a href="boardindex.html">게시판</a></li>
+            <li><a href="/board/list">게시판</a></li>
             <li><a href="/api">음식 데이터</a></li>
-            <li><a href="login.html">로그아웃</a></li>
+            <li><a href="/member/logout">로그아웃</a></li>
         </div>
         
         <ul class="navbar__icons"></ul>
@@ -50,7 +50,27 @@
         <div class="item color2">
             <div class="recommendfood">
                 <p>오늘의 추천 음식</p>
-                <img class="recommendfood" src="/images/tteokbokki.jpg" alt="My Image" width="300" height="300">
+
+                <table border="1">
+                    <tr>
+                        <td>아침</td>
+                        <td>점심</td>
+                        <td>저녁</td>
+                    </tr>
+                    <th:block th:each="commend : ${commendNutrient}">
+                        <tr>
+                            <td th:text="${commend.foodName}"></td>
+                        </tr>
+                    </th:block>
+
+                    <tr>
+                        <td>저녁</td>
+                        <td>점심</td>
+                        <td>저녁</td>
+                    </tr>
+                </table>
+
+                <p th:text="${commendInfo}"></p>
             </div>
             
             <p>오늘의 영상</p><iframe class="youtube" width="500" height="255" src="https://www.youtube.com/embed/Os_heh8vPfs?si=Eg8YcpMxhEckDYV_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -69,10 +89,30 @@
                 <p th:text="${todayItem.kcal}+kcal"> </p>
             </th:block>
         </div>
-        <div class="item color5">출석 체크</div>
-        <div class="item color6">미니 게시판 가져오기</div>
-        <div class="item color7">초과한 영양성분</div>
-        <div class="item color8">부족한 영양성분</div>
+        <div class="item color5">
+            타임라인
+
+        </div>
+        <div class="item color6">
+            인기글
+            <th:block th:each="poplarBoard : ${poplarBoard}">
+                <div>
+                    <a style="color: blue;" th:text="${poplarBoard.title}" th:href="@{/board/view(id=${poplarBoard.id})}"> </a>
+                </div>
+            </th:block>
+        </div>
+        <div class="item color7">
+            초과한 영양성분
+            <th:block th:each="overNutrient : ${overNutrient}">
+                <p th:text="${overNutrient}"> </p>
+            </th:block>
+        </div>
+        <div class="item color8">
+            부족한 영양성분
+            <th:block th:each="scarceNutrient : ${scarceNutrient}">
+                <p th:text="${scarceNutrient}"> </p>
+            </th:block>
+        </div>
 
         
     </div>
