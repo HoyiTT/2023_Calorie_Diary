@@ -28,6 +28,8 @@ public class FoodCommendEntity {
     private String sugars;
     @Column
     private String salt;
+    @Column
+    private String meal;
 
     public static FoodCommendEntity toFoodCommendEntity(FoodCommendDTO foodCommendDTO){
         FoodCommendEntity foodCommendEntity=new FoodCommendEntity();
@@ -39,6 +41,7 @@ public class FoodCommendEntity {
         foodCommendEntity.setFat(foodCommendDTO.getFat());
         foodCommendEntity.setSugars(foodCommendDTO.getSugars());
         foodCommendEntity.setSalt(foodCommendDTO.getSalt());
+        foodCommendEntity.setMeal(foodCommendDTO.getMeal());
 
         return foodCommendEntity;
     }
@@ -53,6 +56,7 @@ public class FoodCommendEntity {
         dto.setFat(entity.getFat());
         dto.setSugars(entity.getSugars());
         dto.setSalt(entity.getSalt());
+        dto.setMeal(entity.getMeal());
         return dto;
     }
 }

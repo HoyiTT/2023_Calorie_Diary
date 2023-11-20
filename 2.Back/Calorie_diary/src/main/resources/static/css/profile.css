@@ -1,6 +1,9 @@
 body{
-  margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
+  background-color: #328f8a;
+  background-image: linear-gradient(45deg,#328f8a,#5fcf80);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 a{
   text-decoration: none;
@@ -16,10 +19,6 @@ a{
   justify-content: space-between;
   align-items:center;
   padding: 8px 12px;
-  background-color: #328f8a;
-  background-image: linear-gradient(45deg,#328f8a,#5fcf80);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 .navbar__logo{
   padding: 8px 12ox;
@@ -62,18 +61,35 @@ a{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top:10px;
+  margin-top:28px;
   text-align: center;
   justify-content: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 20px;
   border: 1px solid black;
   min-height: 825px;
-}
-.item{
-  border:1px solid black;
+  background-color: #fff;
 }
 
+
+
+
+.graph1{
+  background-color: #ccc;
+  border-radius: 40px;
+}
+.graph1 span{
+  display: block;
+  text-align: right;
+  width: 70%;
+  padding: 0 10px;
+  background-color: #5fcf80;
+  border-radius: 40px;
+  box-sizing: border-box;
+  color:#fff;
+  animation: stack1 2s 1;
+  margin-bottom: 10px;
+}
 
 .graph2{
   background-color: #ccc;
@@ -126,16 +142,22 @@ a{
   margin-bottom: 10px;
 }
 
+@keyframes stack1{
+  0%{width:0%; color : rgba(255,255,255,0);}
+  40%{color : rgba(255,255,255,1);}
+  100%{width:70%; color : rgba(255,255,255,1);}
+}
+
 @keyframes stack2{
   0%{width:0%; color : rgba(255,255,255,0);}
   40%{color : rgba(255,255,255,1);}
-  100%{width:25%; color : rgba(255,255,255,1);}
+  100%{width:60%; color : rgba(255,255,255,1);}
 }
 
 @keyframes stack3{
   0%{width:0%; color : rgba(255,255,255,0);}
   40%{color : rgba(255,255,255,1);}
-  100%{width:60%; color : rgba(255,255,255,1);}
+  100%{width:90%; color : rgba(255,255,255,1);}
 }
 
 @keyframes stack4{
@@ -144,6 +166,9 @@ a{
   100%{width:50%; color : rgba(255,255,255,1);}
 }
 
+.row{
+  padding:15px 12px;
+}
 
 @media screen and (max-width:768px){
     
@@ -179,10 +204,11 @@ a{
   .container{
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
+      max-height: 600px;
   }
   .userImage{
-      width: 350px;
-      height:350px;
+      width: 300px;
+      height:300px;
   }
   .item{
       text-align: center;
@@ -193,3 +219,13 @@ a{
       height:250px;
   }
 }
+@media screen and (max-width:735px){
+  
+  .container{
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+

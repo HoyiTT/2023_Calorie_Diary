@@ -57,7 +57,7 @@ public class FoodCommendService {
         double fat = totalFat(foodCommendDTOList);
         double kcal =totalKcal(foodCommendDTOList);
         String info="위 식단을 모두 섭취 시 총 "+kcal+"칼로리를 섭취 하실 수 있습니다. 이 안에 포함된 영양 성분은 총"+
-                +carbohydrate+"의 탄수화물, "+protein+"의 단백질, "+fat+"의 지방 입니다.";
+                +carbohydrate+"g의 탄수화물, "+protein+"g의 단백질, "+fat+"g의 지방 입니다.";
         return info;
 
     }
@@ -70,7 +70,6 @@ public class FoodCommendService {
         for(FoodCommendDTO dto : foodCommendDTOList){
             try {
                 carbohydrateValue = Double.parseDouble(dto.getCarbohydrate());
-                System.out.println("탄수화물 합 : "+carbohydrateValue);
                 carbohydrateSum+=carbohydrateValue;
             } catch (NumberFormatException e){
                 System.err.println("숫자로 변환할 수 없습니다1.");
@@ -119,12 +118,13 @@ public class FoodCommendService {
 
         for(FoodCommendDTO dto : foodCommendDTOList){
             try {
-                kcalValue = Double.parseDouble(dto.getFat());
+                kcalValue = Double.parseDouble(dto.getKcal());
                 kcalSum+=kcalValue;
             } catch (NumberFormatException e){
                 System.err.println("숫자로 변환할 수 없습니다3.");
             }
         }
+
         return kcalSum;
     }
 

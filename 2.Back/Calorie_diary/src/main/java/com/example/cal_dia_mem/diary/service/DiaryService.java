@@ -47,33 +47,37 @@ public class DiaryService {
                 .map(DiaryEntity::entityToDto)
                 .collect(Collectors.toList());
 
-        if(gen==null)return null;
+        if(gen==null||currentWeight==null)return null;
         if(gen.equals("m")) {
-
-            if (400 < totalCarbohydrate(diaryDtoList)){
-                overNutrient.add("탄수화물");
+            double moverCarbo=totalCarbohydrate(diaryDtoList)-400;
+            if (moverCarbo>0){
+                overNutrient.add("탄수화물이 권장 섭취량보다"+String.format("%.1f",moverCarbo)+"g만큼 초과되었습니다.");
             }
 
-            if (Double.parseDouble(currentWeight) * 1.2 < totalProtein(diaryDtoList)) {
-                overNutrient.add("단백질");
+            double moverPro =totalProtein(diaryDtoList)-Double.parseDouble(currentWeight)*1.2;
+            if (moverPro>0) {
+                overNutrient.add("단백질이 권장 섭취량보다"+String.format("%.1f",moverPro)+"g만큼 초과되었습니다.");
             }
 
-            if (65 < totalFat(diaryDtoList)){
-                overNutrient.add("지방");
+            double moverFat=totalFat(diaryDtoList)-65;
+            if (moverFat>0){
+                overNutrient.add("지방이 권장 섭취량보다"+String.format("%.1f",moverFat)+"g만큼 초과되었습니다.");
             }
         }
         else if(gen.equals("w")){
-
-            if (350 < totalCarbohydrate(diaryDtoList)){
-                overNutrient.add("탄수화물");
+            double woverCarbo=totalCarbohydrate(diaryDtoList)-350;
+            if (woverCarbo>0){
+                overNutrient.add("탄수화물이 권장 섭취량보다"+String.format("%.1f",woverCarbo)+"g만큼 초과되었습니다.");
             }
 
-            if (Double.parseDouble(currentWeight) * 1.2 < totalProtein(diaryDtoList)) {
-                overNutrient.add("단백질");
+            double woverPro=totalProtein(diaryDtoList)-Double.parseDouble(currentWeight)*1.2;
+            if (woverPro>0) {
+                overNutrient.add("단백질이 권장 섭취량보다"+String.format("%.1f",woverPro)+"g만큼 초과되었습니다.");
             }
 
-            if (65 < totalFat(diaryDtoList)){
-                overNutrient.add("지방");
+            double woverFat = totalFat(diaryDtoList)-65;
+            if (woverFat>0){
+                overNutrient.add("지방이 권장 섭취량보다"+String.format("%.1f",woverFat)+"g만큼 초과되었습니다.");
             }
         }
         return overNutrient;
@@ -91,7 +95,7 @@ public class DiaryService {
                 .map(DiaryEntity::entityToDto)
                 .collect(Collectors.toList());
 
-        if(gen==null)return null;
+        if(gen==null||currentWeight==null)return null;
         if(gen.equals("m")) {
             double mScarceCarbo = 110-totalCarbohydrate(diaryDtoList);
 
