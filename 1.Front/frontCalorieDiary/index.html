@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://kit.fontawesome.com/07f7c184df.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/07f7c184df.js" crossorigin="anonymous"></script>
+    <title>CalorieDiary</title>
+</head>
+<body>
+    <nav class="navbar">
+        
+        <div class="navbar__logo">
+            <i class="fa-solid fa-c"></i><i class="fa-solid fa-d"></i>
+            <a href="index.html">CalorieDiary</a>
+        </div>
+        
+        <div class="navbar__menu">
+            <li><a href="index.html">홈</a></li>
+            <li><a href="profile.html">프로필</a></li>
+            <li><a href="camera.html">식단 등록</a></li>
+            <li><a href="diary.html">칼로리 다이어리</a></li>
+            <li><a href="board.html">게시판</a></li>
+            <li><a href="fooddb.html">음식 데이터</a></li>
+            <li><a href="login.html">로그아웃</a></li>
+        </div>
+        
+        <ul class="navbar__icons"></ul>
+
+        <a href="#" class="navbar__toggleBtn">
+            <i class="fa-solid fa-bars"></i>
+        </a> 
+    </nav>
+
+    <div class="container">
+        
+        <div class="item myProfile">
+            
+            <div class="ProfileImage">
+                <img src="images/profile.png" alt="image" class="userImage" width="200px" height="10px">
+            </div>
+
+            <p>이름 : 황호연</p>
+            <p>별명 : brianhhy</p>
+            
+            <p>목표 체중</p>
+            <div class="graph2">
+                <span>25%</span>
+            </div>
+
+            <p>목표 bmi</p>
+            <div class="graph4">
+                <span>50%</span>
+            </div>
+            
+            <p>목표 골격근량</p>
+            <div class="graph3">
+                <span>60%</span>
+            </div>
+
+            <p>목표 체지방량</p>
+            <div class="graph4">
+                <span>50%</span>
+            </div>
+
+        </div>
+        
+        <div class="item recommendFood">오늘의 추천 음식
+            
+            
+            <div class="breakfast">
+                
+                <p>아침</p>
+                
+                <div class="wrap">
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="afternoon">
+                
+                <p>점심</p>
+                
+                <div class="wrap">
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="dinner">
+                <p>저녁</p>
+
+                <div class="wrap">
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="foodName">음식 이름</div>
+                        <div class="bottom">
+                        <div class="mainNut">주 영양소</div>
+                        <div class="calorie">???kcal</div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+        </div>
+        <div class="item color3">오늘의 식단</div>
+        <div class="item color4">오늘의 칼로리</div>
+        <div class="item color5">칼로리 타임머신
+            
+            <form>    
+                <select>
+                    <option value="year2023">2023</option>
+                    <option value="year2022">2022</option>
+                    <option value="year2021">2021</option>
+                    <option value="year2020">2020</option>
+                    <option value="year2019">2019</option>
+                </select>
+                
+                <select>
+                    <option value="month01">01</option>
+                    <option value="month02">02</option>
+                    <option value="month03">03</option>
+                    <option value="month04">04</option>
+                    <option value="month05">05</option>
+                    <option value="month06">06</option>
+                    <option value="month07">07</option>
+                    <option value="month08">08</option>
+                    <option value="month09">09</option>
+                    <option value="month10">10</option>
+                    <option value="month11">11</option>
+                    <option value="month12">12</option>
+                </select>
+
+                <select>
+                    <option value="month01">01</option>
+                    <option value="month02">02</option>
+                    <option value="month03">03</option>
+                    <option value="month04">04</option>
+                    <option value="month05">05</option>
+                    <option value="month06">06</option>
+                    <option value="month07">07</option>
+                    <option value="month08">08</option>
+                    <option value="month09">09</option>
+                    <option value="month10">10</option>
+                    <option value="month11">11</option>
+                    <option value="month12">12</option>
+                    <option value="month13">13</option>
+                    <option value="month14">14</option>
+                    <option value="month15">15</option>
+                    <option value="month16">16</option>
+                    <option value="month17">17</option>
+                    <option value="month18">18</option>
+                    <option value="month19">19</option>
+                    <option value="month20">20</option>
+                    <option value="month21">21</option>
+                    <option value="month22">22</option>
+                    <option value="month23">23</option>
+                    <option value="month24">24</option>
+                    <option value="month25">25</option>
+                    <option value="month26">26</option>
+                    <option value="month27">27</option>
+                    <option value="month28">28</option>
+                    <option value="month29">29</option>
+                    <option value="month30">30</option>
+                    <option value="month31">31</option>
+                </select>
+                <input class="btn-3d green" type="submit" value="Submit" />
+            </form>
+        </div>
+
+        <div class="item color6">미니 게시판 가져오기</div>
+        <div class="item color7">초과한 영양성분</div>
+        <div class="item color8">부족한 영양성분</div>
+
+        
+    </div>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/index.js" defer></script>
+</body>
+</html> 
