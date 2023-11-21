@@ -6,13 +6,13 @@ import com.example.cal_dia_mem.diary.service.DiaryService;
 import com.example.cal_dia_mem.foodCommend.dto.FoodCommendDTO;
 import com.example.cal_dia_mem.foodCommend.entity.FoodCommendEntity;
 import com.example.cal_dia_mem.foodCommend.repository.FoodCommendRepository;
+import com.example.cal_dia_mem.member.entity.SiteUserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.sql.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,30 +23,57 @@ public class FoodCommendService {
     @Autowired
     private final DiaryService diaryService;
 
-    //범위를 입력 받아 랜덤하게 추출
-    public FoodCommendEntity getRandomFoodInRange(int startId, int endId) {
-        Random random = new Random();
-        long randomId = startId + random.nextInt(endId - startId + 1);
-        return foodCommendRepository.findById(randomId).orElse(null);
+    //날짜를 입력 받아 랜덤하게 추출
+    public int randomNum(int i) {
+        int retNum = 0;
+        java.util.Date today = new java.util.Date();
+        Date sqlDate = new Date(today.getTime());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(sqlDate);
+
+
+        // 연, 월, 일 분리
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        if(i==1){
+            retNum=(((year+month+day)*month*month/day)*3)%5+1;
+        }else if(i==2){
+            retNum=(((year-month-day)*day/month)*3) %5+5;
+        }else if(i==3){
+            retNum=(((year+month-day)*month/day)*3) %5+10;
+        }
+        return retNum;
     }
 
     //
     public List<FoodCommendDTO> commendFood() {
+        Long id1= (long) randomNum(1);
+        Long id2= (long) randomNum(2);
+        Long id3= (long) randomNum(3);
+
         List<FoodCommendDTO> foodCommendDTOList = new ArrayList<>();
         FoodCommendDTO foodCommendDTO;
 
-        FoodCommendEntity foodCommendEntity=getRandomFoodInRange(1,5);
-        foodCommendDTO=FoodCommendDTO.toFoodCommendDTO(foodCommendEntity);
-        foodCommendDTOList.add(foodCommendDTO);
-
-        foodCommendEntity=getRandomFoodInRange(6,10);
-        foodCommendDTO=FoodCommendDTO.toFoodCommendDTO(foodCommendEntity);
-        foodCommendDTOList.add(foodCommendDTO);
-
-        foodCommendEntity=getRandomFoodInRange(11,15);
-        foodCommendDTO=FoodCommendDTO.toFoodCommendDTO(foodCommendEntity);
-        foodCommendDTOList.add(foodCommendDTO);
-
+        Optional<FoodCommendEntity> foodCommendEntity1= foodCommendRepository.findById(id1);
+        if(foodCommendEntity1.isPresent()){
+            FoodCommendEntity foodCommendEntity =foodCommendEntity1.get();
+            foodCommendDTO=FoodCommendDTO.toFoodCommendDTO(foodCommendEntity);
+            foodCommendDTOList.add(foodCommendDTO);
+        }
+        Optional<FoodCommendEntity> foodCommendEntity2= foodCommendRepository.findById(id2);
+        if(foodCommendEntity2.isPresent()){
+            FoodCommendEntity foodCommendEntity =foodCommendEntity2.get();
+            foodCommendDTO=FoodCommendDTO.toFoodCommendDTO(foodCommendEntity);
+            foodCommendDTOList.add(foodCommendDTO);
+        }
+        Optional<FoodCommendEntity> foodCommendEntity3= foodCommendRepository.findById(id3);
+        if(foodCommendEntity3.isPresent()){
+            FoodCommendEntity foodCommendEntity =foodCommendEntity3.get();
+            foodCommendDTO=FoodCommendDTO.toFoodCommendDTO(foodCommendEntity);
+            foodCommendDTOList.add(foodCommendDTO);
+        }
         return foodCommendDTOList;
 
     }
@@ -57,7 +84,7 @@ public class FoodCommendService {
         double fat = totalFat(foodCommendDTOList);
         double kcal =totalKcal(foodCommendDTOList);
         String info="위 식단을 모두 섭취 시 총 "+kcal+"칼로리를 섭취 하실 수 있습니다. 이 안에 포함된 영양 성분은 총"+
-                +carbohydrate+"의 탄수화물, "+protein+"의 단백질, "+fat+"의 지방 입니다.";
+                +carbohydrate+"g의 탄수화물, "+protein+"g의 단백질, "+fat+"g의 지방 입니다.";
         return info;
 
     }
@@ -70,7 +97,6 @@ public class FoodCommendService {
         for(FoodCommendDTO dto : foodCommendDTOList){
             try {
                 carbohydrateValue = Double.parseDouble(dto.getCarbohydrate());
-                System.out.println("탄수화물 합 : "+carbohydrateValue);
                 carbohydrateSum+=carbohydrateValue;
             } catch (NumberFormatException e){
                 System.err.println("숫자로 변환할 수 없습니다1.");
@@ -119,12 +145,13 @@ public class FoodCommendService {
 
         for(FoodCommendDTO dto : foodCommendDTOList){
             try {
-                kcalValue = Double.parseDouble(dto.getFat());
+                kcalValue = Double.parseDouble(dto.getKcal());
                 kcalSum+=kcalValue;
             } catch (NumberFormatException e){
                 System.err.println("숫자로 변환할 수 없습니다3.");
             }
         }
+
         return kcalSum;
     }
 

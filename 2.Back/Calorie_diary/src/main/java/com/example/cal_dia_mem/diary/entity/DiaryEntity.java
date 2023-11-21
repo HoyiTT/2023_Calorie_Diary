@@ -2,6 +2,7 @@ package com.example.cal_dia_mem.diary.entity;
 
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.sql.Timestamp;
 @Setter
 @Getter
 @Table(name="food_diary")
+@Transactional
 public class DiaryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +48,7 @@ public class DiaryEntity {
 
     public static DiaryEntity toDiaryEntity(DiaryDTO diaryDTO){
         DiaryEntity diaryEntity = new DiaryEntity();
+        diaryEntity.setId(diaryDTO.getId());
         diaryEntity.setMemberEmail(diaryDTO.getMemberEmail());
         diaryEntity.setCreateDate(diaryDTO.getCreateDate());
         diaryEntity.setFood_name(diaryDTO.getFood_name());
@@ -65,6 +68,7 @@ public class DiaryEntity {
 
     public static DiaryDTO entityToDto(DiaryEntity entity){
         DiaryDTO dto = new DiaryDTO();
+        dto.setId(entity.getId());
         dto.setMemberEmail(entity.getMemberEmail());
         dto.setCreateDate(entity.getCreateDate());
         dto.setFood_name(entity.getFood_name());

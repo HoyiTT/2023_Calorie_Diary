@@ -63,27 +63,41 @@ public class CameraController {
         ocrDTO.setTransfat(" ");
 
 
-
+        
         junFoodDTO1= (JunFoodDTO) session.getAttribute("junFood"); //세션으로 객체받아오기
         ocrDTO1= (OcrDTO) session.getAttribute("ocr");
+        int num = 0;
+        if(session.getAttribute("num")!=null){
+            num= (int) session.getAttribute("num");
+        }
+        
+        
 
         //둘 다 널이라면? --> 첫 화면 진입상태
         if(ocrDTO1==null && junFoodDTO1==null) {
             model.addAttribute("food",junFoodDTO);
         }
-        //만약 받아온 ocrDTO1이고 junFoodDTO1이 널이 아니라면? --> 사진이 업로드 된 것임
-        else if(ocrDTO1==null) {
-            if (junFoodDTO1 != null) {
-
-                junFoodDTO = junFoodDTO1;  // 빈 값을 가진 DTO에 사진으로 받아온DTO 입력
-                model.addAttribute("food",junFoodDTO); // model에 객체추가
-            }
+        //음식사진이 업로드되면
+        if(ocrDTO1==null&&junFoodDTO1!=null){
+            junFoodDTO = junFoodDTO1;  // 빈 값을 가진 DTO에 사진으로 받아온DTO 입력
+            model.addAttribute("food",junFoodDTO); // model에 객체추가
         }
-        //그렇지 않다면 ? --> 영양성분이 업로드 된 것임
-        else{
+        //영양성분이 업로드되면
+        if(ocrDTO1!=null&&junFoodDTO1==null){
             ocrDTO=ocrDTO1;
             model.addAttribute("food",ocrDTO);
         }
+        // 두번째 업로드
+        if(ocrDTO1!=null&&junFoodDTO1!=null){
+            if(num==1){
+                ocrDTO=ocrDTO1;
+                model.addAttribute("food",ocrDTO);
+            }else if(num==2){
+                junFoodDTO = junFoodDTO1;  // 빈 값을 가진 DTO에 사진으로 받아온DTO 입력
+                model.addAttribute("food",junFoodDTO);
+            }
+        }
+
 
         model.addAttribute("memberEmail",myEmail);
 
@@ -115,6 +129,7 @@ public class CameraController {
                 OcrDTO orcNutrient = cameraService.ocr(myEmail); //ocr을 통해 뽑아온 영양성분을 저장하는 곳
                 System.out.println("test:"+orcNutrient);
                 session.setAttribute("ocr",orcNutrient);
+                session.setAttribute("num",1);
                 return "/member/message";
             } catch (IOException e) {
                 e.printStackTrace();
@@ -146,6 +161,7 @@ public class CameraController {
 
                 model.addAttribute("message", "File uploaded successfully: " + fileName);
                 model.addAttribute("searchUrl", "/camera");
+                session.setAttribute("num",2);
 
                 return "/member/message";
             } catch (IOException e) {

@@ -30,6 +30,7 @@ public class DiaryDTO {
 
     public static DiaryDTO toDiaryDTO(DiaryEntity diaryEntity){
         DiaryDTO diaryDTO = new DiaryDTO();
+        diaryDTO.setId(diaryEntity.getId());
         diaryDTO.setMemberEmail(diaryEntity.getMemberEmail());
         diaryDTO.setCreateDate(diaryEntity.getCreateDate());
         diaryDTO.setFood_name(diaryEntity.getFood_name());

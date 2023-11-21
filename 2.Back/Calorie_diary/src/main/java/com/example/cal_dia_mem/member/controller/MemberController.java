@@ -42,9 +42,10 @@ public class MemberController {
     private final BoardService boardService;
 
     private final FoodCommendService foodCommendService;
+
     //회원가입 페이지 출력
     @GetMapping("/member/save")
-    public String saveForm(){
+    public String saveForm() {
         return "/member/createaccount";
     }
 
@@ -53,9 +54,9 @@ public class MemberController {
     public String save(@Valid MemberDTO memberDTO, Errors errors, org.springframework.ui.Model model) {
         System.out.println("memberDTO= " + memberDTO);
 
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             //회원가입 실패 시 입력값 유지
-            model.addAttribute("memberDTO",memberDTO);
+            model.addAttribute("memberDTO", memberDTO);
 
             //유효성 통과 못한 필드와 메시지 핸들링
             Map<String, String> validatorResult = MemberService.validateHandling(errors);
@@ -70,7 +71,19 @@ public class MemberController {
         profileDTO.setMemberEmail(memberDTO.getMemberEmail());
         profileDTO.setMemberName(memberDTO.getMemberName());
 
-        System.out.println("profileDTO= "+ profileDTO);
+        //profileDTO 초기 값 공백처리
+        profileDTO.setPurposeWeight("");
+        profileDTO.setMuscle("");
+        profileDTO.setHeight("");
+        profileDTO.setPurposeMuscle("");
+        profileDTO.setPurposeBodyFat("");
+        profileDTO.setPurposeBMI("");
+        profileDTO.setBodyFat("");
+        profileDTO.setCurrentWeight("");
+        profileDTO.setGender("");
+
+
+        System.out.println("profileDTO= " + profileDTO);
         memberService.save(memberDTO);
         profileService.save(profileDTO);
 
@@ -78,104 +91,156 @@ public class MemberController {
     }
 
     @GetMapping("/member/login")
-    public String loginForm(){
-         return "/member/login";
+    public String loginForm() {
+        return "/member/login";
     }
+
     @PostMapping("/member/login")
-    public String login(@ModelAttribute MemberDTO memberDTO , HttpServletRequest request, Model model){
+    public String login(@ModelAttribute MemberDTO memberDTO, HttpServletRequest request, Model model) {
         MemberDTO loginResult = memberService.login(memberDTO);
         //로그인 성공
-        if(loginResult != null){
+        if (loginResult != null) {
             // 세션 사용 - 회원별 데이터 식별 시 사용됨
-            HttpSession session =request.getSession();
-            session.setAttribute("sessionNickname",loginResult.getMemberNickname());
-            session.setAttribute("sessionEmail",loginResult.getMemberEmail());
-            session.setAttribute("sessionName",loginResult.getMemberName());
+            HttpSession session = request.getSession();
+            session.setAttribute("sessionNickname", loginResult.getMemberNickname());
+            session.setAttribute("sessionEmail", loginResult.getMemberEmail());
+            session.setAttribute("sessionName", loginResult.getMemberName());
 
             String myEmail = (String) session.getAttribute("sessionEmail");
 
             //인덱스에 표현할 프로필
             ProfileDTO profileDTO = profileService.modifyProfile(myEmail);
-            if(profileDTO.getPurposeBMI()==null)profileDTO.setPurposeBMI("프로필을 입력해주세요.");
-            if(profileDTO.getPurposeMuscle()==null)profileDTO.setPurposeMuscle("프로필을 입력해주세요.");
-            if(profileDTO.getPurposeBodyFat()==null)profileDTO.setPurposeBodyFat("프로필을 입력해주세요.");
 
-            //프로필이 모두 입력되어있다면
-            if(profileDTO.getPurposeBodyFat()!=null&&profileDTO.getPurposeMuscle()!=null&&profileDTO.getPurposeBMI()!=null
-                &&profileDTO.getHeight()!=null&&profileDTO.getCurrentWeight()!=null&&profileDTO.getBodyFat()!=null)
-            {
+
                 //목표 골격근
-               Integer percentMuscle=Integer.parseInt(profileDTO.getMuscle())*100/Integer.parseInt(profileDTO.getPurposeMuscle());
+                if (!profileDTO.getMuscle().equals("") && !profileDTO.getPurposeMuscle().equals("")) {
+                    Integer percentMuscle = Integer.parseInt(profileDTO.getMuscle()) * 100 / Integer.parseInt(profileDTO.getPurposeMuscle());
+                    profileDTO.setPurposeMuscle(String.valueOf(percentMuscle));
+                }
 
-               //목표 bmi
-               double percentBmi=Double.parseDouble(profileDTO.getCurrentWeight())/(Double.parseDouble(profileDTO.getHeight())/100)
-                       /(Double.parseDouble(profileDTO.getHeight())/100)*100/Double.parseDouble(profileDTO.getPurposeBMI());
-               Integer percentBMI=(int)percentBmi;
-               //목표 체지방
-               Integer percentBodyFat=Integer.parseInt(profileDTO.getPurposeBodyFat())*100/Integer.parseInt(profileDTO.getBodyFat());
+                //목표 bmi
+                if (!profileDTO.getCurrentWeight().equals("") && !profileDTO.getHeight().equals("") && !profileDTO.getPurposeBMI().equals("")) {
 
-               profileDTO.setPurposeBMI(String.valueOf(percentBMI));
-               profileDTO.setPurposeMuscle(String.valueOf(percentMuscle));
-               profileDTO.setPurposeBodyFat(String.valueOf(percentBodyFat));
-            }
+                    double percentBmi = Double.parseDouble(profileDTO.getCurrentWeight()) / (Double.parseDouble(profileDTO.getHeight()) / 100)
+                            / (Double.parseDouble(profileDTO.getHeight()) / 100) * 100 / Double.parseDouble(profileDTO.getPurposeBMI());
+                    Integer percentBMI = (int) percentBmi;
+                    profileDTO.setPurposeBMI(String.valueOf(percentBMI));
+                }
+            //목표 체지방
+                if (!profileDTO.getPurposeBodyFat().equals("") && !profileDTO.getBodyFat().equals("")) {
 
-            model.addAttribute("modifyProfile",profileDTO);
+                    Integer percentBodyFat = Integer.parseInt(profileDTO.getPurposeBodyFat()) * 100 / Integer.parseInt(profileDTO.getBodyFat());
+                    profileDTO.setPurposeBodyFat(String.valueOf(percentBodyFat));
+                }
+                //목표 체중
+                if (!profileDTO.getCurrentWeight().equals("") && !profileDTO.getPurposeWeight().equals("")) {
+                    Integer percentWeight = Integer.parseInt(profileDTO.getCurrentWeight()) * 100 / Integer.parseInt(profileDTO.getPurposeWeight());
+                    profileDTO.setPurposeWeight(String.valueOf(percentWeight));
+                }
 
 
+            if(profileDTO.getPurposeWeight().equals(""))profileDTO.setPurposeWeight("프로필을 입력해주세요");
+            if(profileDTO.getPurposeMuscle().equals(""))profileDTO.setPurposeMuscle("프로필을 입력해주세요");
+            if(profileDTO.getPurposeBodyFat().equals(""))profileDTO.setPurposeBodyFat("프로필을 입력해주세요");
+            if(profileDTO.getPurposeBMI().equals(""))profileDTO.setPurposeBMI("프로필을 입력해주세요");
+
+
+
+            model.addAttribute("modifyProfile", profileDTO);
 
 
             Date todayDate = new Date(System.currentTimeMillis());
             // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 섭취한 음식 및 영양성분 받아오기
-            List<DiaryDTO> dto=diaryService.callDiary(todayDate,loginResult.getMemberEmail());
-            model.addAttribute("todayList",dto);
+            List<DiaryDTO> dto = diaryService.callDiary(todayDate, loginResult.getMemberEmail());
+            model.addAttribute("todayList", dto);
 
             // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
-            List<String> overNutrient = diaryService.overNutrient(todayDate,loginResult.getMemberEmail());
-            if(overNutrient==null){
-                model.addAttribute("overNutrient","정확한 서비스를 제공 위해 프로필설정을 해주세요.");
-            }
-            else {
+            List<String> overNutrient = diaryService.overNutrient(todayDate, loginResult.getMemberEmail());
+            if (overNutrient == null) {
+                model.addAttribute("overNutrient", "정확한 서비스를 제공 위해 프로필설정을 해주세요.");
+            } else {
                 model.addAttribute("overNutrient", overNutrient);
             }
             // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
-            List<String> scarceNutrient = diaryService.scarceNutrient(todayDate,loginResult.getMemberEmail());
-            if(scarceNutrient==null){
-                model.addAttribute("scarceNutrient","정확한 서비스를 제공 위해 프로필설정을 해주세요.");
-            }
-            else{
+            List<String> scarceNutrient = diaryService.scarceNutrient(todayDate, loginResult.getMemberEmail());
+            if (scarceNutrient == null) {
+                model.addAttribute("scarceNutrient", "정확한 서비스를 제공 위해 프로필설정을 해주세요.");
+            } else {
                 model.addAttribute("scarceNutrient", scarceNutrient);
             }
             //최근 3일동안 가장 인기있는 게시글 5개 가져오기
             List<BoardDTO> poplarBoard = boardService.popularBoard();
-            model.addAttribute("poplarBoard",poplarBoard);
+            model.addAttribute("poplarBoard", poplarBoard);
 
             // 음식추천
-            List<FoodCommendDTO> foodCommendDTOList=foodCommendService.commendFood();
+            List<FoodCommendDTO> foodCommendDTOList = foodCommendService.commendFood();
 
-            model.addAttribute("commendNutrient",foodCommendDTOList);
+            model.addAttribute("commendNutrient", foodCommendDTOList);
 
-            String commendInfo=foodCommendService.foodCommendInfo(foodCommendDTOList);
-            model.addAttribute("commendInfo",commendInfo);
-
-            List<String> meal = new ArrayList<>();
-            meal.add("아침"); meal.add("점심"); meal.add("저녁");
-            model.addAttribute("meal",meal);
+            String commendInfo = foodCommendService.foodCommendInfo(foodCommendDTOList);
+            model.addAttribute("commendInfo", commendInfo);
+            model.addAttribute("selectDate", "오늘");
             return "index";
+
         }
-        //로그인 실패
-        else{
-            // 알림창 및 리다이렉션
-            model.addAttribute("message","아이디와 비밀번호가 일치하지 않습니다!");
-            model.addAttribute("searchUrl","/member/login");
-            return "/member/message";
+
+            //로그인 실패
+            else {
+                // 알림창 및 리다이렉션
+                model.addAttribute("message", "아이디와 비밀번호가 일치하지 않습니다!");
+                model.addAttribute("searchUrl", "/member/login");
+                return "/member/message";
+            }
         }
-    }
+
 
     @GetMapping("/index/call")
     public String index(HttpServletRequest request, Model model,HttpSession session){
         String myEmail = (String) session.getAttribute("sessionEmail");
+
+        //인덱스에 표현할 프로필
+        ProfileDTO profileDTO = profileService.modifyProfile(myEmail);
+
+        //목표 골격근
+        if (!profileDTO.getMuscle().equals("") && !profileDTO.getPurposeMuscle().equals("")) {
+            Integer percentMuscle = Integer.parseInt(profileDTO.getMuscle()) * 100 / Integer.parseInt(profileDTO.getPurposeMuscle());
+            profileDTO.setPurposeMuscle(String.valueOf(percentMuscle));
+        }
+
+        //목표 bmi
+        if (!profileDTO.getCurrentWeight().equals("") && !profileDTO.getHeight().equals("") && !profileDTO.getPurposeBMI().equals("")) {
+
+            double percentBmi = Double.parseDouble(profileDTO.getCurrentWeight()) / (Double.parseDouble(profileDTO.getHeight()) / 100)
+                    / (Double.parseDouble(profileDTO.getHeight()) / 100) * 100 / Double.parseDouble(profileDTO.getPurposeBMI());
+            Integer percentBMI = (int) percentBmi;
+            profileDTO.setPurposeBMI(String.valueOf(percentBMI));
+        }
+        //목표 체지방
+        if (!profileDTO.getPurposeBodyFat().equals("") && !profileDTO.getBodyFat().equals("")) {
+
+            Integer percentBodyFat = Integer.parseInt(profileDTO.getPurposeBodyFat()) * 100 / Integer.parseInt(profileDTO.getBodyFat());
+            profileDTO.setPurposeBodyFat(String.valueOf(percentBodyFat));
+        }
+        //목표 체중
+        if (!profileDTO.getCurrentWeight().equals("") && !profileDTO.getPurposeWeight().equals("")) {
+            Integer percentWeight = Integer.parseInt(profileDTO.getCurrentWeight()) * 100 / Integer.parseInt(profileDTO.getPurposeWeight());
+            profileDTO.setPurposeWeight(String.valueOf(percentWeight));
+        }
+
+
+        if(profileDTO.getPurposeWeight().equals(""))profileDTO.setPurposeWeight("프로필을 입력해주세요");
+        if(profileDTO.getPurposeMuscle().equals(""))profileDTO.setPurposeMuscle("프로필을 입력해주세요");
+        if(profileDTO.getPurposeBodyFat().equals(""))profileDTO.setPurposeBodyFat("프로필을 입력해주세요");
+        if(profileDTO.getPurposeBMI().equals(""))profileDTO.setPurposeBMI("프로필을 입력해주세요");
+
+
+
+        model.addAttribute("modifyProfile", profileDTO);
+
         Date todayDate = new Date(System.currentTimeMillis());
         // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 섭취한 음식 및 영양성분 받아오기
+
+
         List<DiaryDTO> dto=diaryService.callDiary(todayDate,myEmail);
         model.addAttribute("todayList",dto);
 
@@ -206,63 +271,108 @@ public class MemberController {
 
         String commendInfo=foodCommendService.foodCommendInfo(foodCommendDTOList);
         model.addAttribute("commendInfo",commendInfo);
-
-        List<String> meal = new ArrayList<>();
-        meal.add("아침"); meal.add("점심"); meal.add("저녁");
-        model.addAttribute("meal",meal);
+        model.addAttribute("selectDate","오늘");
         return "index";
     }
 
     @PostMapping("/index/call/past")
-    public String index(Model model,HttpSession session,@RequestParam("pastDate") String Date) {
+    public String index(Model model,HttpSession session, @RequestParam("year") String year,@RequestParam("month") String month,@RequestParam("date") String date) {
         String myEmail = (String) session.getAttribute("sessionEmail");
-        String dateString = Date;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        //인덱스에 표현할 프로필
+        ProfileDTO profileDTO = profileService.modifyProfile(myEmail);
+
+        //목표 골격근
+        if (!profileDTO.getMuscle().equals("") && !profileDTO.getPurposeMuscle().equals("")) {
+            Integer percentMuscle = Integer.parseInt(profileDTO.getMuscle()) * 100 / Integer.parseInt(profileDTO.getPurposeMuscle());
+            profileDTO.setPurposeMuscle(String.valueOf(percentMuscle));
+        }
+
+        //목표 bmi
+        if (!profileDTO.getCurrentWeight().equals("") && !profileDTO.getHeight().equals("") && !profileDTO.getPurposeBMI().equals("")) {
+
+            double percentBmi = Double.parseDouble(profileDTO.getCurrentWeight()) / (Double.parseDouble(profileDTO.getHeight()) / 100)
+                    / (Double.parseDouble(profileDTO.getHeight()) / 100) * 100 / Double.parseDouble(profileDTO.getPurposeBMI());
+            Integer percentBMI = (int) percentBmi;
+            profileDTO.setPurposeBMI(String.valueOf(percentBMI));
+        }
+        //목표 체지방
+        if (!profileDTO.getPurposeBodyFat().equals("") && !profileDTO.getBodyFat().equals("")) {
+
+            Integer percentBodyFat = Integer.parseInt(profileDTO.getPurposeBodyFat()) * 100 / Integer.parseInt(profileDTO.getBodyFat());
+            profileDTO.setPurposeBodyFat(String.valueOf(percentBodyFat));
+        }
+        //목표 체중
+        if (!profileDTO.getCurrentWeight().equals("") && !profileDTO.getPurposeWeight().equals("")) {
+            Integer percentWeight = Integer.parseInt(profileDTO.getCurrentWeight()) * 100 / Integer.parseInt(profileDTO.getPurposeWeight());
+            profileDTO.setPurposeWeight(String.valueOf(percentWeight));
+        }
+
+
+        if(profileDTO.getPurposeWeight().equals(""))profileDTO.setPurposeWeight("프로필을 입력해주세요");
+        if(profileDTO.getPurposeMuscle().equals(""))profileDTO.setPurposeMuscle("프로필을 입력해주세요");
+        if(profileDTO.getPurposeBodyFat().equals(""))profileDTO.setPurposeBodyFat("프로필을 입력해주세요");
+        if(profileDTO.getPurposeBMI().equals(""))profileDTO.setPurposeBMI("프로필을 입력해주세요");
+
+
+
+        model.addAttribute("modifyProfile", profileDTO);
+
+
+
         java.util.Date utilDate = null;
+        java.sql.Date selectedDate = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = year + "-" + month + "-" + date;
         try {
             utilDate = dateFormat.parse(dateString);
+            selectedDate = new java.sql.Date(utilDate.getTime());
+            // 이제 selectedDate를 사용하여 원하는 작업 수행
+            System.out.println("선택한 날짜: " + selectedDate);
+
         } catch (ParseException e) {
             e.printStackTrace();
+            // 날짜 변환 중 에러가 발생한 경우 처리
         }
-        if (utilDate != null) {
-            Date pastDate = new Date(utilDate.getTime());
+            if(selectedDate==null)model.addAttribute("selectDate"," ");
+            if(selectedDate!=null) {
+                model.addAttribute("selectDate",selectedDate+"일");
+
+                // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 그날 섭취한 음식 및 영양성분 받아오기
+                List<DiaryDTO> dto = diaryService.callDiary(selectedDate, myEmail);
+                model.addAttribute("todayList", dto);
 
 
-            List<DiaryDTO> dto = diaryService.callDiary(pastDate, myEmail);
-            model.addAttribute("todayList", dto);
 
-            // 과거 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
-            List<String> overNutrient = diaryService.overNutrient(pastDate, myEmail);
-            if(overNutrient==null){
-                model.addAttribute("overNutrient","정확한 서비스를 제공 위해 프로필설정을 해주세요.");
-            }else{
-                model.addAttribute("overNutrient", overNutrient);
+                // 과거 날짜와 멤버 이메일을 매개변수로 회원 별 그날 초과한 영양성분 받아오기
+                List<String> overNutrient = diaryService.overNutrient(selectedDate, myEmail);
+                if (overNutrient == null) {
+                    model.addAttribute("overNutrient", "정확한 서비스를 제공 위해 프로필설정을 해주세요.");
+                } else {
+                    model.addAttribute("overNutrient", overNutrient);
+                }
+
+                // 과거 날짜와 멤버 이메일을 매개변수로 회원 별 그날 부족한 영양성분 받아오기
+                List<String> scarceNutrient = diaryService.scarceNutrient(selectedDate, myEmail);
+                if (scarceNutrient == null) {
+                    model.addAttribute("scarceNutrient", "정확한 서비스를 제공 위해 프로필설정을 해주세요.");
+                } else {
+                    model.addAttribute("scarceNutrient", scarceNutrient);
+
+                }
+                //오늘 3일동안 가장 인기있는 게시글 5개 가져오기
+                List<BoardDTO> poplarBoard = boardService.popularBoard();
+                model.addAttribute("poplarBoard", poplarBoard);
+
+                // 음식추천
+                List<FoodCommendDTO> foodCommendDTOList = foodCommendService.commendFood();
+
+                model.addAttribute("commendNutrient", foodCommendDTOList);
+
+                String commendInfo = foodCommendService.foodCommendInfo(foodCommendDTOList);
+                model.addAttribute("commendInfo", commendInfo);
+
             }
-
-            // 과거 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
-            List<String> scarceNutrient = diaryService.scarceNutrient(pastDate, myEmail);
-            if(scarceNutrient==null){
-                model.addAttribute("scarceNutrient","정확한 서비스를 제공 위해 프로필설정을 해주세요.");
-            }else{
-                model.addAttribute("scarceNutrient", scarceNutrient);
-
-            }
-            //오늘 3일동안 가장 인기있는 게시글 5개 가져오기
-            List<BoardDTO> poplarBoard = boardService.popularBoard();
-            model.addAttribute("poplarBoard", poplarBoard);
-
-            // 음식추천
-            List<FoodCommendDTO> foodCommendDTOList=foodCommendService.commendFood();
-
-            model.addAttribute("commendNutrient",foodCommendDTOList);
-
-            String commendInfo=foodCommendService.foodCommendInfo(foodCommendDTOList);
-            model.addAttribute("commendInfo",commendInfo);
-
-            List<String> meal = new ArrayList<>();
-            meal.add("아침"); meal.add("점심"); meal.add("저녁");
-            model.addAttribute("meal",meal);
-        }
         return "index";
     }
 

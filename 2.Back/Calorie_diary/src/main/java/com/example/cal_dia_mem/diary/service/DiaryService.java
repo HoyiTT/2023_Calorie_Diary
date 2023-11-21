@@ -4,12 +4,15 @@ import com.example.cal_dia_mem.diary.entity.DiaryEntity;
 import com.example.cal_dia_mem.diary.repository.DiaryRepository;
 import com.example.cal_dia_mem.foodCommend.dto.FoodCommendDTO;
 import com.example.cal_dia_mem.profile.service.ProfileService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,15 +26,31 @@ public class DiaryService {
         DiaryEntity diaryEntity = DiaryEntity.toDiaryEntity(diaryDTO);
         diaryRepository.save(diaryEntity);
     }
+    public void diaryDelete(Integer id){
+        diaryRepository.deleteById(id);
+    }
 
     // 칼로리 다이어리 DB로부터 섭취 음식 목록 받아오기
     public List<DiaryDTO> callDiary(Date createDate, String myEmail){
         List<DiaryEntity> diaryEntityList =diaryRepository.findByCreateDateAndMemberEmail(createDate,myEmail);
 
+        System.out.println(diaryEntityList);
+
+
         // entity 리스트를 dto 리스트로 변환하는 스트림
         List<DiaryDTO> diaryDtoList = diaryEntityList.stream()
                 .map(DiaryEntity::entityToDto)
-                    .collect(Collectors.toList());
+                .collect(Collectors.toList());
+
+        System.out.println(diaryDtoList);
+        return diaryDtoList;
+    }
+
+    public List<DiaryDTO> idDiary(Integer id){
+        Optional<DiaryEntity> diaryEntityList =diaryRepository.findById(id);
+        List<DiaryDTO> diaryDtoList = diaryEntityList.stream()
+                .map(DiaryEntity::entityToDto)
+                .collect(Collectors.toList());
         return diaryDtoList;
     }
 
@@ -182,4 +201,52 @@ public class DiaryService {
         System.out.println("오늘섭취 지방 :"+fatSum);
         return fatSum;
     }
+    public double totalKcal(List<DiaryDTO> diaryDtoList){
+        double kcalValue;
+        double kcalSum = 0.0;
+
+        for(DiaryDTO dto : diaryDtoList){
+            try {
+                kcalValue = Double.parseDouble(dto.getKcal());
+                kcalSum+=kcalValue;
+            } catch (NumberFormatException e){
+                System.err.println("숫자로 변환할 수 없습니다1.");
+            }
+        }
+        System.out.println("오늘섭취 탄수 :"+kcalSum);
+        return kcalSum;
+    }
+    public double totalSugars(List<DiaryDTO> diaryDtoList){
+        double sugarsValue;
+        double sugarsSum = 0.0;
+
+        for(DiaryDTO dto : diaryDtoList){
+            try {
+                sugarsValue = Double.parseDouble(dto.getSugars());
+                sugarsSum+=sugarsValue;
+            } catch (NumberFormatException e){
+                System.err.println("숫자로 변환할 수 없습니다1.");
+            }
+        }
+        System.out.println("오늘섭취 탄수 :"+sugarsSum);
+        return sugarsSum;
+    }
+
+    public double totalSalt(List<DiaryDTO> diaryDtoList){
+        double saltValue;
+        double slatSum = 0.0;
+
+        for(DiaryDTO dto : diaryDtoList){
+            try {
+                saltValue = Double.parseDouble(dto.getSalt());
+                slatSum+=saltValue;
+            } catch (NumberFormatException e){
+                System.err.println("숫자로 변환할 수 없습니다1.");
+            }
+        }
+        System.out.println("오늘섭취 탄수 :"+slatSum);
+        return slatSum;
+    }
+
+
 }

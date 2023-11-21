@@ -18,6 +18,8 @@ public class FoodCommendDTO {
     private String sugars;
     private String salt;
 
+    private String meal;
+
     public static FoodCommendDTO toFoodCommendDTO(FoodCommendEntity foodCommendEntity){
         FoodCommendDTO foodCommendDTO=new FoodCommendDTO();
         foodCommendDTO.setId(foodCommendEntity.getId());
@@ -28,6 +30,7 @@ public class FoodCommendDTO {
         foodCommendDTO.setFat(foodCommendEntity.getFat());
         foodCommendDTO.setSugars(foodCommendEntity.getSugars());
         foodCommendDTO.setSalt(foodCommendEntity.getSalt());
+        foodCommendDTO.setMeal(foodCommendEntity.getMeal());
 
         return foodCommendDTO;
     }

@@ -224,7 +224,7 @@ public class CameraService {
 
             //두번 째 문자열 가공 --> 숫자부분만 추출 --> ex) 26g 에서 26만 추출
 
-            Pattern pattern = Pattern.compile("[^0-9]");
+            Pattern pattern = Pattern.compile("[^0-9.]");
             Matcher matcher = pattern.matcher(SaltInfo);
             SaltInfo = matcher.replaceAll("");
 
