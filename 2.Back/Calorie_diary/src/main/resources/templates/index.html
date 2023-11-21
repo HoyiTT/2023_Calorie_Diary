@@ -22,7 +22,11 @@
             <li><a href="/index/call">홈</a></li>
             <li><a href="/profile/modify">프로필</a></li>
             <li><a href="/camera">칼로리 카메라</a></li>
+<<<<<<< HEAD
             <li><a href="/diary">칼로리 다이어리</a></li>
+=======
+            <li><a href="caresult.html">식단 추천</a></li>
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             <li><a href="/board/list">게시판</a></li>
             <li><a href="/api">음식 데이터</a></li>
             <li><a href="/member/logout">로그아웃</a></li>
@@ -105,6 +109,7 @@
                 <p th:text="${todayItem.kcal}+kcal"> </p>
             </th:block>
         </div>
+<<<<<<< HEAD
         <div class="item color5">칼로리 타임머신
 
             <form action="/index/call/past" method="post">
@@ -166,6 +171,11 @@
                 </select>
                 <input class="btn-3d green" type="submit" value="Submit" />
             </form>
+=======
+        <div class="item color5">
+            타임라인
+
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
         </div>
         <div class="item color6">
             인기글
@@ -176,20 +186,29 @@
             </th:block>
         </div>
         <div class="item color7">
+<<<<<<< HEAD
             <p th:text="${selectDate}"></p>
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             초과한 영양성분
             <th:block th:each="overNutrient : ${overNutrient}">
                 <p th:text="${overNutrient}"> </p>
             </th:block>
         </div>
         <div class="item color8">
+<<<<<<< HEAD
             <p th:text="${selectDate}"></p>
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             부족한 영양성분
             <th:block th:each="scarceNutrient : ${scarceNutrient}">
                 <p th:text="${scarceNutrient}"> </p>
             </th:block>
         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 
     </div>
 

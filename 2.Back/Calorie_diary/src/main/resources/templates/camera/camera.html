@@ -25,7 +25,11 @@
         <li><a href="/index/call">홈</a></li>
         <li><a href="/profile/modify">프로필</a></li>
         <li><a href="/camera">칼로리 카메라</a></li>
+<<<<<<< HEAD
         <li><a href="/diary">칼로리 다이어리</a></li>
+=======
+        <li><a href="caresult.html">식단 추천</a></li>
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
         <li><a href="/board/list">게시판</a></li>
         <li><a href="/api">음식 데이터</a></li>
         <li><a href="/member/logout">로그아웃</a></li>
@@ -102,6 +106,7 @@
     <tr>
         <form action="/diary/save" method="post"></form>
         <th scope="row">1</th>
+<<<<<<< HEAD
         <form action="/diary/save" method="post">
         <td>
             <input th:value="${food.foodName}" type="text" name="food_name">
@@ -128,6 +133,33 @@
             <input type="hidden" name="cholesterol" th:value=${food.cholesterol}>
             <input type="hidden" name="saturated_fatty" th:value=${food.saturated_fatty}>
             <input type="hidden" name="transfat" th:value=${food.transfat}>
+=======
+        <td><input th:text="${junFood.foodName}" type="text" name="foodName"></td>
+        <td></td>
+        <td ></td>
+        <td th:text="${junFood.kcal}"></td>
+        <td th:text="${junFood.carbohydrate}"></td>
+        <td th:text="${junFood.protein}"></td>
+        <td th:text="${junFood.fat}"></td>
+        <td th:text="${junFood.sugars}"></td>
+        <td th:text="${junFood.salt}"></td>
+        <td th:text="${junFood.cholesterol}"></td>
+        <td th:text="${junFood.saturated_fatty}"></td>
+        <td th:text="${junFood.transfat}"></td>
+        <form action="/diary/save" method="post">
+            <input type="hidden" name="food_name" th:value=${junFood.foodName}>
+            <input type="hidden" name="maker_name" value=" ">
+            <input type="hidden" name="serving_size" value=" ">
+            <input type="hidden" name="kcal" th:value=${junFood.kcal}>
+            <input type="hidden" name="carbohydrate" th:value=${junFood.carbohydrate}>
+            <input type="hidden" name="protein" th:value=${junFood.protein}>
+            <input type="hidden" name="fat" th:value=${junFood.fat}>
+            <input type="hidden" name="sugars" th:value=${junFood.sugars}>
+            <input type="hidden" name="salt" th:value=${junFood.salt}>
+            <input type="hidden" name="cholesterol" th:value=${junFood.cholesterol}>
+            <input type="hidden" name="saturated_fatty" th:value=${junFood.saturated_fatty}>
+            <input type="hidden" name="transfat" th:value=${junFood.transfat}>
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             <input type="hidden" name="memberEmail" th:value=${memberEmail}>
             <td><button type="submit" class="btn btn-success">추가하기</button></td>
         </form>

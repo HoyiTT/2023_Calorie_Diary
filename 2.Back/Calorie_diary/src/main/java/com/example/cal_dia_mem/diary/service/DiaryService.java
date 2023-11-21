@@ -2,12 +2,21 @@ package com.example.cal_dia_mem.diary.service;
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import com.example.cal_dia_mem.diary.entity.DiaryEntity;
 import com.example.cal_dia_mem.diary.repository.DiaryRepository;
+<<<<<<< HEAD
 import com.example.cal_dia_mem.foodCommend.dto.FoodCommendDTO;
+=======
+import com.example.cal_dia_mem.profile.dto.ProfileDTO;
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 import com.example.cal_dia_mem.profile.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+<<<<<<< HEAD
+=======
+import java.sql.Timestamp;
+import java.time.LocalDate;
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,6 +56,7 @@ public class DiaryService {
                 .map(DiaryEntity::entityToDto)
                 .collect(Collectors.toList());
 
+<<<<<<< HEAD
         if(gen==null||currentWeight==null)return null;
         if(gen.equals("m")) {
             double moverCarbo=totalCarbohydrate(diaryDtoList)-400;
@@ -78,6 +88,35 @@ public class DiaryService {
             double woverFat = totalFat(diaryDtoList)-65;
             if (woverFat>0){
                 overNutrient.add("지방이 권장 섭취량보다"+String.format("%.1f",woverFat)+"g만큼 초과되었습니다.");
+=======
+
+        if(gen.equals("m")) {
+
+            if (400 < totalCarbohydrate(diaryDtoList)){
+                overNutrient.add("탄수화물");
+            }
+
+            if (Double.parseDouble(currentWeight) * 1.2 < totalProtein(diaryDtoList)) {
+                overNutrient.add("단백질");
+            }
+
+            if (65 < totalFat(diaryDtoList)){
+                overNutrient.add("지방");
+            }
+        }
+        else if(gen.equals("w")){
+
+            if (350 < totalCarbohydrate(diaryDtoList)){
+                overNutrient.add("탄수화물");
+            }
+
+            if (Double.parseDouble(currentWeight) * 1.2 < totalProtein(diaryDtoList)) {
+                overNutrient.add("단백질");
+            }
+
+            if (65 < totalFat(diaryDtoList)){
+                overNutrient.add("지방");
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             }
         }
         return overNutrient;
@@ -95,7 +134,11 @@ public class DiaryService {
                 .map(DiaryEntity::entityToDto)
                 .collect(Collectors.toList());
 
+<<<<<<< HEAD
         if(gen==null||currentWeight==null)return null;
+=======
+
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
         if(gen.equals("m")) {
             double mScarceCarbo = 110-totalCarbohydrate(diaryDtoList);
 

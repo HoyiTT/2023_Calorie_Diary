@@ -70,10 +70,16 @@ public class CameraService {
 
         return nameValue;
     }
+<<<<<<< HEAD
     public OcrDTO ocr(String myEmail){
         String apiURL = "https://s8ajln5gaa.apigw.ntruss.com/custom/v1/25873/a17bbc25bf454fc8958a92d5e2a00befbf9f1e8f435e110f9098198080056a85/general"; //API URL
         String secretKey = "cWlmemNNTnNvSkp0TlFWVHpEc0VvWElTSWFBY1lDb2E="; //API secret key
         String foodName= " ";
+=======
+    public List<OcrDTO> ocr(String myEmail){
+        String apiURL = "https://s8ajln5gaa.apigw.ntruss.com/custom/v1/25873/a17bbc25bf454fc8958a92d5e2a00befbf9f1e8f435e110f9098198080056a85/general"; //API URL
+        String secretKey = "cWlmemNNTnNvSkp0TlFWVHpEc0VvWElTSWFBY1lDb2E="; //API secret key
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
         String kcal = null;
         String SaltInfo= null;
         String CarbohydrateInfo= null;
@@ -83,7 +89,11 @@ public class CameraService {
         String SaturatedFatInfo= null;
         String CholesterolInfo= null;
         String ProteinInfo= null;
+<<<<<<< HEAD
         OcrDTO data = new OcrDTO();
+=======
+        List<OcrDTO> nutrientlist = new ArrayList<>();
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 
         try {
             URL url = new URL(apiURL);
@@ -176,7 +186,10 @@ public class CameraService {
 
             // 영양성분 정보 추출
             SaltInfo = extractNutrientInfo(NutrientFacts, Salt);
+<<<<<<< HEAD
             SaltInfo = extractNutrientInfo(NutrientFacts, Salt);
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             CarbohydrateInfo = extractNutrientInfo(NutrientFacts, Carbohydrate);
             SugarInfo = extractNutrientInfo(NutrientFacts, Sugar);
             FatInfo = extractNutrientInfo(NutrientFacts, Fat);
@@ -195,6 +208,7 @@ public class CameraService {
             ProteinInfo = extractStringAfterKorean(ProteinInfo);*/
 
 
+<<<<<<< HEAD
             //문자열 가공 --> 띄어쓰기 뒷부분만 추출 --> 영양성분만 추출하겠다는 뜻 ex) 탄수화물 36g 에서 36g만 추출
             int spaceIndex = SaltInfo.indexOf(' ');
             // 띄어쓰기가 있는 경우에만 추출
@@ -250,6 +264,10 @@ public class CameraService {
             ProteinInfo = matcher.replaceAll("");
 
             data.setFoodName("  ");
+=======
+
+            OcrDTO data = new OcrDTO();
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             data.setKcal(kcal);
             data.setSalt(SaltInfo);
             data.setCarbohydrate(CarbohydrateInfo);
@@ -260,10 +278,18 @@ public class CameraService {
             data.setCholesterol(CholesterolInfo);
             data.setProtein(ProteinInfo);
 
+<<<<<<< HEAD
 
 
             //전체 문자열 출력
             //System.out.println("테스트 :"+ data);
+=======
+            nutrientlist.add(data);
+
+
+            //전체 문자열 출력
+            System.out.println(NutrientFacts);
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             // 결과 출력
             System.out.println(kcal+" : kcal");
             System.out.println("추출된 " + Salt + " 정보: " + SaltInfo);
@@ -282,7 +308,11 @@ public class CameraService {
             System.out.println(e);
         }
 
+<<<<<<< HEAD
         return data;
+=======
+        return nutrientlist;
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
     }
 
 
@@ -316,7 +346,11 @@ public class CameraService {
     public static String removeCommas(String input) {
         // 쉼표(,)를 제거한 문자열 반환
         String processedString = input.replaceAll(",", "");
+<<<<<<< HEAD
         //processedString=input.replaceAll("g"," ");
+=======
+
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
         return processedString;
     }
     public static String extractNumberBeforeKcal(String input) {

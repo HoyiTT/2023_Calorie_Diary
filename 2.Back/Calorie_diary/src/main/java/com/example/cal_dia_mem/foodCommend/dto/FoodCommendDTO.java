@@ -18,8 +18,11 @@ public class FoodCommendDTO {
     private String sugars;
     private String salt;
 
+<<<<<<< HEAD
     private String meal;
 
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
     public static FoodCommendDTO toFoodCommendDTO(FoodCommendEntity foodCommendEntity){
         FoodCommendDTO foodCommendDTO=new FoodCommendDTO();
         foodCommendDTO.setId(foodCommendEntity.getId());
@@ -28,9 +31,14 @@ public class FoodCommendDTO {
         foodCommendDTO.setCarbohydrate(foodCommendEntity.getCarbohydrate());
         foodCommendDTO.setProtein(foodCommendEntity.getProtein());
         foodCommendDTO.setFat(foodCommendEntity.getFat());
+<<<<<<< HEAD
         foodCommendDTO.setSugars(foodCommendEntity.getSugars());
         foodCommendDTO.setSalt(foodCommendEntity.getSalt());
         foodCommendDTO.setMeal(foodCommendEntity.getMeal());
+=======
+        foodCommendDTO.setSugars(foodCommendDTO.getSugars());
+        foodCommendDTO.setSalt(foodCommendDTO.getSalt());
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 
         return foodCommendDTO;
     }

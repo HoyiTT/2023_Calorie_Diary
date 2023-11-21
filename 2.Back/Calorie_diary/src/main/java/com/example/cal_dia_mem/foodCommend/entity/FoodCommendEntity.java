@@ -1,7 +1,10 @@
 package com.example.cal_dia_mem.foodCommend.entity;
 
+<<<<<<< HEAD
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import com.example.cal_dia_mem.diary.entity.DiaryEntity;
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 import com.example.cal_dia_mem.foodCommend.dto.FoodCommendDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,8 +31,11 @@ public class FoodCommendEntity {
     private String sugars;
     @Column
     private String salt;
+<<<<<<< HEAD
     @Column
     private String meal;
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 
     public static FoodCommendEntity toFoodCommendEntity(FoodCommendDTO foodCommendDTO){
         FoodCommendEntity foodCommendEntity=new FoodCommendEntity();
@@ -41,6 +47,7 @@ public class FoodCommendEntity {
         foodCommendEntity.setFat(foodCommendDTO.getFat());
         foodCommendEntity.setSugars(foodCommendDTO.getSugars());
         foodCommendEntity.setSalt(foodCommendDTO.getSalt());
+<<<<<<< HEAD
         foodCommendEntity.setMeal(foodCommendDTO.getMeal());
 
         return foodCommendEntity;
@@ -59,4 +66,9 @@ public class FoodCommendEntity {
         dto.setMeal(entity.getMeal());
         return dto;
     }
+=======
+
+        return foodCommendEntity;
+    }
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 }

@@ -1,12 +1,16 @@
 package com.example.cal_dia_mem.foodCommend.service;
 
+<<<<<<< HEAD
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import com.example.cal_dia_mem.diary.entity.DiaryEntity;
 import com.example.cal_dia_mem.diary.service.DiaryService;
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 import com.example.cal_dia_mem.foodCommend.dto.FoodCommendDTO;
 import com.example.cal_dia_mem.foodCommend.entity.FoodCommendEntity;
 import com.example.cal_dia_mem.foodCommend.repository.FoodCommendRepository;
 import lombok.RequiredArgsConstructor;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+=======
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 
 @Service
 @RequiredArgsConstructor
 public class FoodCommendService {
+<<<<<<< HEAD
 
     private final FoodCommendRepository foodCommendRepository;
     @Autowired
@@ -128,4 +138,30 @@ public class FoodCommendService {
         return kcalSum;
     }
 
+=======
+    private final FoodCommendRepository foodCommendRepository;
+
+    public FoodCommendEntity getRandomEntity1to5() {
+        return foodCommendRepository.findRandomEntityInRange(1, 5);
+    }
+
+    public FoodCommendEntity getRandomEntity6to10() {
+        return foodCommendRepository.findRandomEntityInRange(6, 10);
+    }
+
+    public FoodCommendEntity getRandomEntity11to15() {
+        return foodCommendRepository.findRandomEntityInRange(11, 15);
+    }
+
+    public List<FoodCommendDTO> commendFood() {
+        List<FoodCommendEntity> foodCommendEntityList = null;
+        foodCommendEntityList.add(getRandomEntity1to5());
+        foodCommendEntityList.add(getRandomEntity6to10());
+        foodCommendEntityList.add(getRandomEntity11to15());
+
+        System.out.println(foodCommendEntityList);
+        return null;
+
+    }
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 }

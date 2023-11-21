@@ -29,6 +29,7 @@ public class CameraController {
     CameraService cameraService = new CameraService();
     @Autowired
     JunFoodService junFoodService;
+<<<<<<< HEAD
 
     @RequestMapping("/camera")
     public String showUploadForm(Model model,HttpSession session) {
@@ -61,8 +62,26 @@ public class CameraController {
         ocrDTO.setCholesterol(" ");
         ocrDTO.setSaturated_fatty(" ");
         ocrDTO.setTransfat(" ");
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 
+    @RequestMapping("/camera")
+    public String showUploadForm(Model model,HttpSession session) {
+        String myEmail=(String)session.getAttribute("sessionEmail");
+        JunFoodDTO junFoodDTO =new JunFoodDTO();
+        JunFoodDTO junFoodDTO1 = new JunFoodDTO();
+        junFoodDTO.setFoodName(" ");
+        junFoodDTO.setKcal(" ");
+        junFoodDTO.setCarbohydrate(" ");
+        junFoodDTO.setProtein(" ");
+        junFoodDTO.setFat(" ");
+        junFoodDTO.setSugars(" ");
+        junFoodDTO.setSalt(" ");
+        junFoodDTO.setCholesterol(" ");
+        junFoodDTO.setSaturated_fatty(" ");
+        junFoodDTO.setTransfat(" ");
 
+<<<<<<< HEAD
         
         junFoodDTO1= (JunFoodDTO) session.getAttribute("junFood"); //세션으로 객체받아오기
         ocrDTO1= (OcrDTO) session.getAttribute("ocr");
@@ -100,6 +119,15 @@ public class CameraController {
 
 
         model.addAttribute("memberEmail",myEmail);
+=======
+        junFoodDTO1= (JunFoodDTO) session.getAttribute("junFood");
+        if(junFoodDTO1!=null){
+            junFoodDTO=junFoodDTO1;
+        }
+        model.addAttribute("memberEmail",myEmail);
+        model.addAttribute("junFood",junFoodDTO);
+        System.out.println(junFoodDTO);
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 
         return "/camera/camera";
     }
@@ -126,10 +154,16 @@ public class CameraController {
                 model.addAttribute("message", "File uploaded successfully: " + fileName);
                 model.addAttribute("searchUrl", "/camera");
 
+<<<<<<< HEAD
                 OcrDTO orcNutrient = cameraService.ocr(myEmail); //ocr을 통해 뽑아온 영양성분을 저장하는 곳
                 System.out.println("test:"+orcNutrient);
                 session.setAttribute("ocr",orcNutrient);
                 session.setAttribute("num",1);
+=======
+                List<OcrDTO> nutrientlist = cameraService.ocr(myEmail); //ocr을 통해 뽑아온 영양성분을 저장하는 곳
+                System.out.println(nutrientlist);
+
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
                 return "/member/message";
             } catch (IOException e) {
                 e.printStackTrace();
@@ -156,12 +190,20 @@ public class CameraController {
                 newResult=newResult+1;
                 Integer result=newResult;
                 JunFoodDTO junFoodDTO;
+<<<<<<< HEAD
                 junFoodDTO=junFoodService.flushJunFood(result);      // DTO에 데이터 넣기
                 session.setAttribute("junFood",junFoodDTO);    // 세션에 객체 통째로 추가
 
                 model.addAttribute("message", "File uploaded successfully: " + fileName);
                 model.addAttribute("searchUrl", "/camera");
                 session.setAttribute("num",2);
+=======
+                junFoodDTO=junFoodService.flushJunFood(result);
+                session.setAttribute("junFood",junFoodDTO);
+
+                model.addAttribute("message", "File uploaded successfully: " + fileName);
+                model.addAttribute("searchUrl", "/camera");
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 
                 return "/member/message";
             } catch (IOException e) {

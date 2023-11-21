@@ -6,7 +6,10 @@ import com.example.cal_dia_mem.board.service.BoardService;
 import com.example.cal_dia_mem.diary.dto.DiaryDTO;
 import com.example.cal_dia_mem.diary.repository.DiaryRepository;
 import com.example.cal_dia_mem.diary.service.DiaryService;
+<<<<<<< HEAD
 import com.example.cal_dia_mem.foodCommend.dto.FoodCommendDTO;
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 import com.example.cal_dia_mem.foodCommend.service.FoodCommendService;
 import com.example.cal_dia_mem.member.dto.MemberDTO;
 import com.example.cal_dia_mem.member.service.MemberService;
@@ -25,7 +28,10 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
 import java.util.List;
 import java.util.Map;
 
@@ -90,6 +96,7 @@ public class MemberController {
             HttpSession session =request.getSession();
             session.setAttribute("sessionNickname",loginResult.getMemberNickname());
             session.setAttribute("sessionEmail",loginResult.getMemberEmail());
+<<<<<<< HEAD
             session.setAttribute("sessionName",loginResult.getMemberName());
 
             String myEmail = (String) session.getAttribute("sessionEmail");
@@ -131,6 +138,8 @@ public class MemberController {
 
 
 
+=======
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             Date todayDate = new Date(System.currentTimeMillis());
             // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 섭취한 음식 및 영양성분 받아오기
             List<DiaryDTO> dto=diaryService.callDiary(todayDate,loginResult.getMemberEmail());
@@ -138,6 +147,7 @@ public class MemberController {
 
             // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
             List<String> overNutrient = diaryService.overNutrient(todayDate,loginResult.getMemberEmail());
+<<<<<<< HEAD
             if(overNutrient==null){
                 model.addAttribute("overNutrient","정확한 서비스를 제공 위해 프로필설정을 해주세요.");
             }
@@ -152,10 +162,19 @@ public class MemberController {
             else{
                 model.addAttribute("scarceNutrient", scarceNutrient);
             }
+=======
+            model.addAttribute("overNutrient",overNutrient);
+
+            // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
+            List<String> scarceNutrient = diaryService.scarceNutrient(todayDate,loginResult.getMemberEmail());
+            model.addAttribute("scarceNutrient",scarceNutrient);
+
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             //최근 3일동안 가장 인기있는 게시글 5개 가져오기
             List<BoardDTO> poplarBoard = boardService.popularBoard();
             model.addAttribute("poplarBoard",poplarBoard);
 
+<<<<<<< HEAD
             // 음식추천
             List<FoodCommendDTO> foodCommendDTOList=foodCommendService.commendFood();
 
@@ -164,6 +183,9 @@ public class MemberController {
             String commendInfo=foodCommendService.foodCommendInfo(foodCommendDTOList);
             model.addAttribute("commendInfo",commendInfo);
             model.addAttribute("selectDate","오늘");
+=======
+           // foodCommendService.commendFood();
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
             return "index";
         }
         //로그인 실패
@@ -178,6 +200,7 @@ public class MemberController {
     @GetMapping("/index/call")
     public String index(HttpServletRequest request, Model model,HttpSession session){
         String myEmail = (String) session.getAttribute("sessionEmail");
+<<<<<<< HEAD
 
         //인덱스에 표현할 프로필
         ProfileDTO profileDTO = profileService.modifyProfile(myEmail);
@@ -215,11 +238,16 @@ public class MemberController {
         // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 섭취한 음식 및 영양성분 받아오기
 
 
+=======
+        Date todayDate = new Date(System.currentTimeMillis());
+        // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 섭취한 음식 및 영양성분 받아오기
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
         List<DiaryDTO> dto=diaryService.callDiary(todayDate,myEmail);
         model.addAttribute("todayList",dto);
 
         // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
         List<String> overNutrient = diaryService.overNutrient(todayDate,myEmail);
+<<<<<<< HEAD
         if(overNutrient==null){
             model.addAttribute("overNutrient","정확한 서비스를 제공 위해 프로필설정을 해주세요.");
         }
@@ -246,10 +274,22 @@ public class MemberController {
         String commendInfo=foodCommendService.foodCommendInfo(foodCommendDTOList);
         model.addAttribute("commendInfo",commendInfo);
         model.addAttribute("selectDate","오늘");
+=======
+        model.addAttribute("overNutrient",overNutrient);
+
+        // 오늘 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
+        List<String> scarceNutrient = diaryService.scarceNutrient(todayDate,myEmail);
+        model.addAttribute("scarceNutrient",scarceNutrient);
+
+        //최근 3일동안 가장 인기있는 게시글 5개 가져오기
+        List<BoardDTO> poplarBoard = boardService.popularBoard();
+        model.addAttribute("poplarBoard",poplarBoard);
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
         return "index";
     }
 
     @PostMapping("/index/call/past")
+<<<<<<< HEAD
     public String index(Model model,HttpSession session, @RequestParam("year") String year,@RequestParam("month") String month,@RequestParam("date") String date) {
         String myEmail = (String) session.getAttribute("sessionEmail");
 
@@ -341,6 +381,37 @@ public class MemberController {
                 model.addAttribute("commendInfo", commendInfo);
 
             }
+=======
+    public String index(Model model,HttpSession session,@RequestParam("pastDate") String Date) {
+        String myEmail = (String) session.getAttribute("sessionEmail");
+        String dateString = Date;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date utilDate = null;
+        try {
+            utilDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (utilDate != null) {
+            Date pastDate = new Date(utilDate.getTime());
+
+
+            List<DiaryDTO> dto = diaryService.callDiary(pastDate, myEmail);
+            model.addAttribute("todayList", dto);
+
+            // 과거 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 초과한 영양성분 받아오기
+            List<String> overNutrient = diaryService.overNutrient(pastDate, myEmail);
+            model.addAttribute("overNutrient", overNutrient);
+
+            // 과거 날짜와 멤버 이메일을 매개변수로 회원 별 오늘 부족한 영양성분 받아오기
+            List<String> scarceNutrient = diaryService.scarceNutrient(pastDate, myEmail);
+            model.addAttribute("scarceNutrient", scarceNutrient);
+
+            //오늘 3일동안 가장 인기있는 게시글 5개 가져오기
+            List<BoardDTO> poplarBoard = boardService.popularBoard();
+            model.addAttribute("poplarBoard", poplarBoard);
+        }
+>>>>>>> 55631393740fd99be0357e9fd4fa185a2c769ee6
         return "index";
     }
 
