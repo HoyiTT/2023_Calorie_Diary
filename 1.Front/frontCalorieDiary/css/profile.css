@@ -71,7 +71,13 @@ a{
   background-color: #fff;
 }
 
+.item1{
+  background-color: #fff;
+}
 
+.item2{
+  background-color: #fff; 
+}
 
 
 .graph1{
@@ -224,6 +230,10 @@ a{
   .container{
     display: flex;
     flex-direction: column;
+    max-height: fit-content;
   }
+  .item1{
+    margin: 0 auto;
 
+  }
 }

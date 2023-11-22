@@ -62,6 +62,10 @@ a{
   gap:16px;
 }
 
+.table{
+  white-space:nowrap;
+  overflow-x:scroll;
+}
 
 @media screen and (max-width:768px){
   
@@ -92,5 +96,11 @@ a{
   .navbar__menu.active,
   .navbar__icons.active{
       display: flex;
+  }
+}
+@media screen and (max-width:735px){
+  .cardWrap{
+    display: flex;
+    flex-direction: column;
   }
 }
