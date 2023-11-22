@@ -241,10 +241,15 @@ a{
 .form{
   margin-bottom: 20px;
 }
-.table{
-  margin-top:580px;
-}
 
+.table-responsive{
+  padding-top: 20px;
+  margin-top: 550px;
+}
+.table{
+  white-space:nowrap;
+  overflow-x:scroll;
+}
 @media screen and (max-width:768px){
   
   .navbar{
@@ -280,3 +285,7 @@ a{
     justify-content: center;
   }
 }
+
+@media screen and (max-width:735px){
+
+} 
