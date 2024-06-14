@@ -35,7 +35,7 @@
 
 1. 카메라 구성도
 
-<img align="left" src="../4.Images/structure1.png">
+<img align="left" src="./4.Images/structure1.png">
 
 1. 수동 음식 추가 구성도
 
