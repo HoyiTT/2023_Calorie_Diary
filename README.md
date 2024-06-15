@@ -35,15 +35,15 @@
 
 1. 카메라 구성도
 
-<img align="left" src="./4.Images/structure1.png">
+<img src="./4.Images/structure1.png">
 
 1. 수동 음식 추가 구성도
 
-<img align="left" src="./4.Images/structure2.png">
+<img src="./4.Images/structure2.png">
 
 1. 서버 구성도
 
-<img align="left" src="./4.Images/structure3.png">
+<img src="./4.Images/structure3.png">
 
 ### 기술 스택
 
@@ -81,21 +81,21 @@
 
 칼로리 카메라 화면
 
-<img align="left" src="./4.Images/camera.png">
+<img src="./4.Images/camera.png">
 
 - 음식과 영양성분표 중 인식할 사진을 선택할 수 있다.
 - 이미지를 업로드 후 제출하기 화면을 클릭할 시 칼로리 다이어리 화면에 해당 음식이 추가된다.
 
 음식 데이터 화면
 
-<img align="left" src="./4.Images/selfadd.png">
+<img src="./4.Images/selfadd.png">
 
 - 사진이 인식되지 않을 경우를 대비해 만든 기능이다.
 - 식품안전나라로부터 받아온 음식을 검색해서 직접 추가할 수 있다.
 
 칼로리 다이어리 화면
 
-<img align="left" src="./4.Images/result.png">
+<img src="./4.Images/result.png">
 
 - 칼로리 카메라, 음식 데이터를 통해 추가된 음식들이 보이는 화면이다.
 - 하루가 끝나면 그 날 먹은 음식은 자동으로 데이터베이스에 저장된다.
